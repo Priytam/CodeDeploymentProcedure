@@ -1,0 +1,24 @@
+<div class="row" data-ng-controller="StepViewController">
+    <div class="box box-info">
+        <div class="box-header">
+            <i class="fa fa-envelope"></i>
+            <h3 class="box-title"> {{step.name}} </h3>
+
+        </div>
+        <div class="box-body">
+            <span >  <b> Step id  : </b> {{step._id}}</span>
+            <span >  <b> Type   : </b> {{step.type}}</span>
+            <br>
+            <br>
+            <br>
+            <b>
+
+                <span ng-if="step.status === 'INPROGRESS' && step.state === 'Approved'"> waiting for {{step.values}} to approve this step</span>
+                <span ng-if="step.status === 'DEFINED'"> waiting for other steps to complete ... </span>
+            </b>
+        </div>
+        <div class="box-footer clearfix">
+            <button class="pull-right btn btn-default" id="sendEmail">Approve <i class="fa fa-arrow-circle-right"></i></button>
+        </div>
+    </div>
+</div>

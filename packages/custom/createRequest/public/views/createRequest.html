@@ -1,0 +1,98 @@
+<section data-ng-controller="CreateRequestController" data-ng-init="findPlans()">
+  <div class="row" ng-if="plans.length!==0">
+    <div class="col-md-8">
+        <div class="list-group">
+          <button class="list-group-item" type="button" data-ng-repeat="plan in plans" data-ng-click="changeSelectedPlan(plan)">
+                 <b> {{plan.name}}  </b>({{plan.description}})  <br>
+                  <small class="text-muted">
+                    <i class="glyphicon glyphicon-time"></i>
+
+                    created on {{plan.created | date}} by {{plan.user || 'anonumous'}}
+                  </small>
+          </button>
+        </div>
+    </div>
+    <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- small box -->
+                    <div class="small-box bg-aqua">
+                        <div class="inner">
+                            <h3>
+                                {{plans.length}}
+                            </h3>
+                            <p>
+                                Plans
+                            </p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-archive"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">
+                            More info <i class="fa fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div><!-- ./col -->
+                <div class="col-md-12">
+                    <!-- small box -->
+                    <div class="small-box bg-green">
+                        <div class="inner">
+                            <h3>
+                                53
+                            </h3>
+                            <p>
+                               Discussion
+                            </p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-tv"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">
+                            More info <i class="fa fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div><!-- ./col -->
+                <div class="col-md-12">
+                    <!-- small box -->
+                    <div class="small-box bg-yellow">
+                        <div class="inner">
+                            <h3>
+                                44
+                            </h3>
+                            <p>
+                                Active request
+                            </p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-battery-half"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">
+                            More info <i class="fa fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div><!-- ./col -->
+                <div class="col-md-12">
+                    <!-- small box -->
+                    <div class="small-box bg-red">
+                        <div class="inner">
+                            <h3>
+                                65
+                            </h3>
+                            <p>
+                               Completed Requests
+                            </p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-battery-full"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">
+                            More info <i class="fa fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div><!-- ./col -->
+            </div><!-- /.row -->
+        </div>
+
+  </div>
+</section>
+

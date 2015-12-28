@@ -1,0 +1,73 @@
+<div class="modal-header">
+    Step for plan {{plan.name}}
+    <a class="btn btn-info" ng-click="dismiss()">Close</a>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-xs-12">
+            <form name="epStepForm" class="form-horizontal " role="form" data-ng-submit="addAStep(epStepForm.$valid)" novalidate>
+                <!--step form-->
+                <div class="form-group" ng-class="{ 'has-error' : stepFormSbmitted && epStepForm.stepName.$invalid }">
+                    <label mean-token="'create-stepName'"  for="stepName" class="col-md-3 control-label">Step Name :</label>
+                    <div class="col-md-9">
+                        <input name="stepName" type="text" class="form-control" data-ng-model="step.name" id="stepName" placeholder="Plan Name" required>
+                        <div ng-show="stepFormSbmitted && epStepForm.stepName.$invalid" class="help-block">
+                            <p ng-show="epStepForm.stepName.$error.required">Step Name is required</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error' : stepFormSbmitted && epStepForm.stepDescription.$invalid }">
+                    <label mean-token="'create-stepDescription'"  for="stepDescription" class="col-md-3 control-label">Step Description :</label>
+                    <div class="col-md-9">
+                        <input name="stepDescription" type="text" class="form-control" data-ng-model="step.description" id="stepDescription" placeholder="Step Description " required>
+                        <div ng-show="stepFormSbmitted && epStepForm.stepDescription.$invalid" class="help-block">
+                            <p ng-show="epStepForm.stepDescription.$error.required">Step Description is required</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error' : stepFormSbmitted && epStepForm.stepType.$invalid }">
+                    <label mean-token="'create-stepType'"  for="stepType" class="col-md-3 control-label">Step Type :</label>
+                    <div class="col-md-9">
+                        <select name="stepType" class="form-control" data-ng-model="step.type" id="stepType" placeholder="Step type" required>
+                            <option data-ng-repeat="type in types">
+                                {{::type}}
+                            </option>
+                        </select>
+                        <div ng-show="stepFormSbmitted && epStepForm.stepType.$invalid" class="help-block">
+                            <p ng-show="epStepForm.stepType.$error.required">Step Type is required</p>
+                        </div>
+                    </div>
+                </div>
+                <div data-ng-show="step.type.trim() === 'Approval'" class="form-group" ng-class="{ 'has-error' : stepFormSbmitted && epStepForm.stepValues.$invalid }">
+                    <div class="row">
+                        <label mean-token="'create-stepValues'"  for="stepValues" class="col-md-3 control-label">Emails </label>
+                        <div class="col-xs-9">
+                            <textarea name="stepValues" class="form-control" ng-model-options='{ debounce: 750 }' id="stepValues" ng-change="processOnChange()" ng-model="unprocessed.values" name="step.values" rows="4"></textarea>
+                            <div ng-show="stepFormSbmitted && epStepForm.stepValues.$invalid" class="help-block">
+                                <p ng-show="epStepForm.stepValues.$error.required">Step Type is required</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label mean-token="'create-isMandatory'"  for="isMandatory" class="col-md-3 col-md-9 control-label">
+                        is Mandatory :</label>
+                    <div class="col-md-9">
+                        <input name="isMandatory" style="width: 5%" type="checkbox" class="form-control" data-ng-model="step.isMandatory" id="isMandatory"  value="True">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-3 col-md-9" style="text-align:center">
+                        <button mean-token="'create-add-step'"  ng-click="" type="submit" class="btn btn-info text-center">
+                            <i class="glyphicon glyphicon-edit"></i>Submit
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <a class="btn btn-info" ng-click="dismiss()">Close</a>
+</div>
+    <!-- add button just to toggle the view-->

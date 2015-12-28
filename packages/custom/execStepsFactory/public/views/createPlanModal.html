@@ -1,0 +1,38 @@
+<div class="modal-header">
+    Form to create a plan
+    <a class="btn btn-info" ng-click="dismiss()">Close</a>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-xs-12">
+            <form name="epForm" class="form-horizontal" role="form" data-ng-submit="addAPlan(epForm.$valid)" novalidate>
+                <!-- name of plan -->
+                <div class="form-group" ng-class="{ 'has-error' : submitted && epForm.planName.$invalid }">
+                    <label mean-token="'create-planName'"  for="planName" class="col-md-3 control-label">Plan Name :</label>
+                    <div class="col-md-9">
+                        <input name="planName" type="text" class="form-control" data-ng-model="executionPlan.name" id="planName" placeholder="Plan Name" required>
+                        <div ng-show="submitted && epForm.planName.$invalid" class="help-block">
+                            <p ng-show="epForm.planName.$error.required">Plan Name is required</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error' : submitted && epStepForm.planDescription.$invalid }">
+                    <label mean-token="'create-planDescription'"  for="planDescription" class="col-md-3 control-label">Step Description :</label>
+                    <div class="col-md-9">
+                        <input name="planDescription" type="text" class="form-control" data-ng-model="executionPlan.description" id="planDescription" placeholder="Step Description " required>
+                        <div ng-show="submitted && epStepForm.planDescription.$invalid" class="help-block">
+                            <p ng-show="epStepForm.planDescription.$error.required">Step Description is required</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- submit -->
+                <div class="form-group">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button mean-token="'create-submit'" type="submit" class="btn btn-info">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

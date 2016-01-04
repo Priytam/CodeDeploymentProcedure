@@ -32,7 +32,7 @@ angular.module('mean.upload').directive('meanUpload', function($upload) {
                         if (data.success) {
                             if (angular.isDefined(attrs.uploadFileCallback)) {
                                 $scope.uploadFileCallback({
-                                    file: data.file
+                                    file : data.file
                                 });
                             }
                             files.push(data.file);

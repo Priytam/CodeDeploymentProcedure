@@ -2,15 +2,18 @@
     <div class="row">
         <ul id="progress" >
             <div data-ng-repeat="step in steps">
-                <li ui-sref="home.requestDetail.stepView({step : step, id : request._id, stepId : step._id})" ng-if="step.status !== 'INPROGRESS'" >{{step.name}}
-                <li ui-sref="home.requestDetail.stepView({step : step, id : request._id, stepId : step._id})" ng-if="step.status === 'INPROGRESS'" class="active  ">{{step.name}}</li>
+                <li ui-sref="home.requestDetail.stepView({step : step, id : request._id, stepId : step._id, type : step.type})" ng-if="step.status !== 'INPROGRESS'" >{{step.name}}
+                <li ui-sref="home.requestDetail.stepView({step : step, id : request._id, stepId : step._id, type : step.type})" ng-if="step.status === 'INPROGRESS'" class="active  ">{{step.name}}</li>
             </div>
         </ul>
     </div>
     <br>
     <br>
     <br>
-    <div class="row">
+    <div class="row" ng-if="showFinished">
+        <span class="text-info text-center"> This request has been finished . Please click on arrow if you want to have a look on particular steps</span>
+    </div>
+    <div   class="row">
         <div ui-view class="col-md-12">
         </div>
     </div>

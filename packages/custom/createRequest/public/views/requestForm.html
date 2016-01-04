@@ -24,21 +24,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div ng-switch-when="Approval">
-                            <div class="row">
-                                <label class="col-xs-3">{{::step.name}}
-                                    <i title="This is a mandatory field!" class="fa fa-asterisk" ng-if="step.isMandatory === true" style="color:red"></i>
-                                </label>
-                                <div class="col-xs-9">
-                                    <select ng-required="step.isMandatory === true" ng-change="pushRequired(step, $index)" ng-model="requestData[step.name]" name="step.name" class="form-control">
-                                        <option ng-repeat="value in step.values">{{::value}}</option>
-                                    </select>
-                                    <span class="help-block">{{::step.description }}</span>
-                                </div>
-                            </div>
-                        </div>
-
                         <div ng-switch-when="Code">
                             <div class="row">
                                 <label class="col-xs-3">{{::step.name}}
@@ -52,7 +37,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div ng-switch-when="DateTime">
                             <div class="row">
                                 <label class="col-xs-3">{{::step.name}}
@@ -69,9 +53,34 @@
                                 </div>
                             </div>
                         </div>
-                        <div ng-switch-when="Upload">
-                            upload is todo ? :(
+
+                        <div ng-switch-when="Approval">
+                            <div class="row">
+                                <label class="col-xs-3">{{::step.name}}
+                                    <i title="This is a mandatory field!" class="fa fa-asterisk" ng-if="step.isMandatory === true" style="color:red"></i>
+                                </label>
+                                <div class="col-xs-9">
+                                    <select ng-required="step.isMandatory === true" ng-change="pushRequired(step, $index)" ng-model="requestData[step.name]" name="step.name" class="form-control">
+                                        <option ng-repeat="value in step.values">{{::value}}</option>
+                                    </select>
+                                    <span class="help-block">{{::step.description }} <span ng-if="step.isMandatory === true">(since it is known who can approve this step, its mandatory to select this approver)</span></span>
+                                </div>
+                            </div>
                         </div>
+
+                        <div ng-switch-when="Upload">
+                            <div class="row">
+                                <label class="col-xs-3">{{::step.name}}
+                                    <i title="This is a mandatory field!" class="fa fa-asterisk" ng-if="step.isMandatory === true" style="color:red"></i>
+                                </label>
+                                <div class="col-xs-9">
+                                    <mean-upload file-dest="destination" upload-callback="uploadFinished(files, step, $index)" upload-file-callback="uploadFileCallback(file)">
+                                    </mean-upload>
+                                    <span class="help-block">{{::step.description }}( If document is not ready yet , you can upload it at time proceesing this step</span></span>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>

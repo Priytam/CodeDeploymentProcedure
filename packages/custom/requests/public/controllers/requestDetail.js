@@ -3,8 +3,7 @@
  */
 angular.module('mean.createRequest').controller('RequestsDetailController', ['$scope', '$stateParams', 'Requests', 'RequestsSpecific', '$state',
     function($scope, $stateParams, Requests, RequestsSpecific, $state){
-
-
+        $scope.showFinished = false;
         if( $stateParams.request === null) {
             Requests.get({
                 reqID : $stateParams.id
@@ -26,14 +25,16 @@ angular.module('mean.createRequest').controller('RequestsDetailController', ['$s
         }
 
         function selectActiveStep(){
+            var isFinished = true;
             angular.forEach($scope.steps, function(value, key){
                 if(value.status === 'INPROGRESS'){
-                    $scope.selectedStep = value;
+                    isFinished = false;
+                    $state.go('home.requestDetail.stepView', {step : value, id : $scope.request._id, stepId : value._id, type : value.type});
                 }
-            })
-        }
-        $scope.selectStep= function(step) {
-            $state.go('home.stepView', {step : step, id : $scope.request._id, stepId : step._id});
+            });
+            if(isFinished){
+                $scope.showFinished = true;
+            }
         }
     }
 ]);

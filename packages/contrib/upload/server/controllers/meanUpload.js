@@ -8,6 +8,7 @@ var fs = require('fs'),
 
 
 function rename(file, dest, /*user,*/ callback) {
+    console.log(file);
     fs.rename(file.path, directory + dest + file.name, function(err) {
         if (err) throw err;
         else

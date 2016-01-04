@@ -19,14 +19,10 @@ module.exports = function(Requests, app) {
     app.param('reqID', requests.article);
 
 
-    var stepType = require('../controllers/typeDB')();
+    var stepType = require('../controllers/types')();
 
     app.route('/api/stepType/')
-        .get(stepType.getSpecificSteps)
         .post(stepType.getSpecificSteps);
     app.route('/api/stepType/:stepId')
         .get(stepType.show);
-
-    app.param('stepId', stepType.step);
-
 };

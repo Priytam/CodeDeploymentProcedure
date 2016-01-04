@@ -10,18 +10,18 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 /**
- * Approval Schema
+ * Upload Schema
  */
 
-var ApprovalSchema = new Schema({
+var UploadSchema = new Schema({
     values: {
         type: Array,
         required: true
     },
     state: {
         type: String,
-        enum : ['ApprovalAskMailSend','WaitingForApproval', 'ApprovedAndNotified'],
-        default : 'ApprovalAskMailSend'
+        enum : ['UploadMailAndNotify','UploadedAndNotified'],
+        default : 'UploadMailAndNotify'
     },
     name : {
         type: String,
@@ -38,21 +38,21 @@ var ApprovalSchema = new Schema({
     },
     type : {
         type: String,
-        default : 'Approval'
+        default : 'Upload'
     }
 });
 
 /**
  * Validations
  */
-ApprovalSchema.path('values').validate(function(values) {
+UploadSchema.path('values').validate(function(values) {
     return !!values;
 }, 'values cannot be blank');
 
-ApprovalSchema.statics.load = function(id, cb) {
+UploadSchema.statics.load = function(id, cb) {
     this.findOne({
         _id: id
     }).populate('user', 'name username').exec(cb);
 };
 
-mongoose.model('Approval', ApprovalSchema);
+mongoose.model('Upload', UploadSchema);

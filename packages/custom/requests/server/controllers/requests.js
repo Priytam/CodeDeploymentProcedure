@@ -6,9 +6,12 @@
 var mongoose = require('mongoose'),
     RequestDB = mongoose.model('Request'),
     ApprovalDB = mongoose.model('Approval'),
+    UploadDB = mongoose.model('Upload'),
     config = require('meanio').loadConfig(),
     _ = require('lodash'),
-    approvalLogic = require('./ApprovalLogic')();
+    factory =  require('./StrategyFactory')(),
+    entry =  require('./StrategyEntry')(factory).registerAll();
+
 
 module.exports = function(EPDBs) {
 
@@ -17,7 +20,10 @@ module.exports = function(EPDBs) {
         var body = req.body;
         var insertedPosition = 0;
         for(var keys = Object.keys(body), i = 0, end = keys.length; i < end; i++) {
+            console.log('####################');
+            console.log(body[keys[i]].type);
             switch (body[keys[i]].type) {
+
                 case 'Approval':
                     insertIntoDb(body[keys[i]], keys[i], function (err, data) {
                         if (err) {
@@ -29,7 +35,18 @@ module.exports = function(EPDBs) {
                             done(null, typeDb);
                         }
                     });
-
+                    break;
+                case 'Upload':
+                    insertIntoUploadDb(body[keys[i]], keys[i], function (err, data) {
+                        if (err) {
+                            done(err);
+                            return;
+                        }
+                        typeDb[insertedPosition] = data;
+                        if (++insertedPosition == end) {
+                            done(null, typeDb);
+                        }
+                    });
                     break;
             }
         }
@@ -37,17 +54,32 @@ module.exports = function(EPDBs) {
 
     function insertIntoDb(reqData, name, done) {
         var values = [];
-        values[0]= reqData.value;
-        var data = { values : values, name : name , plan : reqData.name};
+        values[0] = reqData.value;
+        var data = {values: values, name: name, plan: reqData.name};
         var approval = new ApprovalDB(data);
         approval.user = '';
-        approval.save(function(err) {
+        approval.save(function (err) {
             if (err) {
                 done(err, null);
             }
             done(null, approval);
-        });
+        })
     }
+
+
+        function insertIntoUploadDb(reqData, name, done) {
+            var values = [];
+            values[0] = reqData.value;
+            var data = {values: values, name: name, plan: reqData.name};
+            var approval = new UploadDB(data);
+            approval.user = '';
+            approval.save(function (err) {
+                if (err) {
+                    done(err, null);
+                }
+                done(null, approval);
+            });
+        }
 
     return {
 
@@ -90,11 +122,6 @@ module.exports = function(EPDBs) {
                             error: 'Cannot save the db'
                         });
                     }
-                    EPDBs.events.publish({
-                        user: {
-                            name: article.name
-                        }
-                    });
                     res.json(article);
                 });
             });
@@ -106,48 +133,13 @@ module.exports = function(EPDBs) {
          * @param res
          ********************************/
         processData : function(req, res) {
-            var typeId = req.query.stepID;
-            ApprovalDB.findOne({
-                    _id : typeId
-                },
-                function(err, approval) {
-                    if (err || !approval) {
-                        return res.status(500).json({
-                            error: 'Cannot process this request'
-                        });
-                    }
-                    switch (approval.type) {
-                        case 'Approval':
-                            approvalLogic.processApproval(approval, function (result) {
-                                changeRequestStateLogic(sendResponse(result));
-                            });
-                            break;
-                    }
-                });
-
-            function sendResponse(result){
-                res.json(result)
-            }
-
-            function changeRequestStateLogic(done) {
-                ApprovalDB.find({ _id : req.params.reqID, status : 'FINISHED'}, function(err, data){
-                    if(req.request.steps.length  === data.length){
-                        req.body.status = 'FINISHED';
-                    }
-                    else {
-                        req.body.status = 'INPROGRESS';
-                    }
-                    var article = req.request;
-                    article = _.extend(article, req.body);
-                    article.save(function(err) {
-                        if (err) {
-                            done(err)
-                        }
-                        done(null);
-                    });
-                });
-            }
-
+            //entry.registerAll();
+            factory.processData(req, function (err, response) {
+                if (err) {
+                   return res.status(500).json(response);
+                }
+                res.json(response)
+            });
         },
         /**
          * Update an article
@@ -161,41 +153,20 @@ module.exports = function(EPDBs) {
                         error: 'Cannot update the db'
                     });
                 }
-
-                EPDBs.events.publish({
-                    action: 'updated',
-                    user: {
-                        name: req.user.name
-                    },
-                    name: article.host + article.port,
-                    url: config.hostname + '/dbFactory/' + article._id
-                });
-
                 res.json(article);
             });
         },
-
         /**
          * Delete an article
          */
         destroy: function(req, res) {
             var article = req.article;
-
             article.remove(function(err) {
                 if (err) {
                     return res.status(500).json({
                         error: 'Cannot delete the db'
                     });
                 }
-
-                EPDBs.events.publish({
-                    action: 'deleted',
-                    user: {
-                        name: req.user.name
-                    },
-                    name: article.host + article.port
-                });
-
                 res.json(article);
             });
         },

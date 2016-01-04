@@ -12,12 +12,21 @@ angular.module('mean.requests').controller('StepViewController', ['$scope', 'Glo
 
       if( $stateParams.step === null) {
           RequestsSpecific.get({
-              stepId : $stateParams.stepId
+              stepId : $stateParams.stepId,
+              type : $stateParams.type
           }, function(step) {
               $scope.step = step;
           });
       } else {
           $scope.step = $stateParams.step;
+      }
+
+
+      $scope.processStep = function(step) {
+          Requests.get({reqID : $stateParams.id}, function(request) {
+              var new_request = new Requests(request);
+              new_request.$process({stepId : step._id, type : step.type});
+          });
       }
   }
 ]);

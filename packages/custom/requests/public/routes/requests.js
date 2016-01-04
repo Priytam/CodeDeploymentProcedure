@@ -14,7 +14,7 @@ angular.module('mean.requests').config(['$stateProvider',
         templateUrl: 'requests/views/requestDetail.html'
     })
      .state('home.requestDetail.stepView', {
-          url: '/step/:stepId',
+          url: '/step/:stepId/type/:type',
           parent:'home.requestDetail',
           params : {step : null},
           templateUrl: 'requests/views/stepView.html'

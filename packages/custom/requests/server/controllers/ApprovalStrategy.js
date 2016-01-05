@@ -82,6 +82,7 @@ module.exports =  function () {
                 }
                 approval.status = 'INPROGRESS';
                 approval.state = 'WaitingForApproval';
+                approval.currentStateNumber = 2;
                 approval.save(function(err) {
                     if (err) {
                         response.message = 'Approval step fail' + err;
@@ -106,6 +107,7 @@ module.exports =  function () {
                 function(done) {
                     approval.status = 'FINISHED';
                     approval.state = 'ApprovedAndNotified';
+                    approval.currentStateNumber = 3;
                     approval.save(function(err) {
                         if (err) {
                             return done(true);

@@ -1,5 +1,15 @@
 <div>
     <div id='file_browse_wrapper'>
-        <input type='file' id='file_browse' ng-file-select="onFileSelect($files)" multiple>
+<!--
+        <input type='file' class="btn btn-default btn-file" id='file_browse' ng-file-select="onFileSelect($files)" multiple>
+-->
+        <div class="input-group">
+                <span class="input-group-btn">
+                    <span class="btn btn-primary btn-file">
+                        Browse &hellip; <input type="file"  ng-file-select="onFileSelect($files)" multiple>
+                    </span>
+                </span>
+            <input type="text" class="form-control" readonly>
+        </div>
     </div>
 </div>

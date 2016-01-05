@@ -8,6 +8,7 @@ var config = require('meanio').loadConfig(),
     nodemailer = require('nodemailer'),
     async = require('async'),
     UploadDb = mongoose.model('Upload'),
+    _ = require('lodash'),
     templates = require('./template');
 
 module.exports =  function () {
@@ -64,6 +65,7 @@ module.exports =  function () {
                 }
                 upload.status = 'FINISHED';
                 upload.state = 'UploadedAndNotified';
+                upload.currentStateNumber = 2;
                 upload.save(function(err) {
                     if (err) {
                         response.message = 'upload step fail' + err;
@@ -83,9 +85,26 @@ module.exports =  function () {
         });
     }
 
-
+    function update(id, step, cb) {
+        getData(id, function(err, result){
+            if(err){
+                console.log(err);
+                return cb(err);
+            }
+            var update = result;
+            update = _.extend(update,step);
+            update.save(function(err) {
+                if (err) {
+                    console.log(err);
+                    return cb(err);
+                }
+                cb(null, update);
+            });
+        });
+    }
     return {
         processData :  processStep,
-        getData : getData
+        getData : getData,
+        update : update
     }
 };

@@ -27,6 +27,14 @@ var ApprovalSchema = new Schema({
         type: String,
         trim : true
     },
+    numberOfStates : {
+        type: Number,
+        default : 3
+    },
+    currentStateNumber : {
+        type: Number,
+        default : 0
+    },
     plan : {
         type: String,
         trim : true

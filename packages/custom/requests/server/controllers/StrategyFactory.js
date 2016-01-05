@@ -79,10 +79,30 @@ module.exports = function () {
         })
     }
 
+    function update(id, type, step, cb) {
+        var processor;
+        if (!type) {
+            return cb({
+                error: "NonMentionedHandlerTypeError",
+                message: "Handler type is not mentioned in request"
+            });
+        }
+        processor = strategy[type];
+        processor.update(id, step, function (err, result) {
+            if (err) {
+                return cb({
+                    error: 'Cannot process this request'
+                });
+            }
+            return cb(null, result);
+        })
+    }
+
     return {
         registerStrategy : registerStrategy,
         processData : processData,
         getAllStepsOfARequest : getAllStepsOfARequest,
-        getStep : getStep
+        getStep : getStep,
+        update : update
     }
 };

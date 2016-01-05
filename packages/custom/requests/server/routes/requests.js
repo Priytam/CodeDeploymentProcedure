@@ -24,5 +24,6 @@ module.exports = function(Requests, app) {
     app.route('/api/stepType/')
         .post(stepType.getSpecificSteps);
     app.route('/api/stepType/:stepId')
-        .get(stepType.show);
+        .get(stepType.show)
+        .put(stepType.update);
 };

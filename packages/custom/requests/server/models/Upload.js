@@ -39,6 +39,14 @@ var UploadSchema = new Schema({
     type : {
         type: String,
         default : 'Upload'
+    },
+    numberOfStates : {
+        type: Number,
+        default : 2
+    },
+    currentStateNumber : {
+        type: Number,
+        default : 0
     }
 });
 

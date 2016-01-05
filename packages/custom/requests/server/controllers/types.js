@@ -3,14 +3,12 @@
  */
 var mongoose = require('mongoose'),
     config = require('meanio').loadConfig(),
-    _ = require('lodash'),
     factory =  require('./StrategyFactory')(),
     entry =  require('./StrategyEntry')(factory).registerAll();
 
 module.exports = function() {
 
     function getSpecificSteps(req, res) {
-        //entry.registerAll();
         var stepList = req.body.steps;
         factory.getAllStepsOfARequest(stepList, function (err, response) {
             if (err) {
@@ -21,7 +19,6 @@ module.exports = function() {
     }
 
     function show(req, res) {
-       // entry.registerAll();
         var id = req.params.stepId;
         var type = req.query.type;
         factory.getStep(id, type, function (err, response) {
@@ -32,8 +29,21 @@ module.exports = function() {
         });
     }
 
+    function update(req, res) {
+        var id = req.body._id;
+        var type = req.body.type;
+        var step = req.body;
+        factory.update(id, type, step, function (err, response) {
+            if (err) {
+                return res.status(500).json(err);
+            }
+            res.json(response)
+        });
+    }
+
     return {
         getSpecificSteps : getSpecificSteps,
-        show : show
+        show : show,
+        update : update
     };
 };

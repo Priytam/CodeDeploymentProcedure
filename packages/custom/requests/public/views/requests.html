@@ -3,32 +3,50 @@
         <div class="box-header">
             <i class="fa fa-clipboard"></i>
             <h3 class="box-title">Requests List</h3>
-            <div class="box-tools pull-right">
-               <!-- <ul class="pagination pagination-sm inline">
-                    <li><a href="#">&laquo;</a></li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">&raquo;</a></li>
-                </ul>-->
+            <div class="box-tools">
+                <div class="input-group">
+                    <input type="text" name="search" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search requests by name"/>
+                    <div class="input-group-btn">
+                        <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="box-body">
-            <ul class="todo-list">
-                <li data-ng-repeat="request in requests" ng-click="openDetailView(request)">
-                     <span class="handle">
-                         <i class="fa fa-ellipsis-v"></i>
-                         <i class="fa fa-ellipsis-v"></i>
-                     </span>
-                    <input type="checkbox" value="" name=""/>
-                    <span class="text">{{request.name}}</span>
-                    <span class="text">{{request.status}}</span>
-                    <div class="tools">
-                        <i class="fa fa-edit"></i>
-                        <i class="fa fa-trash-o"></i>
-                    </div>
-                </li>
-            </ul>
+            <table class="table table-bordered table-responsive">
+                <tr>
+                    <th>Request Id</th>
+                    <th>Plan Name</th>
+                    <th>Status</th>
+                    <th>Progress</th>
+                    <th>Created</th>
+                </tr>
+                <tr data-ng-repeat="request in requests">
+                    <td>
+                        <a ng-click="openDetailView(request)">
+                            {{request._id}}
+                        </a>
+                    </td>
+                    <td >
+                        <a class="btn btn-app" ng-click="openDetailView(request)">
+                            <span class="badge bg-yellow">{{request.steps.length}} steps</span>
+                            {{request.name}}
+                        </a>
+                    </td>
+                    <td ng-if="request.status === 'DEFINED'"><span class="badge bg-orange">{{request.status}}</span></td>
+                    <td ng-if="request.status === 'INPROGRESS'"><span class="badge bg-green">{{request.status}}</span></td>
+                    <td ng-if="request.status === 'FINISHED'"><span class="badge bg-blue">{{request.status}}</span></td>
+                    <td >
+                        <div class="progress xs">
+                            <div class="progress-bar progress-bar-success" style="width: 55%"></div>
+                        </div>
+                    </td>
+                    <td >
+                       {{request.created | date}}
+                    </td>
+
+                </tr>
+            </table>
         </div>
         <!--<div class="box-footer clearfix no-border">
             <button class="btn btn-default pull-right"><i class="fa fa-plus"></i> Add item</button>

@@ -1,21 +1,55 @@
-<div class="" data-ng-controller="RequestsDetailController" data-ng-init="findSpecific()">
-    <div class="row">
-        <ul id="progress" >
-            <div data-ng-repeat="step in steps">
-                <li ui-sref="home.requestDetail.stepView({step : step, id : request._id, stepId : step._id, type : step.type})" ng-if="step.status !== 'INPROGRESS'" >{{step.name}}
-                <li ui-sref="home.requestDetail.stepView({step : step, id : request._id, stepId : step._id, type : step.type})" ng-if="step.status === 'INPROGRESS'" class="active  ">{{step.name}}</li>
-            </div>
-        </ul>
-    </div>
-    <br>
-    <br>
-    <br>
-    <div class="row" ng-if="showFinished">
+<div class="row" data-ng-controller="RequestsDetailController" data-ng-init="findSpecific()">
+    <!--<div class="row" ng-if="showFinished">
         <span class="text-info text-center"> This request has been finished . Please click on arrow if you want to have a look on particular steps</span>
-    </div>
-    <div   class="row">
-        <div ui-view class="col-md-12">
-        </div>
-    </div>
+    </div>-->
+    <div class="col-md-12">
+                    <div class="box box-primary">
+                        <div class="box-header">
+                            <i class="fa fa-tasks"></i> <h3 class="box-title ">Steps overview</h3>
+                            <div class="box-tools">
+                                <div class="input-group">
+                                    <input type="text" name="search" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search step by name"/>
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <ul id="progress" >
+                                    <div data-ng-repeat="step in steps">
+                                        <li ui-sref="home.requestDetail.stepView({step : step, id : request._id, stepId : step._id, type : step.type})" ng-if="step.status !== 'INPROGRESS'" >{{step.name}}
+                                        <li ui-sref="home.requestDetail.stepView({step : step, id : request._id, stepId : step._id, type : step.type})" ng-if="step.status === 'INPROGRESS'" class="active">{{step.name}}</li>
+                                    </div>
+                                </ul>
+                        </div>
+                        <div class="box-body">
+                            <table class="table table-bordered table-responsive table-hover">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Step</th>
+                                    <th>Progress</th>
+                                    <th>Status</th>
+                                    <th>State</th>
+                                </tr>
+                                <tr data-ng-repeat="step in steps" ui-sref="home.requestDetail.stepView({step : step, id : request._id, stepId : step._id, type : step.type})">
+                                    <td>1.</td>
+                                    <td>{{step.name}}</td>
+                                    <td>
+                                        <div class="progress xs">
+                                            <div class="progress-bar progress-bar-success" style="width: {{(step.currentStateNumber/step.numberOfStates)*100}}%"></div>
+                                        </div>
+                                    </td>
+                                    <td ng-if="step.status === 'DEFINED'"><span class="badge bg-orange">{{step.status}}</span></td>
+                                    <td ng-if="step.status === 'INPROGRESS'"><span class="badge bg-green">{{step.status}}</span></td>
+                                    <td ng-if="step.status === 'FINISHED'"><span class="badge bg-blue">{{step.status}}</span></td>
+                                    <td ><span class="badge bg-info">{{step.state}}</span></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="box-footer clearfix">
+                            <div ui-view class="col-md-12">
+                            </div>
+                        </div>
+                    </div>
+                </div>
 </div>
 

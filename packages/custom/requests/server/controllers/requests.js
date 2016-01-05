@@ -20,10 +20,7 @@ module.exports = function(EPDBs) {
         var body = req.body;
         var insertedPosition = 0;
         for(var keys = Object.keys(body), i = 0, end = keys.length; i < end; i++) {
-            console.log('####################');
-            console.log(body[keys[i]].type);
             switch (body[keys[i]].type) {
-
                 case 'Approval':
                     insertIntoDb(body[keys[i]], keys[i], function (err, data) {
                         if (err) {
@@ -98,31 +95,31 @@ module.exports = function(EPDBs) {
         },
 
         /**
-         * Create an article
+         * Create an request
          */
         create: function(req, res) {
             createCorrespondingType(req, function(err, typeData){
                 if (err || ! typeData) {
                     return res.status(500).json({
-                        error: 'Cannot save the db'
+                        error: 'Cannot save the request'
                     });
                 }
-                var article = new RequestDB(req.body);
-                article.steps = typeData;
+                var request = new RequestDB(req.body);
+                request.steps = typeData;
                 for( var i = 0 ; i < typeData.length ; i++){
-                    article.steps[i].type = typeData[i].type;
-                    article.steps[i].name = typeData[i].name;
-                    article.steps[i].category = typeData[i];
+                    request.steps[i].type = typeData[i].type;
+                    request.steps[i].name = typeData[i].name;
+                    request.steps[i].category = typeData[i];
                 }
-                article.name = typeData[0].plan;
-                article.user = req.user;
-                article.save(function(err) {
+                request.name = typeData[0].plan;
+                request.user = req.user;
+                request.save(function(err) {
                     if (err) {
                         return res.status(500).json({
                             error: 'Cannot save the db'
                         });
                     }
-                    res.json(article);
+                    res.json(request);
                 });
             });
         },
@@ -133,66 +130,59 @@ module.exports = function(EPDBs) {
          * @param res
          ********************************/
         processData : function(req, res) {
-            //entry.registerAll();
             factory.processData(req, function (err, response) {
                 if (err) {
                    return res.status(500).json(response);
                 }
-                res.json(response)
+                return res.json(response)
             });
         },
         /**
-         * Update an article
+         * Update an request
          */
         update : function(req, res) {
-            var article = req.request;
-            article = _.extend(article, req.body);
-            article.save(function(err) {
+            var request = req.request;
+            request = _.extend(request, req.body);
+            request.save(function(err) {
                 if (err) {
                     return res.status(500).json({
-                        error: 'Cannot update the db'
+                        error: 'Cannot update the request'
                     });
                 }
-                res.json(article);
+                res.json(request);
             });
         },
         /**
-         * Delete an article
+         * Delete an request
          */
         destroy: function(req, res) {
-            var article = req.article;
-            article.remove(function(err) {
+            var request = req.request;
+            request.remove(function(err) {
                 if (err) {
                     return res.status(500).json({
-                        error: 'Cannot delete the db'
+                        error: 'Cannot delete the request'
                     });
                 }
-                res.json(article);
+                res.json(request);
             });
         },
         /**
-         * Show an article
+         * Show an request
          */
         show: function(req, res) {
-            EPDBs.events.publish({
-                user: {
-                    name: req.user
-                }
-            });
             res.json(req.request);
         },
         /**
-         * List of Articles
+         * List of Requests
          */
         all: function(req, res) {
-            RequestDB.find({}).sort('-created').exec(function(err, articles) {
+            RequestDB.find({}).sort('-created').exec(function(err, requests) {
                 if (err) {
-                    console.log(err);
                     return res.status(500).json({
-                        error: 'Cannot list the articles'
+                        error: 'Cannot list the request'
                     });
                 }
-                res.json(articles)
+                res.json(requests)
             });
 
         }

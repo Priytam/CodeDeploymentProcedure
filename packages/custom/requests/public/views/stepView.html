@@ -1,6 +1,5 @@
 <div class="row" data-ng-controller="StepViewController">
     <div class="box box-info">
-
         <div ng-switch on="step.type">
             <div ng-switch-when="Approval">
                 <div class="box-header">
@@ -9,12 +8,15 @@
                 </div>
                 <div class="box-body">
                     <div class="row">
-                        <span >  <b> Step id  : </b> {{step._id}}</span>
-                        <span >  <b> Type   : </b> {{step.type}}</span>  <br><br><br>
-                        <b>
-                            <span ng-if="step.status === 'INPROGRESS' && step.state === 'WaitingForApproval'"> waiting for {{step.values.toString()}} to approve this step</span>
-                            <span ng-if="step.status === 'DEFINED'"> waiting for other steps to complete ... </span>
-                        </b>
+                        <div class="col-xs-11 col-xs-offset-1">
+                            <span >  <b> Step id  : </b> {{step._id}}</span>
+                            <span >  <b> Type   : </b> {{step.type}}</span>
+                            <span class="text-success"> <b>Status  :</b> {{step.status}}</span><br><br><br>
+                            <b>
+                                <span ng-if="step.status === 'INPROGRESS' && step.state === 'WaitingForApproval'"> waiting for {{step.values.toString()}} to approve this step</span>
+                                <span ng-if="step.status === 'DEFINED'"> waiting for other steps to complete ... </span>
+                            </b>
+                        </div>
                     </div>
                 </div>
                 <div class="box-footer clearfix">
@@ -29,17 +31,22 @@
                 </div>
                 <div class="box-body">
                     <div class="row" ng-if="step.status === 'DEFINED'">
-                        <label class="col-xs-3">{{::step.name}}
+                        <label class="col-md-3 text-right">
+                            {{::step.name}} :
                             <i title="This is a mandatory field!" class="fa fa-asterisk" ng-if="step.isMandatory === true" style="color:red"></i>
                         </label>
-                        <div class="col-xs-9">
-                            <mean-upload file-dest="destination" upload-callback="uploadFinished(files, step, $index)" upload-file-callback="uploadFileCallback(file)">
+                        <div class="col-md-9 text-left">
+                            <mean-upload file-dest="destination" upload-callback="uploadFinished(files)" upload-file-callback="uploadFileCallback(file)">
                             </mean-upload>
                         </div>
                     </div>
+                    <span class="text-info">List of files (click to download)</span>
+                    <div data-ng-repeat="file in step.values" class="text-center">
+                        <a  target="_blank" data-ng-href="{{file.src}}">{{file.name}} is {{file.size}} bytes </a>
+                    </div>
                 </div>
-                <div class="box-footer clearfix">
-                    <button class="pull-right btn btn-default" id="sendEmail" ng-click="processStep(step)">Approve <i class="fa fa-arrow-circle-right"></i></button>
+                <div class="box-footer clearfix" ng-if="step.status === 'INPROGRESS'">
+                    <button class="pull-right btn btn-default" id="sendEmail" ng-click="processStep(step)">FinishUpload <i class="fa fa-arrow-circle-right"></i></button>
                 </div>
             </div>
         </div>

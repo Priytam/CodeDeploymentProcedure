@@ -38,18 +38,6 @@ angular.module('mean.execStepsFactory').controller('ExecStepsFactoryController',
       $scope.executionPlan.steps = AddStepFactory.getSteps();
     }
 
-    $scope.addADB = function(){
-      $uibModal.open({
-        templateUrl: 'dbFactory/views/createDb.html',
-        controller: 'DbFactoryController',
-        size: 'wide'
-      })
-      .result.then(function(db){
-         //console.log(db);
-         $scope.addedDb = db;
-      });
-    };
-
     $scope.create = function() {
         var ep = new EPDB($scope.executionPlan);
         $scope.showPreview = false;
@@ -66,9 +54,6 @@ angular.module('mean.execStepsFactory').controller('ExecStepsFactoryController',
     $scope.find = function() {
       EPDB.query(function(plans) {
         $scope.eps = plans;
-      });
-      DbFactory.query(function(dataBases){
-        $scope.dbs = dataBases;
       });
     };
 

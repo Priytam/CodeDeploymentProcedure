@@ -2,8 +2,8 @@
  * Created by arkulkar on 12/21/2015.
  */
 angular.module('mean.createRequest').controller('RequestFormController', ['$scope', '$stateParams',
-    'ExecStepsFactory', 'Requests',
-    function($scope, $stateParams, ExecStepsFactory, Requests){
+    'ExecStepsFactory', 'Requests', '$state',
+    function($scope, $stateParams, ExecStepsFactory, Requests, $state){
 
         var input = [];
         $scope.requestData = [];
@@ -14,13 +14,13 @@ angular.module('mean.createRequest').controller('RequestFormController', ['$scop
             ExecStepsFactory.get({epId : $stateParams.id}, function(plan) {
                 $scope.plan = plan;
                 var date = new Date();
-                $scope.destination = '/docs_'+$scope.plan.name+'_'+date.getFullYear()+'_'+date.getMonth() + 1 +'_'+date.getHours()+'_'+date.getMinutes()+'_'+date.getSeconds()+'/';
+                $scope.destination = '/docs_'+$scope.plan.name+'_'+date.getFullYear()+'_'+date.getMonth() + 1 +'_'+date.getDay()+'_'+'_'+date.getHours()+'_'+date.getMinutes()+'_'+date.getSeconds()+'/';
                 createDefaultSteps()
             });
         } else {
             $scope.plan = $stateParams.myPlan;
             var date = new Date();
-            $scope.destination = '/docs_'+$scope.plan.name+'_'+date.getFullYear()+'_'+date.getMonth()+ 1 + '_'+date.getHours()+'_'+date.getMinutes()+'_'+date.getSeconds()+'/';
+            $scope.destination = '/docs_'+$scope.plan.name+'_'+date.getFullYear()+'_'+date.getMonth()+ 1 +'_'+date.getDay()+'_'+ '_'+date.getHours()+'_'+date.getMinutes()+'_'+date.getSeconds()+'/';
             createDefaultSteps()
         }
 
@@ -41,6 +41,7 @@ angular.module('mean.createRequest').controller('RequestFormController', ['$scop
             request.$save(function(response) {
                 //process very first request by default
                 //request.$process({stepId : response.steps[0].category, type : response.steps[0].type});
+                $state.go('home.requestDetail', {request : response, id : response._id});
             });
         };
 

@@ -6,7 +6,7 @@
 angular.module('mean.requests').factory('RequestsSpecific', [ '$resource',
     function($resource) {
         return $resource('/api/stepType/:stepId', {
-            reqID: '@_id'
+            stepId: '@_id'
         }, {
             update: {
                 method: 'PUT'

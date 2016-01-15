@@ -15,7 +15,7 @@
                                 </div>
                             </div>
                             <ul id="progress" >
-                                    <div data-ng-repeat="step in steps">
+                                    <div data-ng-repeat="step in steps | orderBy:executionNumber">
                                         <li ui-sref="home.requestDetail.stepView({step : step, id : request._id, stepId : step._id, type : step.type})" ng-if="step.status !== 'INPROGRESS'" >{{step.name}}
                                         <li ui-sref="home.requestDetail.stepView({step : step, id : request._id, stepId : step._id, type : step.type})" ng-if="step.status === 'INPROGRESS'" class="active">{{step.name}}</li>
                                     </div>
@@ -30,8 +30,8 @@
                                     <th>Status</th>
                                     <th>State</th>
                                 </tr>
-                                <tr data-ng-repeat="step in steps" ui-sref="home.requestDetail.stepView({step : step, id : request._id, stepId : step._id, type : step.type})">
-                                    <td>1.</td>
+                                <tr data-ng-repeat="step in steps | orderBy:executionNumber" ui-sref="home.requestDetail.stepView({step : step, id : request._id, stepId : step._id, type : step.type})">
+                                    <td>{{step.executionNumber}}</td>
                                     <td>{{step.name}}</td>
                                     <td>
                                         <div class="progress xs">

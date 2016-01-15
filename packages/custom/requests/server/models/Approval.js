@@ -47,6 +47,18 @@ var ApprovalSchema = new Schema({
     type : {
         type: String,
         default : 'Approval'
+    },
+    executionNumber : {
+        type : Number,
+        trim : true
+    },
+    isFirst : {
+        type: Boolean,
+        default : false
+    },
+    isLast : {
+        type: Boolean,
+        default : false
     }
 });
 

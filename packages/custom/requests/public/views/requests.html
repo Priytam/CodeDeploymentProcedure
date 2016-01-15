@@ -13,6 +13,7 @@
             </div>
         </div>
         <div class="box-body">
+
             <table class="table table-bordered table-responsive">
                 <tr>
                     <th>Request Id</th>
@@ -38,7 +39,7 @@
                     <td ng-if="request.status === 'FINISHED'"><span class="badge bg-blue">{{request.status}}</span></td>
                     <td >
                         <div class="progress xs">
-                            <div class="progress-bar progress-bar-success" style="width: 55%"></div>
+                            <div class="progress-bar progress-bar-success" style="width: {{(request.processedStep/request.steps.length)*100}}%"></div>
                         </div>
                     </td>
                     <td >

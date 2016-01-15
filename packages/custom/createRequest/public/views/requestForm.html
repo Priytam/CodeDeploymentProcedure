@@ -7,7 +7,7 @@
             <div class="box-body">
                 <form  name="flowInputForm" novalidate>
                     <div class="form-group form-horizontal">
-                        <div ng-repeat="step in plan.steps">
+                        <div ng-repeat="step in plan.steps | orderBy:stepNumber">
                             <div ng-switch on="step.type">
                                 <div ng-switch-when="Query">
                                     <div class="row">
@@ -103,7 +103,7 @@
             </div>
             <div class="box-body">
                 <ul class="list-group">
-                    <span ng-repeat="step in plan.steps">
+                    <span ng-repeat="step in plan.steps | orderBy:stepNumber">
                         <li class="list-group-item text-center"  >{{::step.name}}  </li>
                         <i style="color:darkgreen;" ng-show="!$last" class="fa fa-arrow-down fa-2x col-md-offset-5"></i>
                     </span>

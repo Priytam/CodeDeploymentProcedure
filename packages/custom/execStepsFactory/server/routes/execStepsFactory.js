@@ -3,16 +3,16 @@
 // The Package is past automatically as first parameter
 module.exports = function (EPDBs, app) {
 
-  var articles = require('../controllers/epFactories')(EPDBs);
+  var plans = require('../controllers/epFactories')(EPDBs);
 
   app.route('/api/epFactory')
-      .get(articles.all)
-      .post(articles.create);
+      .get(plans.all)
+      .post(plans.create);
   app.route('/api/epFactory/:epId')
-      .get(articles.show)
-      .put(articles.update)
-      .delete(articles.destroy);
+      .get(plans.show)
+      .put(plans.update)
+      .delete(plans.destroy);
 
-  // Finish with setting up the dbId param
-  app.param('epId', articles.plan);
+  // Finish with setting up the epId param
+  app.param('epId', plans.plan);
 };

@@ -26,21 +26,19 @@ angular.module('mean.createRequest').controller('RequestFormController', ['$scop
 
         function createDefaultSteps(){
             angular.forEach($scope.plan.steps, function(step) {
-                var data = {'value' : [], 'type' : step.type, 'executionNumber' : 0 , 'name' : $scope.plan.name};
+                var data = {'value' : [], 'type' : step.type,  'executionNumber': step.stepNumber, 'isFirst' : step.isFirst , 'isLast' : step.isLast, 'name' : $scope.plan.name};
                 input[step.name] = data;
             }, input);
         }
 
         $scope.pushRequired = function(step, index) {
-            var data = {'value' : $scope.requestData[step.name], 'type' : step.type, 'executionNumber' : index , 'name' : $scope.plan.name};
+            var data = {'value' : $scope.requestData[step.name], 'type' : step.type, 'executionNumber': step.stepNumber, 'isFirst' : step.isFirst , 'isLast' : step.isLast , 'name' : $scope.plan.name};
             input[step.name] = data;
         };
 
         $scope.submit = function() {
             var request = new Requests(input);
             request.$save(function(response) {
-                //process very first request by default
-                //request.$process({stepId : response.steps[0].category, type : response.steps[0].type});
                 $state.go('home.requestDetail', {request : response, id : response._id});
             });
         };
@@ -50,7 +48,7 @@ angular.module('mean.createRequest').controller('RequestFormController', ['$scop
         };
 
         $scope.uploadFinished = function(files, step, index) {
-            var data = {'value' : files, 'type' : step.type, 'executionNumber' : index , 'name' : $scope.plan.name};
+            var data = {'value' : files, 'type' : step.type, 'executionNumber': step.stepNumber, 'isFirst' : step.isFirst , 'isLast' : step.isLast , 'name' : $scope.plan.name};
             input[step.name] = data;
         }
     }

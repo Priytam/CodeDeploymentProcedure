@@ -47,6 +47,18 @@ var UploadSchema = new Schema({
     currentStateNumber : {
         type: Number,
         default : 0
+    },
+    executionNumber : {
+        type : Number,
+        trim : true
+    },
+    isFirst : {
+        type: Boolean,
+        default : false
+    },
+    isLast : {
+        type: Boolean,
+        default : false
     }
 });
 

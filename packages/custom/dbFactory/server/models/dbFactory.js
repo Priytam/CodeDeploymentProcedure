@@ -8,7 +8,7 @@ var mongoose = require('mongoose'),
 
 
 /**
- * Article Schema
+ * Database Schema
  */
 var DBSchema = new Schema({
   created: {

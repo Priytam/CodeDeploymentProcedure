@@ -1,6 +1,9 @@
 /**
  * Created by pjpandey on 12/30/2015.
  */
+var mongoose = require('mongoose'),
+    RequestDB = mongoose.model('Request');
+
 module.exports = function () {
 
     var strategy = {};
@@ -27,7 +30,37 @@ module.exports = function () {
             });
         }
         processor.processData(id, reqId,  function(msg){
-            return cb(null, msg);
+            getStep(id, type, function(err, data){
+               var processedStep = data.executionNumber;
+               getRequest(reqId, function(err, result){
+                   if(err){
+                       return cb(err);
+                   }
+                   var request = result;
+                   request.processedStep = processedStep;
+                   if(data.isFirst){
+                       request.status = 'INPROGRESS';
+                   }
+                   if(data.isLast){
+                       request.status = 'FINISHED';
+                   }
+                   request.save(function(err) {
+                       if (err) {
+                           return cb(err);
+                       }
+                       return cb(null, msg);
+                   });
+               })
+            });
+        });
+    }
+
+    function getRequest(id , cb){
+        RequestDB.findOne({_id : id}, function(err, approval) {
+            if (err) {
+                return cb(err);
+            }
+            return cb(null, approval);
         });
     }
 

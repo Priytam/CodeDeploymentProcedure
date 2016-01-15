@@ -52,7 +52,7 @@ module.exports = function(EPDBs) {
     function insertIntoDb(reqData, name, done) {
         var values = [];
         values[0] = reqData.value;
-        var data = {values: values, name: name, plan: reqData.name};
+        var data = {values: values, name: name, plan: reqData.name, 'executionNumber': reqData.executionNumber, 'isFirst' : reqData.isFirst , 'isLast' : reqData.isLast };
         var approval = new ApprovalDB(data);
         approval.user = '';
         approval.save(function (err) {
@@ -67,7 +67,7 @@ module.exports = function(EPDBs) {
         function insertIntoUploadDb(reqData, name, done) {
             var values = [];
             values[0] = reqData.value;
-            var data = {values: values, name: name, plan: reqData.name};
+            var data = {values: values, name: name, plan: reqData.name, 'executionNumber': reqData.executionNumber, 'isFirst' : reqData.isFirst , 'isLast' : reqData.isLast };
             var approval = new UploadDB(data);
             approval.user = '';
             approval.save(function (err) {

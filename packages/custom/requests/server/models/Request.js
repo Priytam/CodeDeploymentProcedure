@@ -19,7 +19,6 @@ var allowedCategories = [
         type: Schema.ObjectId,
         ref: 'Upload'
     }
-
 ];
 /**
  * Article Schema
@@ -39,6 +38,10 @@ var RequestSchema = new Schema({
         type : String,
         trim : true
     },
+    processedStep : {
+        type : Number,
+        trim : true
+    },
     steps : [{
         name : {
             type: String,
@@ -53,16 +56,7 @@ var RequestSchema = new Schema({
             trim: true
         }
     }]
-
 });
-
-/**
- * Validations
- */
-/*RequestSchema.path('category').validate(function(category) {
-    return !!category;
-}, 'category cannot be blank');*/
-
 
 /**
  * Statics
@@ -74,6 +68,3 @@ RequestSchema.statics.load = function(id, cb) {
 };
 
 mongoose.model('Request', RequestSchema);
-/**
- * Created by arkulkar on 12/19/2015.
- */

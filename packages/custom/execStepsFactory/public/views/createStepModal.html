@@ -1,6 +1,6 @@
 <div class="modal-header">
     Step for plan {{plan.name}}
-    <a class="btn btn-info" ng-click="dismiss()">Close</a>
+    <a class="pull-right" ng-click="dismiss()"><i class="fa fa-close"></i></a>
 </div>
 <div class="modal-body">
     <div class="row">
@@ -15,6 +15,10 @@
                             <p ng-show="epStepForm.stepName.$error.required">Step Name is required</p>
                         </div>
                     </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Step Number :</label>
+                    <span  class="col-md-9 pull-left"> <i class="badge">{{step.stepNumber}}</i></span>
                 </div>
                 <div class="form-group" ng-class="{ 'has-error' : stepFormSbmitted && epStepForm.stepDescription.$invalid }">
                     <label mean-token="'create-stepDescription'"  for="stepDescription" class="col-md-3 control-label">Step Description :</label>
@@ -57,17 +61,16 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-md-offset-3 col-md-9" style="text-align:center">
-                        <button mean-token="'create-add-step'"  ng-click="" type="submit" class="btn btn-info text-center">
+                    <div class="col-md-offset-7 col-md-5" style="text-align:center">
+                        <button mean-token="'create-add-step'"  ng-click="" type="submit" class="btn btn-info">
                             <i class="glyphicon glyphicon-edit"></i>Submit
                         </button>
+                        &nbsp;&nbsp;&nbsp;
+                        <a class="btn btn-info pull-right" ng-click="dismiss()">Cancel</a>
                     </div>
                 </div>
             </form>
         </div>
     </div>
-</div>
-<div class="modal-footer">
-    <a class="btn btn-info" ng-click="dismiss()">Close</a>
 </div>
     <!-- add button just to toggle the view-->

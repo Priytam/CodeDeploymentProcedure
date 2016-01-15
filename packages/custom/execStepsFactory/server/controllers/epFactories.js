@@ -14,13 +14,13 @@ module.exports = function(EPDBs) {
         /**
          * Find article by id
          */
-        article: function(req, res, next, id) {
-            EPDB.load(id, function(err, db) {
+        plan : function(req, res, next, id) {
+            EPDB.load(id, function(err, plan) {
                 if (err)
                     return next(err);
-                if (!db)
+                if (!plan)
                     return next(new Error('Failed to load db ' + id));
-                req.db = db;
+                req.plan = plan;
                 next();
             });
         },
@@ -76,25 +76,14 @@ module.exports = function(EPDBs) {
          * Delete an article
          */
         destroy: function(req, res) {
-            var article = req.article;
-
-
-            article.remove(function(err) {
+            var plan = req.plan;
+            plan.remove(function(err) {
                 if (err) {
                     return res.status(500).json({
-                        error: 'Cannot delete the db'
+                        error: 'Cannot delete the plan'
                     });
                 }
-
-                EPDBs.events.publish({
-                    action: 'deleted',
-                    user: {
-                        name: req.user.name
-                    },
-                    name: article.host + article.port
-                });
-
-                res.json(article);
+                res.json(plan);
             });
         },
         /**

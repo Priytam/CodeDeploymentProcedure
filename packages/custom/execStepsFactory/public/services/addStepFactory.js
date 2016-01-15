@@ -22,7 +22,7 @@ function AddStepFactory() {
     }
 
     function clearSteps(){
-        return steps.clear();
+        steps  = [];
     }
 
     function setStep(step) {

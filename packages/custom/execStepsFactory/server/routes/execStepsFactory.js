@@ -14,5 +14,5 @@ module.exports = function (EPDBs, app) {
       .delete(articles.destroy);
 
   // Finish with setting up the dbId param
-  app.param('epId', articles.article);
+  app.param('epId', articles.plan);
 };

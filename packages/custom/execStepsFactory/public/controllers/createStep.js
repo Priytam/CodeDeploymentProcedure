@@ -8,6 +8,10 @@ angular.module('mean.execStepsFactory').controller('CreateStepModalController', 
 
         $scope.types =  ['Query', 'Approval', 'Code', 'Upload', 'DateTime'];
         $scope.step = {};
+        $scope.step.stepNumber = AddStepFactory.getSteps().length + 1;
+        if($scope.step.stepNumber === 1) {
+            $scope.step.isFirst = true;
+        }
 
         $scope.addAStep = function(isValid) {
             if (isValid && $scope.step !== undefined) {

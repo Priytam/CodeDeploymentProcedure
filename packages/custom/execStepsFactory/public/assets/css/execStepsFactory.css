@@ -417,3 +417,9 @@ th {
     z-index: 1020;
     background: transparent url('../img/ajax-loader1.gif') 50% 50% no-repeat;
 }*/
+
+
+.large-Modal .modal-dialog{
+    width:80%;
+    height: 90%;
+}

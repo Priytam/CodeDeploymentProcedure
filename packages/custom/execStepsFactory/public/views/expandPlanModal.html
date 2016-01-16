@@ -1,0 +1,47 @@
+<div>
+    <div class="modal-header">
+        {{plan.name}}
+        <a class="pull-right" ng-click="dismiss()"><i class="fa fa-close"></i></a>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-xs-12">
+                <div ng-show="isEmpty">
+                    <label class="info_description">NO Plan selected, please select a plan and try agaian</label>
+                </div>
+                <div ng-show="!isEmpty">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">{{plan.name}}
+                        <span class="text-muted">({{plan.description}})</span>
+                        </div>
+                        <div class="panel-body">
+                            <uib-accordion close-others="true">
+                                <uib-accordion-group data-ng-repeat="step in plan.steps" is-open="statusOpen[$index].open">
+                                    <uib-accordion-heading>
+                                      {{step.stepNumber}} .&nbsp; {{step.name}} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': statusOpen[$index].open, 'glyphicon-chevron-right': !statusOpen[$index].open}"></i>
+                                    </uib-accordion-heading>
+                                    <div>
+                                        <div class="col-md-offset-1 col-md-11"><label>stepNumber:</label>&nbsp;&nbsp;{{step.stepNumber}}</div>
+                                        <div class="col-md-offset-1 col-md-11"><label>Name:</label>&nbsp;&nbsp;{{step.name}}</div>
+                                        <div class="col-md-offset-1 col-md-11"><label>Description:</label>&nbsp;&nbsp;{{step.description}}</div>
+                                        <div class="col-md-offset-1 col-md-11"><label>Type:</label>&nbsp;&nbsp;{{step.type}}</div>
+                                        <div class="col-md-offset-1 col-md-11"><label>Id:</label>&nbsp;&nbsp;{{step._id}}</div>
+                                        <div class="col-md-offset-1 col-md-11"><label>isMandatory:</label>&nbsp;&nbsp;{{step.isMandatory}}</div>
+                                        <div class="col-md-offset-1 col-md-11"><label>isFirst:</label>&nbsp;&nbsp;{{step.isFirst}}</div>
+                                        <div class="col-md-offset-1 col-md-11"><label>isLast:</label>&nbsp;&nbsp;{{step.isLast}}</div>
+                                    </div>
+                                    <div>
+
+                                    </div>
+                                </uib-accordion-group>
+                            </uib-accordion>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- add button just to toggle the view-->
+
+

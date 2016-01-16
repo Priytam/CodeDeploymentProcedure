@@ -2,12 +2,7 @@
 
 /* jshint -W098 */
 angular.module('mean.execStepsFactory')
-    .filter('isEmpty', [function() {
-      return function(object) {
-        return angular.equals({}, object);
-      }
-    }])
-    .controller('ExecStepsFactoryController', ['$scope', 'Global', 'ExecStepsFactory',
+  .controller('ExecStepsFactoryController', ['$scope', 'Global', 'ExecStepsFactory',
   '$uibModal', 'AddStepFactory', 'DbFactory',
   function($scope, Global, EPDB, $uibModal, AddStepFactory, DbFactory) {
 
@@ -18,15 +13,15 @@ angular.module('mean.execStepsFactory')
 
     $scope.executionPlan = AddStepFactory.getPlan();
     $scope.executionPlan.steps = AddStepFactory.getSteps();
-    $scope.selectedPlan = {};
+    var selectedPlan = {};
     $scope.eps = [];
     $scope.isVisible = true;
+    $scope.isEmpty = true;
     $scope.addAPlan = function() {
       $uibModal.open({
         templateUrl : 'execStepsFactory/views/createPlanModal.html',
         controller : 'CreatePlanModalController',
-        size : 'wide'
-        //windowClass: 'large-Modal'
+        windowClass: 'medium-Modal'
       })
       .result.then(updatePlan);
     };
@@ -39,7 +34,7 @@ angular.module('mean.execStepsFactory')
       $uibModal.open({
         templateUrl : 'execStepsFactory/views/createStepModal.html',
         controller : 'CreateStepModalController',
-        size : 'wide'
+        windowClass: 'medium-Modal'
       })
       .result.then(updateStep);
     };
@@ -56,21 +51,49 @@ angular.module('mean.execStepsFactory')
           $scope.taskMessage = "Plan added successfully ...";
         });
       $scope.isVisible = false;
+      $scope.isEmpty = false;
       AddStepFactory.clearSteps();
       $scope.executionPlan.steps = [];
       $scope.executionPlan = {};
     };
 
     $scope.selectPlan = function(plan){
-      $scope.selectedPlan = plan;
+      selectedPlan = plan;
     };
 
-    $scope.remove = function(){
-      $scope.selectedPlan.$remove(function(response) {
-        $scope.eps.splice($scope.eps.indexOf(response), 1);
-        $scope.taskMessage = "Plan removed successfully ...";
-      });
+    $scope.showDetail = function(type){
+      $uibModal.open({
+        templateUrl : 'execStepsFactory/views/expandPlanModal.html',
+        controller : 'expandPlanController',
+        windowClass : 'medium-Modal',
+        resolve : {
+          plan : function() {
+            return selectedPlan;
+          },
+          operationType : function() {
+            return type;
+          }
+        }
+      })
     };
+
+    $scope.openConfirmDialog = function(){
+      $uibModal.open({
+        templateUrl : 'execStepsFactory/views/confirmDeletePlanModal.html',
+        controller : 'confirmDeletePlanController',
+        size : 'wide',
+        resolve: {
+          plan: function() {
+            return selectedPlan;
+          }
+        }
+      }).result.then(removePlan)
+    };
+
+    function removePlan(){
+      $scope.eps.splice($scope.eps.indexOf(selectedPlan), 1);
+      $scope.taskMessage = "Plan removed successfully ...";
+    }
 
     $scope.closeAlert = function() {
       $scope.taskMessage = undefined;

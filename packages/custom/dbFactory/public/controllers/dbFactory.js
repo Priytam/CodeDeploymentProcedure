@@ -28,8 +28,8 @@ angular.module('mean.dbFactory').controller('DbFactoryController', ['$scope', 'G
     };
 
     $scope.find = function() {
-      DB.query(function(articles) {
-        $scope.dbs = articles;
+      DB.query(function(dbs) {
+        $scope.dbs = dbs;
       });
     };
 

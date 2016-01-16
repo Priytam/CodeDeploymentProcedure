@@ -423,3 +423,8 @@ th {
     width:80%;
     height: 90%;
 }
+
+.medium-Modal .modal-dialog{
+    width:60%;
+    height: 90%;
+}

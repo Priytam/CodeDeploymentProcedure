@@ -12,7 +12,7 @@
                         <a  ng-click="testConnection()" class="list-group-item">
                             <i class="fa fa-check-square-o" style="color: darkorange"></i>
                         </a>
-                        <a  ng-click="remove()" type="submit" class="list-group-item">
+                        <a  ng-click="openConfirmDialog()" type="submit" class="list-group-item">
                             <i class="fa fa-trash-o" style="color: orangered"></i>
                         </a>
                         <a  ng-click="update()" type="submit" class="list-group-item">
@@ -22,13 +22,15 @@
                 </div>
             </div>
             <div class="box-body">
-                <div data-ng-show="addedDb">
-                    <span class="text-success"> dataBase added successfully</span>
+                <uib-alert ng-if="dbtaskMessage" close="closeAlert()" type="success" dismiss-on-timeout="2000">{{dbtaskMessage}}</uib-alert>
+                <div data-ng-show="dbs.length ===0">
+                    <uib-alert close="closeAlert()" type="warning">You don't have any db, please create new db</uib-alert>
                 </div>
-                <div>
+                <div data-ng-show="dbs.length !==0">
                     <table class="table table-bordered table-responsive">
                         <thead>
                         <tr>
+                            <th></th>
                             <th>Host</th>
                             <th>Port</th>
                             <th>Created On</th>
@@ -36,6 +38,7 @@
                         </thead>
                         <tbody>
                         <tr data-ng-repeat="db in dbs">
+                            <td><input type="radio" ng-click="selectBD(db)" name="select"></td>
                             <td>{{db.host}}</td>
                             <td>{{db.port}}</td>
                             <td>{{db.created | date}}</td>

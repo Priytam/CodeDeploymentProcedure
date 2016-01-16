@@ -1,16 +1,16 @@
 'use strict';
 module.exports = function (DBs, app) {
 
-    var articles = require('../controllers/dbFactories')(DBs);
+    var dbs = require('../controllers/dbFactories')(DBs);
 
     app.route('/api/dbFactory')
-        .get(articles.all)
-        .post(articles.create);
+        .get(dbs.all)
+        .post(dbs.create);
     app.route('/api/dbFactory/:dbId')
-        .get(articles.show)
-        .put(articles.update)
-        .delete(articles.destroy);
+        .get(dbs.show)
+        .put(dbs.update)
+        .delete(dbs.destroy);
 
     // Finish with setting up the dbId param
-    app.param('dbId', articles.article);
+    app.param('dbId', dbs.db);
   };

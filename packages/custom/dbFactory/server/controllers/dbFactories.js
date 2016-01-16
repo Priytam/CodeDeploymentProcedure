@@ -12,123 +12,79 @@ module.exports = function(DBs) {
 
     return {
         /**
-         * Find article by id
+         * Find db by id
          */
-        article: function(req, res, next, id) {
-            DB.load(id, function(err, article) {
+        db: function(req, res, next, id) {
+            DB.load(id, function(err, db) {
                 if (err) return next(err);
-                if (!article) return next(new Error('Failed to load db ' + id));
-                req.article = article;
+                if (!db) return next(new Error('Failed to load db ' + id));
+                req.db = db;
                 next();
             });
         },
         /**
-         * Create an article
+         * Create a db
          */
         create: function(req, res) {
-            var article = new DB(req.body);
-            article.user = req.user;
-            article.save(function(err) {
+            var db = new DB(req.body);
+            db.user = req.user;
+            db.save(function(err) {
                 if (err) {
-                    console.log(err);
                     return res.status(500).json({
                         error: 'Cannot save the db'
                     });
                 }
-                DBs.events.publish({
-                    action: 'created',
-                    user: {
-                        name: article.host
-                    },
-                    name: article.host + article.port
-                });
-                console.log('I am here to get Logged');
-                res.json(article);
+                res.json(db);
             });
         },
         /**
-         * Update an article
+         * Update a db
          */
         update: function(req, res) {
-            var article = req.article;
-
-            article = _.extend(article, req.body);
-
-
-            article.save(function(err) {
+            var db = req.db;
+            db = _.extend(db, req.body);
+            db.save(function(err) {
                 if (err) {
                     return res.status(500).json({
                         error: 'Cannot update the db'
                     });
                 }
-
-                DBs.events.publish({
-                    action: 'updated',
-                    user: {
-                        name: req.user.name
-                    },
-                    name: article.host + article.port,
-                    url: config.hostname + '/dbFactory/' + article._id
-                });
-
-                res.json(article);
+                 res.json(db);
             });
         },
         /**
-         * Delete an article
+         * Delete a db
          */
         destroy: function(req, res) {
-            var article = req.article;
-
-
-            article.remove(function(err) {
+            var db = req.db;
+            db.remove(function(err) {
                 if (err) {
                     return res.status(500).json({
                         error: 'Cannot delete the db'
                     });
                 }
-
-                DBs.events.publish({
-                    action: 'deleted',
-                    user: {
-                        name: req.user.name
-                    },
-                    name: article.host + article.port
-                });
-
-                res.json(article);
+                res.json(db);
             });
         },
         /**
-         * Show an article
+         * Show a db
          */
         show: function(req, res) {
-
-            DBs.events.publish({
-                action: 'viewed',
-                user: {
-                    name: req.user.name
-                },
-                name: req.db.host  + req.db.port,
-                url: config.hostname + '/dbFactory/' + req.article._id
-            });
-
-            res.json(req.article);
+            res.json(req.db);
         },
         /**
-         * List of Articles
+         * List of dbs
          */
         all: function(req, res) {
-            DB.find({}).sort('-created').exec(function(err, articles) {
+            DB.find({}).sort('-created').exec(function(err, db) {
                 if (err) {
-                    console.log(err);
                     return res.status(500).json({
-                        error: 'Cannot list the articles'
+                        error: 'Cannot list the dbs'
                     });
                 }
-                res.json(articles)
+                res.json(db)
             });
 
         }
     };
-}
+};

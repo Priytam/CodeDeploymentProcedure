@@ -47,7 +47,6 @@
                     </div>
                 </div>
                 <div>
-
                     <uib-alert ng-if="taskMessage" close="closeAlert()" type="success" dismiss-on-timeout="2000">{{taskMessage}}</uib-alert>
                     <div data-ng-show="eps.length ===0">
                         <uib-alert close="closeAlert()" type="warning">You don't have any plans, please create new plans</uib-alert>
@@ -59,21 +58,32 @@
                             <th></th>
                             <th>Name</th>
                             <th>Description</th>
-                            <th>Flow View</th>
+                            <th>Step #</th>
                             <th>Created On</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr data-ng-repeat="ep in eps">
-                            <td><input type="radio" ng-click="selectPlan(ep)" name="select"></td>
-                            <td>{{ep.name}}</td>
-                            <td>{{ep.description}}</td>
-                            <td><!--{{ep.steps}}-->yet to show</td>
-                            <td>{{ep.created | date}}</td>
-                        </tr>
+                            <tr data-ng-repeat="ep in eps">
+                                <td><input type="radio" ng-click="selectPlan(ep)" name="select"></td>
+                                <td>{{ep.name}}</td>
+                                <td>{{ep.description}}</td>
+                                <td>
+                                    <button uib-popover-template="dynamicPopover.templateUrl" popover-title="Step flow" popover-placement="right" type="button" popover-trigger="mouseenter" class="btn btn-default">
+                                        {{ep.steps.length}}
+                                    </button>
+
+                                </td>
+                                <td>{{ep.created | date}}</td>
+                            </tr>
                         </tbody>
                     </table>
                     </div>
+                    <script type="text/ng-template" id="myPopoverTemplate.html">
+                        <div ng-repeat="step in ep.steps | orderBy:stepNumber">
+                            <li class="list-group-item text-center"  >{{::step.name}}  </li>
+                            <i style="color:darkgreen;" ng-show="!$last" class="fa fa-arrow-down fa-2x col-md-offset-5"></i>
+                        </div>
+                    </script>
                 </div>
             </div>
         </div>

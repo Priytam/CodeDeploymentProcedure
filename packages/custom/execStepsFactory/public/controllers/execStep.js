@@ -11,6 +11,11 @@ angular.module('mean.execStepsFactory')
       name: 'execStepsFactory'
     };
 
+      $scope.dynamicPopover = {
+          templateUrl: 'myPopoverTemplate.html'
+      };
+
+
     $scope.executionPlan = AddStepFactory.getPlan();
     $scope.executionPlan.steps = AddStepFactory.getSteps();
     var selectedPlan = {};
@@ -74,8 +79,12 @@ angular.module('mean.execStepsFactory')
             return type;
           }
         }
-      })
+      }).result.then(updateTaskMessage)
     };
+
+    function updateTaskMessage(msg){
+        $scope.taskMessage = msg;
+    }
 
     $scope.openConfirmDialog = function(){
       $uibModal.open({
@@ -102,6 +111,7 @@ angular.module('mean.execStepsFactory')
     $scope.find = function() {
       EPDB.query(function(plans) {
         $scope.eps = plans;
+          console.log($scope.eps);
       });
     };
 

@@ -38,6 +38,14 @@ var RequestSchema = new Schema({
         type : String,
         trim : true
     },
+    issueNumber : {
+        type : String,
+        trim : true
+    },
+    reason : {
+        type : String,
+        trim : true
+    },
     processedStep : {
         type : Number,
         trim : true

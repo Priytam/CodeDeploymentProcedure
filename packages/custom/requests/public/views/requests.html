@@ -21,6 +21,8 @@
                     <th>Status</th>
                     <th>Progress</th>
                     <th>Created</th>
+                    <th>IssueNumber</th>
+                    <th>Reason</th>
                 </tr>
                 <tr data-ng-repeat="request in requests">
                     <td>
@@ -42,10 +44,9 @@
                             <div class="progress-bar progress-bar-success" style="width: {{(request.processedStep/request.steps.length)*100}}%"></div>
                         </div>
                     </td>
-                    <td >
-                       {{request.created | date}}
-                    </td>
-
+                    <td > {{request.created | date}}</td>
+                    <td > {{request.issueNumber}}</td>
+                    <td > {{request.reason}}</td>
                 </tr>
             </table>
         </div>

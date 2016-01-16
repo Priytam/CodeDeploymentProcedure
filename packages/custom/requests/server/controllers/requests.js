@@ -17,7 +17,7 @@ module.exports = function(EPDBs) {
 
     function createCorrespondingType(req, done) {
         var typeDb = [];
-        var body = req.body;
+        var body = req.body.steps;
         var insertedPosition = 0;
         for(var keys = Object.keys(body), i = 0, end = keys.length; i < end; i++) {
             switch (body[keys[i]].type) {
@@ -111,7 +111,7 @@ module.exports = function(EPDBs) {
                     request.steps[i].name = typeData[i].name;
                     request.steps[i].category = typeData[i];
                 }
-                request.name = typeData[0].plan;
+                //request.name = typeData[0].plan;
                 request.user = req.user;
                 request.save(function(err) {
                     if (err) {

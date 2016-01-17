@@ -24,7 +24,7 @@
     "cookie-parser": "latest",
     "errorhandler": "latest",
     "express": "latest",
-    "express-session": "^1.12.1",
+    "express-session": "^1.13.0",
     "forever": "latest",
     "gridfs-stream": "latest",
     "jsonwebtoken": "latest",

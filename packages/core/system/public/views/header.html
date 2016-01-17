@@ -33,10 +33,10 @@
                         <p class="navbar-text"><i class="fa fa-user fa-lg"></i> {{::user}}</p>
                     </li>
                     <li class="dropdown" uib-dropdown on-toggle="toggled(open)">
-                        <a href="" class="uib-dropdown-toggle" uib-dropdown-toggle>
-                            <i class="fa fa-cog fa-lg" uib-tooltip="Settings" uib-tooltip-placement="bottom"></i><b class="caret"></b>
+                        <a href uib-dropdown-toggle>
+                            <i class="fa fa-cog fa-lg"></i><b class="caret"></b>
                         </a>
-                        <ul class="uib-dropdown-menu">
+                        <ul uib-dropdown-menu aria-labelledby="simple-dropdown">
                             <li>
                                 <a href=""  ng-click="switchUser()">
                                     <i class="fa fa-fw fa-user"></i>

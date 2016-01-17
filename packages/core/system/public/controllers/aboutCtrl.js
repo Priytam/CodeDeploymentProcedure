@@ -5,11 +5,11 @@
         .module('mean.system')
         .controller('About', About);
 
-    function About($modalInstance) {
+    function About($uibModalInstance) {
         /* jshint validthis: true */
         var vm = this;
 
-        vm.close = $modalInstance.dismiss;
+        vm.close = $uibModalInstance.dismiss;
         vm.releaseNotesLink = '';
         vm.appName = 'Code Deployment Procedure';
         vm.version = '1.0.0';

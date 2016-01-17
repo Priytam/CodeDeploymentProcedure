@@ -5,10 +5,10 @@
         .module('mean.system')
         .controller('OpenRequest', OpenRequest);
 
-    function OpenRequest($modalInstance) {
+    function OpenRequest($uibModalInstance) {
         /* jshint validthis: true */
         var vm = this;
-        vm.close = $modalInstance.dismiss;
+        vm.close = $uibModalInstance.dismiss;
         vm.submit = submit;
 
         ////////////////
@@ -18,7 +18,7 @@
         }
 
         function requestSent() {
-            $modalInstance.close(vm.feedback);
+            $uibModalInstance.close(vm.feedback);
         }
     }
 })();

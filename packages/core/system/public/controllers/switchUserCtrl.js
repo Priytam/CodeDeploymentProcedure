@@ -5,10 +5,10 @@
         .module('mean.system')
         .controller('SwitchUser', SwitchUser);
 
-    function SwitchUser($modalInstance, $location, $window, Authentication, $cookieStore) {
+    function SwitchUser($uibModalInstance, $location, $window, Authentication, $cookieStore) {
         /* jshint validthis: true */
         var vm = this;
-        vm.close = $modalInstance.dismiss;
+        vm.close = $uibModalInstance.dismiss;
         vm.newUser = '';
         vm.loggedUser = Authentication.user;
         vm.switchUser = switchUser;
@@ -30,7 +30,7 @@
         function userSwitched() {
             $location.path('/');
             $window.location.reload();
-            $modalInstance.close(true);
+            $uibModalInstance.close(true);
         }
     }
 })();

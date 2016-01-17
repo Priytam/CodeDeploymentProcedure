@@ -4,7 +4,7 @@
     "jquery": "latest",
     "angular": "latest",
     "angular-resource": "latest",
-    "angular-cookies": "latest",
+    "angular-cookies": "~1.4.8",
     "angular-mocks": "latest",
     "angular-route": "latest",
     "bootstrap": "latest",

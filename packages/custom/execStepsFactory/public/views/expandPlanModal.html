@@ -1,7 +1,7 @@
 <div>
     <div class="modal-header">
         {{plan.name}}
-        <a class="pull-right" ng-click="dismiss()"><i class="fa fa-close"></i></a>
+        <a href="" class="pull-right" ng-click="dismiss()"><i class="fa fa-close"></i></a>
     </div>
     <div class="modal-body">
         <div class="row">
@@ -19,7 +19,6 @@
                                 <uib-accordion-group data-ng-repeat="step in plan.steps" is-open="statusOpen[$index].open">
                                     <uib-accordion-heading>
                                       {{step.stepNumber}} .&nbsp; {{step.name}}
-
                                         <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': statusOpen[$index].open, 'glyphicon-chevron-right': !statusOpen[$index].open}"></i>
                                     </uib-accordion-heading>
                                     <div data-ng-show="operationType === 'detail'">

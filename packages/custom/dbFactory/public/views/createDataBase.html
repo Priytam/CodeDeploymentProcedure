@@ -6,16 +6,16 @@
                 <i class="fa fa-database"></i> <h3 class="box-title">DataBase List</h3>
                 <div class="box-tools pull-right">
                     <div class="list-group list-group-horizontal text-center">
-                        <a  ng-click="addADB()" class="list-group-item">
+                        <a  href="" ng-click="addADB()" class="list-group-item">
                             <i class="fa fa-plus-square-o" style="color: darkgreen"></i>
                         </a>
-                        <a  ng-click="testConnection()" class="list-group-item">
+                        <a  href="" ng-click="testConnection()" class="list-group-item">
                             <i class="fa fa-check-square-o" style="color: darkorange"></i>
                         </a>
-                        <a  ng-click="openConfirmDialog()" type="submit" class="list-group-item">
+                        <a  href="" ng-click="openConfirmDialog()" type="submit" class="list-group-item">
                             <i class="fa fa-trash-o" style="color: orangered"></i>
                         </a>
-                        <a  ng-click="update()" type="submit" class="list-group-item">
+                        <a href="" ng-click="update()" type="submit" class="list-group-item">
                             <i class="fa fa-edit" style="color: darkgoldenrod"></i>
                         </a>
                     </div>
@@ -24,7 +24,7 @@
             <div class="box-body">
                 <uib-alert ng-if="dbtaskMessage" close="closeAlert()" type="success" dismiss-on-timeout="2000">{{dbtaskMessage}}</uib-alert>
                 <div data-ng-show="dbs.length ===0">
-                    <uib-alert close="closeAlert()" type="warning">You don't have any db, please create new db</uib-alert>
+                    <uib-alert type="warning">You don't have any db, please create new db</uib-alert>
                 </div>
                 <div data-ng-show="dbs.length !==0">
                     <table class="table table-bordered table-responsive">

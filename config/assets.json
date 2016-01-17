@@ -20,7 +20,8 @@
         "bower_components/angular-bootstrap/ui-bootstrap-tpls.js",
         "bower_components/angular-ui-select/dist/select.min.js",
         "bower_components/web-bootstrap/index.js",
-        "bower_components/angular-http-loader.min.js"
+        "bower_components/angular-http-loader.min.js",
+        "bower_components/angular-cookies/angular-cookies.js"
       ]
     }
   }

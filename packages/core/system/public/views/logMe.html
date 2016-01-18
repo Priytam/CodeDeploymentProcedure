@@ -1,0 +1,24 @@
+<div class="modal-header">
+<!--
+    <a type="button" class="close" aria-hidden="true" ng-click="vm.close('cancel')">&times;</a>
+-->
+    <h4><i class="fa fa-user"></i> Check In</h4>
+</div>
+
+<form class="form-inline" name="switchFrom" role="form">
+    <div class="modal-body" >
+
+        <div class="form-group form-horizontal">
+            <label for="user-text">IDSID :</label>
+            <input id="user-text" class="form-control" name="user-text" type="text" ng-model="vm.user" required focusme autofocus>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button id="switch-button" ng-disabled="switchFrom.$invalid" type="submit" ng-click="vm.logMe()" class="btn btn-primary">
+            <i class="fa fa-plug"></i> LogIn
+        </button>
+<!--
+        <button id="cancel-button" type="button" ng-click="vm.close('cancel')" class="btn btn-warning">Cancel</button>
+-->
+    </div>
+</form>

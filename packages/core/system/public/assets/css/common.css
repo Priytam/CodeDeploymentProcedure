@@ -9,6 +9,14 @@
     border-color: #E7E7E7;
 }
 
+.navbar-inverse .navbar-brand {
+    color: white;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: #afd9ee;
+}
+
 .page-header .navbar-nav {
     float: right;
 }

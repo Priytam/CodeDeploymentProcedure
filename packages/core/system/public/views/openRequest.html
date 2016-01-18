@@ -1,0 +1,28 @@
+<div class="modal-header">
+    <a href="" class="pull-right" ng-click="vm.close('cancel')"><i class="fa fa-close"></i></a>
+    <h4><i class="fa fa-edit"></i> Open Request</h4>
+</div>
+<form novalidate name="feedbackForm">
+    <div class="modal-body">
+        <div class="form-group form-horizontal">
+            <label for="subject">Title:</label>
+            <input class="form-control" type="text" ng-model="vm.feedback.subject" name="subject" id="subject" placeholder="Subject" required focusme="true">
+        </div>
+        <div class="form-group form-horizontal">
+            <label for="message">Description:</label>
+            <textarea class="form-control" ng-model="vm.feedback.message" name="message" id="message" placeholder="Message" rows="10" required></textarea>
+        </div>
+        <div class="form-group form-horizontal">
+            <label for="justification">Justification:</label>
+            <textarea class="form-control" ng-model="vm.feedback.justification" name="justification" id="justification" placeholder="Justification" rows="6" required></textarea>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="submit" ng-click="vm.submit()" ng-disabled="feedbackForm.$invalid">
+            <i class="fa fa-check-square-o"></i> Submit
+        </button>
+        <button class="btn btn-warning" ng-click="vm.close('cancel')">
+            <i class="fa fa-times-circle"></i> Cancel
+        </button>
+    </div>
+</form>

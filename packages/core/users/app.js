@@ -4,7 +4,8 @@
  * Defining the Package
  */
 var mean = require('meanio'),
-  Module = mean.Module;
+  Module = mean.Module,
+  session  = require('express-session');
 
 function MeanUserKlass () {
   Module.call(this, 'users');
@@ -32,7 +33,11 @@ MeanUser.register(function(app, database, passport) {
     });
 
     MeanUser.auth = require('./authorization');
+    app.use(session({ secret: 'anything' }));
+    app.use(passport.initialize());
+    app.use(passport.session());
     require('./passport')(passport);
+
 
     mean.register('auth', MeanUser.auth);
 

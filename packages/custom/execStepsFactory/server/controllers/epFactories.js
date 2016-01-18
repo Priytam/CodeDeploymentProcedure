@@ -78,6 +78,8 @@ module.exports = function(EPDBs) {
          * List of plans
          */
         all: function(req, res) {
+            console.log('##############################################################');
+            console.log(req.user);
             EPDB.find({}).sort('-created').exec(function(err, plans) {
                 if (err) {
                     return res.status(500).json({

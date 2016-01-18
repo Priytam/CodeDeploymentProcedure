@@ -1,0 +1,34 @@
+<div class="modal-header">
+    <a href="" class="pull-right" ng-click="vm.close('cancel')"><i class="fa fa-close"></i></a>
+    <h4><i class="fa fa-info-circle"></i> {{::vm.appName}}</h4>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-xs-3"><b>Version</b></div>
+        <div class="col-xs-9">{{::vm.version}}</div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-xs-3"><b>Release Time</b></div>
+        <div class="col-xs-9">{{::vm.buildDate | date : 'd/M/yy h:mm a' }}</div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-xs-3"><b>Web Server</b></div>
+        <div class="col-xs-9">{{::vm.serverInfo.name}}</div>
+    </div>
+    <br/>
+    <div class="row" ng-show="::vm.releaseNotesLink">
+        <div class="col-xs-12 text-center">
+            <a ng-href="{{::vm.releaseNotesLink}}" class="btn btn-info" target="_blank">
+                View Release Notes
+            </a>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-success" ng-click="vm.close()">
+        <i class="fa fa-times-circle"></i> Close
+    </button>
+</div>
+

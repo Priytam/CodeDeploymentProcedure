@@ -6,7 +6,7 @@
                 <i class="fa fa-database"></i> <h3 class="box-title">DataBase List</h3>
                 <div class="box-tools pull-right">
                     <div class="list-group list-group-horizontal text-center">
-                        <a  href="" ng-click="addADB()" class="list-group-item">
+                        <a  href="" ng-click="addADB('create')" class="list-group-item">
                             <i class="fa fa-plus-square-o" style="color: darkgreen"></i>
                         </a>
                         <a  href="" ng-click="testConnection()" class="list-group-item">
@@ -15,7 +15,7 @@
                         <a  href="" ng-click="openConfirmDialog()" type="submit" class="list-group-item">
                             <i class="fa fa-trash-o" style="color: orangered"></i>
                         </a>
-                        <a href="" ng-click="update()" type="submit" class="list-group-item">
+                        <a href="" ng-click="addADB('update')" type="submit" class="list-group-item">
                             <i class="fa fa-edit" style="color: darkgoldenrod"></i>
                         </a>
                     </div>
@@ -31,6 +31,7 @@
                         <thead>
                         <tr>
                             <th></th>
+                            <th>DBName</th>
                             <th>Host</th>
                             <th>Port</th>
                             <th>Created On</th>
@@ -39,6 +40,7 @@
                         <tbody>
                         <tr data-ng-repeat="db in dbs">
                             <td><input type="radio" ng-click="selectBD(db)" name="select"></td>
+                            <td>{{db.dbName}}</td>
                             <td>{{db.host}}</td>
                             <td>{{db.port}}</td>
                             <td>{{db.created | date}}</td>

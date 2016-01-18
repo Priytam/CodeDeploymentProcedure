@@ -1,16 +1,32 @@
 <div class="modal-header">
-    Form to create a plan
+    Form to create a DB
     <a  href="" class="pull-right" ng-click="dismiss()"><i class="fa fa-close"></i></a>
 </div>
 <div class="modal-body">
     <div class="row">
         <div class="col-xs-12">
-            <form name="epForm" class="form-horizontal" role="form" data-ng-submit="create(epForm.$valid)" novalidate>
-                <!-- name of plan -->
-                <div class="form-group" ng-class="{ 'has-error' : submitted && epForm.host.$invalid }">
-                    <label mean-token="'create-planName'"  for="host" class="col-md-3 control-label">Host :</label>
+            <div ng-if="isDbNotSelected()">
+                <span class="text-warning">No DB is selected, please select a DB and try again</span>
+                <button class="btn btn-warning pull-right" ng-click="dismiss()">
+                    <i class="fa fa-times-circle"></i>&nbsp;Cancel
+                </button>
+            </div>
+            <form ng-if="!isDbNotSelected()" name="epForm" class="form-horizontal" role="form" data-ng-submit="create(epForm.$valid)" novalidate>
+                <!-- name of DB -->
+                <div class="form-group" ng-class="{ 'has-error' : submitted && epForm.name.$invalid }">
+                    <label mean-token="'create-DBName'"  for="host" class="col-md-3 control-label">DBName :</label>
                     <div class="col-md-9">
-                        <input name="host" type="text" class="form-control" data-ng-model="dbList.host" id="host" placeholder="Plan Name" required>
+                        <input name="name" type="text" class="form-control" data-ng-model="dbList.dbName" id="name" placeholder="DB Name" required>
+                        <div ng-show="submitted && epForm.name.$invalid" class="help-block">
+                            <p ng-show="epForm.name.$error.required">DB name is required</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group" ng-class="{ 'has-error' : submitted && epForm.host.$invalid }">
+                    <label mean-token="'create-DBName'"  for="host" class="col-md-3 control-label">Host :</label>
+                    <div class="col-md-9">
+                        <input name="host" type="text" class="form-control" data-ng-model="dbList.host" id="host" placeholder="DB Host" required>
                         <div ng-show="submitted && epForm.host.$invalid" class="help-block">
                             <p ng-show="epForm.host.$error.required">Host name is required</p>
                         </div>
@@ -43,8 +59,11 @@
                 <!-- submit -->
                 <div class="form-group">
                     <div class="col-md-offset-7 col-md-5" style="text-align:center">
-                        <button  ng-click="" type="submit" class="btn btn-info">
-                            <i class="fa fa-check-square-o"></i>Submit
+                        <button  ng-click="" ng-show="operationType==='create'" type="submit" class="btn btn-info">
+                            <i class="fa fa-check-square-o"></i>Create
+                        </button>
+                        <button  ng-click="update(epForm.$valid)" ng-show="operationType==='update'" class="btn btn-info">
+                            <i class="fa fa-check-square-o"></i>Update
                         </button>
                         &nbsp;&nbsp;&nbsp;
                         <button class="btn btn-warning pull-right" ng-click="dismiss()">

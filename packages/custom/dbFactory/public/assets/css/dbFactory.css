@@ -1,3 +1,7 @@
 .dbFactory-example h1 {
   background-color: purple
 }
+.medium-Modal .modal-dialog{
+  width:60%;
+  height: 90%;
+}

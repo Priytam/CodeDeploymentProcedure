@@ -14,21 +14,30 @@ angular.module('mean.dbFactory').controller('dbController', ['$scope', 'Global',
 
         $scope.dbs = [];
 
-        $scope.addADB = function () {
+        $scope.addADB = function (type) {
             $uibModal.open({
-                templateUrl: 'dbFactory/views/createDbModal.html',
-                controller: 'DbFactoryController',
-                size: 'wide'
+                templateUrl : 'dbFactory/views/createDbModal.html',
+                controller : 'DbFactoryController',
+                windowClass : 'medium-Modal',
+                resolve : {
+                    db : function(){
+                        return selectedBD;
+                    },
+                    operationType : function(){
+                        return type;
+                    }
+                }
             }).result.then(function (db) {
-                    //console.log(db);
-                    $scope.addedDb = db;
-                    $scope.dbs.unshift(db);
-                    $scope.taskMessage = "DB added successfully ...";
+                    if(type === 'create'){
+                        $scope.dbs.unshift(db);
+                    }
+                    $scope.taskMessage = db.taskMessage;
                 });
         };
 
         $scope.selectBD = function(db){
             selectedBD = db;
+            console.log(selectedBD);
         };
 
         $scope.openConfirmDialog = function(){
@@ -37,7 +46,7 @@ angular.module('mean.dbFactory').controller('dbController', ['$scope', 'Global',
                 controller : 'confirmDeleteDBController',
                 size : 'wide',
                 resolve: {
-                    db: function() {
+                    db : function() {
                         return selectedBD;
                     }
                 }

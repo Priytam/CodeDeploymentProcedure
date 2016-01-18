@@ -6,8 +6,10 @@ angular.module('mean.dbFactory').controller('confirmDeleteDBController',['$scope
 
     function($scope, $uibModalInstance, db){
         $scope.isEmpty = false;
+
         $scope.db = db;
-        if(angular.equals({},$scope.db)){
+        console.log(db);
+        if(angular.equals({},db)){
             $scope.isEmpty = true;
         }
         $scope.dismiss = function(){

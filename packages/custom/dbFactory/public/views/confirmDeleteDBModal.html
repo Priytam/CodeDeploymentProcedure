@@ -5,15 +5,15 @@
 <div class="modal-body">
     <div class="row">
         <div class="col-xs-12">
-            <div ng-show="isEmpty">
-                <label class="info_description">NO DB selected, please select a DB and try agaian</label>
+            <div ng-if="isEmpty">
+                <label class="text-warning">NO DB selected, please select a DB and try agaian</label>
                 <div class="col-md-offset-7 col-md-5" style="text-align:center">
                     <button class="btn btn-warning pull-right" ng-click="dismiss()">
                         <i class="fa fa-times-circle"></i>&nbsp;Cancel
                     </button>
                 </div>
             </div>
-            <div ng-show="!isEmpty">
+            <div ng-if="!isEmpty">
                 <label class="info_description">Are you sure you want to delete this DB?</label>
                 <div class="col-md-offset-7 col-md-5" style="text-align:center">
                     <button ng-click="ok()" class="btn btn-info">

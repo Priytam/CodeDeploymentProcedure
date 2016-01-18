@@ -15,6 +15,11 @@ var DBSchema = new Schema({
     type: Date,
     default: Date.now
   },
+  dbName: {
+    type: String,
+    required: true,
+    trim: true
+  },
   host: {
     type: String,
     required: true,

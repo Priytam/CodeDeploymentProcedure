@@ -1,13 +1,23 @@
 'use strict';
 
 /* jshint -W098 */
-angular.module('mean.dbFactory').controller('DbFactoryController', ['$scope', 'Global', 'DbFactory', '$uibModalInstance',
-  function($scope, Global, DbFactory, $uibModalInstance) {
+angular.module('mean.dbFactory').controller('DbFactoryController',
+    ['$scope', 'Global', 'DbFactory', '$uibModalInstance', 'db', 'operationType',
+  function($scope, Global, DbFactory, $uibModalInstance, db, operationType) {
 
     $scope.global = Global;
+    $scope.operationType = operationType;
     $scope.package = {
       name: 'dbFactory'
     };
+
+    $scope.isDbNotSelected = function() {
+        return angular.equals({},db);
+    };
+
+    if(operationType === 'update'){
+      $scope.dbList = db;
+    }
 
     $scope.dismiss = function() {
         $uibModalInstance.dismiss();
@@ -15,11 +25,10 @@ angular.module('mean.dbFactory').controller('DbFactoryController', ['$scope', 'G
 
     $scope.create = function(isValid) {
       if (isValid) {
-        // $scope.article.permissions.push('test test');
         var db = new DbFactory($scope.dbList);
         db.$save(function(response) {
-          $scope.db = response;
-            $uibModalInstance.close($scope.db);
+            response.taskMessage = 'DB added successfully ...';
+            $uibModalInstance.close(response);
         });
         $scope.dbList = {};
       } else {
@@ -27,18 +36,15 @@ angular.module('mean.dbFactory').controller('DbFactoryController', ['$scope', 'G
       }
     };
 
-    $scope.find = function() {
-      DB.query(function(dbs) {
-        $scope.dbs = dbs;
-      });
-    };
-
-    $scope.findOne = function() {
-      DB.get({
-       // articleId: $scope.db_id
-      }, function(db) {
-        $scope.db = db;
-      });
+    $scope.update = function(isValid){
+      if(isValid) {
+        $scope.dbList.$update(function(response){
+          response.taskMessage = 'DB updated successfully';
+          $uibModalInstance.close(response);
+        })
+      } else {
+        $scope.submitted = true;
+      }
     };
   }
 ]);

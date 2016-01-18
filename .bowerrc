@@ -4,5 +4,7 @@
           "packages": ".bower-cache",
           "registry": ".bower-registry"
   },
-  "tmp": ".bower-tmp"
+  "tmp": ".bower-tmp",
+  "proxy":"http://proxy-chain.intel.com:911/",
+  "https-proxy":"http://proxy-chain.intel.com:911"
 }

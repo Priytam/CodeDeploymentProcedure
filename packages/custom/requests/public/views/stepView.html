@@ -40,10 +40,15 @@
                             </mean-upload>
                         </div>
                     </div>
-                    <span class="text-info">List of files (click to download)</span>
-                    <div data-ng-repeat="file in step.values" class="text-center">
-                        <a  target="_blank" data-ng-href="{{file.src}}">{{file.name}} is {{file.size}} bytes </a>
+                    <div data-ng-show="! isEmpty()" class="text-center">
+                        <h3>
+                            <span class="text-info">List of files (click to download)</span>
+                        </h3>
+                        <div data-ng-repeat="file in step.values" class="text-center">
+                            <a  target="_blank" data-ng-href="{{file.src}}">{{file.name}} is {{file.size}} bytes </a>
+                        </div>
                     </div>
+
                 </div>
                 <div class="box-footer clearfix" ng-if="step.status === 'INPROGRESS'">
                     <button class="pull-right btn btn-default" id="sendEmail" ng-click="processStep(step)">FinishUpload <i class="fa fa-arrow-circle-right"></i></button>

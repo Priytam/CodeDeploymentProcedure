@@ -68,9 +68,11 @@
                                 <td>{{ep.name}}</td>
                                 <td>{{ep.description}}</td>
                                 <td>
-                                    <span uib-popover-template="dynamicPopover.templateUrl" popover-title="Step flow" popover-placement="right" type="button" popover-trigger="mouseenter" class="text-warning">
+                                    <div class="text-center">
+                                    <span uib-popover-template="dynamicPopover.templateUrl" popover-title="Step flow" popover-placement="right" type="button" popover-trigger="mouseenter" class="badge bg-orange">
                                         {{ep.steps.length}}
                                     </span>
+                                    </div>
                                 </td>
                                 <td>{{ep.created | date}}</td>
                             </tr>

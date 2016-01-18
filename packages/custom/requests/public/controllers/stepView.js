@@ -1,8 +1,9 @@
 'use strict';
 
 /* jshint -W098 */
-angular.module('mean.requests').controller('StepViewController', ['$scope', 'Global', 'Requests', '$state', '$stateParams', 'RequestsSpecific',
-  function($scope, Global, Requests, $state, $stateParams, RequestsSpecific) {
+angular.module('mean.requests').controller('StepViewController', ['$scope', 'Global', 'Requests', '$state', '$stateParams',
+    'RequestsSpecific', '$window',
+  function($scope, Global, Requests, $state, $stateParams, RequestsSpecific, $window) {
       $scope.global = Global;
       $scope.package = {
           name: 'requests'
@@ -30,23 +31,31 @@ angular.module('mean.requests').controller('StepViewController', ['$scope', 'Glo
       $scope.processStep = function(step) {
           Requests.get({reqID : $stateParams.id}, function(request) {
               var new_request = new Requests(request);
-              new_request.$process({stepId : step._id, type : step.type});
+              new_request.$process({stepId : step._id, type : step.type},function(response) {
+                  $window.location.reload();
+              });
           });
       };
 
+      $scope.isEmpty = function(){
+        return angular.equals([], $scope.step.values[0]);
+      };
 
       $scope.uploadFileCallback = function(file) {
           $scope.files.push(file);
       };
 
       $scope.uploadFinished = function(files) {
+          $scope.step.values = [];
           angular.forEach(files,function(file){
               $scope.step.values.push(file);
           },$scope.step.values);
           $scope.step.status = 'INPROGRESS';
           $scope.step.currentStateNumber =  1;
           var  step = new RequestsSpecific($scope.step);
-          step.$update();
+          step.$update(function(res){
+              $window.location.reload();
+          });
       }
   }
 ]);

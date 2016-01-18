@@ -23,7 +23,7 @@ angular.module('mean.dbFactory').controller('dbController', ['$scope', 'Global',
                     //console.log(db);
                     $scope.addedDb = db;
                     $scope.dbs.unshift(db);
-                    $scope.dbtaskMessage = "DB added successfully ...";
+                    $scope.taskMessage = "DB added successfully ...";
                 });
         };
 
@@ -46,11 +46,11 @@ angular.module('mean.dbFactory').controller('dbController', ['$scope', 'Global',
 
         function removeDB(){
             $scope.dbs.splice($scope.dbs.indexOf(selectedBD), 1);
-            $scope.taskMessage = "Plan removed successfully ...";
+            $scope.taskMessage = "DB removed successfully ...";
         }
 
         $scope.closeAlert = function() {
-            $scope.dbtaskMessage = undefined;
+            $scope.taskMessage = undefined;
         };
 
         $scope.find = function() {

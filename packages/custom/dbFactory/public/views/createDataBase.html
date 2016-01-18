@@ -22,7 +22,7 @@
                 </div>
             </div>
             <div class="box-body">
-                <uib-alert ng-if="dbtaskMessage" close="closeAlert()" type="success" dismiss-on-timeout="2000">{{dbtaskMessage}}</uib-alert>
+                <uib-alert ng-if="taskMessage" close="closeAlert()" type="success" dismiss-on-timeout="2000">{{taskMessage}}</uib-alert>
                 <div data-ng-show="dbs.length ===0">
                     <uib-alert close="closeAlert()" type="warning">You don't have any db, please create new db</uib-alert>
                 </div>

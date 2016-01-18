@@ -13,8 +13,8 @@
             </div>
         </div>
         <div class="box-body">
-
-            <table class="table table-bordered table-responsive">
+            <uib-alert ng-show="requests.length===0" type="warning">NO requests available</uib-alert>
+            <table ng-show="requests.length!==0" class="table table-bordered table-responsive">
                 <tr>
                     <th>Request Id</th>
                     <th>Plan Name</th>

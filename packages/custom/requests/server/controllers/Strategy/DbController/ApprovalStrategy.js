@@ -6,7 +6,7 @@ var config = require('meanio').loadConfig(),
     nodemailer = require('nodemailer'),
     async = require('async'),
     ApprovalDB = mongoose.model('Approval'),
-    templates = require('./template');
+    templates = require('./../../template');
 
 
 module.exports =  function () {
@@ -140,9 +140,47 @@ module.exports =  function () {
             });
     }
 
+    function update(id, step, cb) {
+        getData(id, function(err, result){
+            if(err){
+                return cb(err);
+            }
+            var approval = result;
+            approval = _.extend(approval,step);
+            approval.save(function(err) {
+                if (err) {
+                    return cb(err);
+                }
+                cb(null, approval);
+            });
+        });
+    }
+
+    function insert(reqData, name, done) {
+        var values = [];
+        values[0] = reqData.value;
+        var data = {
+            values: values,
+            name : name,
+            plan : reqData.name,
+            'executionNumber': reqData.executionNumber,
+            'isFirst': reqData.isFirst,
+            'isLast': reqData.isLast
+        };
+        var approval = new ApprovalDB(data);
+        approval.user = '';
+        approval.save(function (err) {
+            if (err) {
+                done(err, null);
+            }
+            done(null, approval);
+        })
+    }
 
     return {
         processData :  processStep,
-        getData : getData
+        getData : getData,
+        update : update,
+        insert : insert
     }
 };

@@ -81,6 +81,3 @@ EPSchema.statics.load = function(id, cb) {
 };
 
 mongoose.model('EPDB', EPSchema);
-/**
- * Created by arkulkar on 12/19/2015.
- */

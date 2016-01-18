@@ -9,7 +9,7 @@ var config = require('meanio').loadConfig(),
     async = require('async'),
     UploadDb = mongoose.model('Upload'),
     _ = require('lodash'),
-    templates = require('./template');
+    templates = require('./../../template');
 
 module.exports =  function () {
 
@@ -88,23 +88,44 @@ module.exports =  function () {
     function update(id, step, cb) {
         getData(id, function(err, result){
             if(err){
-                console.log(err);
                 return cb(err);
             }
             var update = result;
             update = _.extend(update,step);
             update.save(function(err) {
                 if (err) {
-                    console.log(err);
                     return cb(err);
                 }
                 cb(null, update);
             });
         });
     }
+
+    function insert(reqData, name, done) {
+        var values = [];
+        values[0] = reqData.value;
+        var data = {
+            values : values,
+            name : name,
+            plan : reqData.name,
+            'executionNumber': reqData.executionNumber,
+            'isFirst': reqData.isFirst,
+            'isLast': reqData.isLast
+        };
+        var upload = new UploadDb(data);
+        upload.user = '';
+        upload.save(function (err) {
+            if (err) {
+                done(err, null);
+            }
+            done(null, upload);
+        });
+    }
+
     return {
         processData :  processStep,
         getData : getData,
-        update : update
+        update : update,
+        insert : insert
     }
 };

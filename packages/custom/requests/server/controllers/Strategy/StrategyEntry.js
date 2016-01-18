@@ -3,9 +3,9 @@
  */
 
 
-var approval = require('./ApprovalStrategy')(),
-    query = require('./QueryStrategy')(),
-    upload = require('./UploadStrategy')();
+var approval = require('./DbController/ApprovalStrategy')(),
+    query = require('./DbController/QueryStrategy')(),
+    upload = require('./DbController/UploadStrategy')();
 
 
 module.exports = function(factory) {

@@ -3,8 +3,8 @@
  */
 var mongoose = require('mongoose'),
     config = require('meanio').loadConfig(),
-    factory =  require('./StrategyFactory')(),
-    entry =  require('./StrategyEntry')(factory).registerAll();
+    factory =  require('./Strategy/StrategyFactory')(),
+    entry =  require('./Strategy/StrategyEntry')(factory).registerAll();
 
 module.exports = function() {
 

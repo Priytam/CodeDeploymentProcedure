@@ -4,19 +4,17 @@
 // The Package is past automatically as first parameter
 module.exports = function(Requests, app) {
 
-    var requests = require('../controllers/requests')(Requests);
+    var requests = require('../controllers/requests');
 
     app.route('/api/request/')
         .get(requests.all)
         .post(requests.create);
     app.route('/api/request/:reqID')
-        .get(requests.show)
+        .get(requests.read)
         .put(requests.update)
-        .delete(requests.destroy)
+        .delete(requests.delete)
         .post(requests.processData);
-
-    // Finish with setting up the dbId param
-    app.param('reqID', requests.article);
+    app.param('reqID', requests.getByID);
 
 
     var stepType = require('../controllers/types')();

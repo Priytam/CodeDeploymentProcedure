@@ -10,8 +10,6 @@ module.exports = function(MeanUser, app, auth, database, passport) {
             failureFlash: false
         }),
         function (req, res) {
-            console.log(req.user);
-            console.log('-----------######################---------------------');
             res.json({user: req.user});
         });
 };

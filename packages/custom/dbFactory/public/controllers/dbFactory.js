@@ -1,8 +1,8 @@
 'use strict';
 
 /* jshint -W098 */
-angular.module('mean.dbFactory').controller('DbFactoryController', ['$scope', 'Global', 'DbFactory', '$modalInstance',
-  function($scope, Global, DbFactory, $modalInstance) {
+angular.module('mean.dbFactory').controller('DbFactoryController', ['$scope', 'Global', 'DbFactory', '$uibModalInstance',
+  function($scope, Global, DbFactory, $uibModalInstance) {
 
     $scope.global = Global;
     $scope.package = {
@@ -10,7 +10,7 @@ angular.module('mean.dbFactory').controller('DbFactoryController', ['$scope', 'G
     };
 
     $scope.dismiss = function() {
-      $modalInstance.dismiss();
+        $uibModalInstance.dismiss();
     };
 
     $scope.create = function(isValid) {
@@ -19,7 +19,7 @@ angular.module('mean.dbFactory').controller('DbFactoryController', ['$scope', 'G
         var db = new DbFactory($scope.dbList);
         db.$save(function(response) {
           $scope.db = response;
-          $modalInstance.close($scope.db);
+            $uibModalInstance.close($scope.db);
         });
         $scope.dbList = {};
       } else {

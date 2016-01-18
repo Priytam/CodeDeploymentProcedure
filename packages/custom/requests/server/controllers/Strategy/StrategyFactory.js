@@ -93,6 +93,34 @@ module.exports = function () {
         }
     }
 
+    function insertSteps(stepList, cb) {
+        var typeDb = [];
+        var body = stepList;
+        var insertedPosition = 0;
+        for (var keys = Object.keys(body), i = 0, end = keys.length; i < end; i++) {
+            var processor, type;
+            type = body[keys[i]].type;
+            if (!type) {
+                return cb({
+                    error: "NonMentionedHandlerTypeError",
+                    message: "Handler type is not mentioned in request"
+                });
+            }
+            processor = strategy[type];
+            processor.insert(body[keys[i]], keys[i], function (err, data) {
+                if (err) {
+                    return cb({
+                        error: 'Cannot process this request'
+                    });
+                }
+                typeDb[insertedPosition] = data;
+                if (++insertedPosition == end) {
+                    return cb(null, typeDb);
+                }
+            });
+        }
+    }
+
     function getStep(id, type, cb) {
         var processor;
         if (!type) {
@@ -136,6 +164,7 @@ module.exports = function () {
         processData : processData,
         getAllStepsOfARequest : getAllStepsOfARequest,
         getStep : getStep,
-        update : update
+        update : update,
+        insertSteps :insertSteps
     }
 };

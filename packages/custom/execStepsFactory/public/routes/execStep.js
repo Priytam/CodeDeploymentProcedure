@@ -6,6 +6,11 @@ angular.module('mean.execStepsFactory').config(['$stateProvider',
       url: '/execStepsFactory',
       parent: 'home',
       templateUrl: 'execStepsFactory/views/createExecPlan.html'
-    });
+    })
+        .state('home.typeInfo', {
+          url: '/type/info',
+          parent:'home',
+          templateUrl: 'execStepsFactory/views/aboutOptions.html'
+        });
   }
 ]);

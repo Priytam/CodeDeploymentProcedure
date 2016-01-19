@@ -44,7 +44,7 @@ angular.module('mean.dbFactory').controller('dbController', ['$scope', 'Global',
             $uibModal.open({
                 templateUrl : 'dbFactory/views/confirmDeleteDBModal.html',
                 controller : 'confirmDeleteDBController',
-                size : 'wide',
+                windowClass : 'medium-Modal',
                 resolve: {
                     db : function() {
                         return selectedBD;

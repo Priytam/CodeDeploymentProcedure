@@ -31,16 +31,17 @@
                 </div>
                 <div class="form-group" ng-class="{ 'has-error' : stepFormSbmitted && epStepForm.stepType.$invalid }">
                     <label mean-token="'create-stepType'"  for="stepType" class="col-md-3 control-label">Step Type :</label>
-                    <div class="col-md-9">
-                        <select name="stepType" class="form-control" data-ng-model="step.type" id="stepType" placeholder="Step type" required>
-                            <option data-ng-repeat="type in types">
-                                {{::type}}
-                            </option>
-                        </select>
+                    <div class="col-md-7">
+                            <select name="stepType" class="form-control" data-ng-model="step.type" id="stepType" placeholder="Step type" required>
+                                <option data-ng-repeat="type in types">
+                                    {{::type}}
+                                </option>
+                            </select>
                         <div ng-show="stepFormSbmitted && epStepForm.stepType.$invalid" class="help-block">
                             <p ng-show="epStepForm.stepType.$error.required">Step Type is required</p>
                         </div>
                     </div>
+                    <a href="/type/info" target="_blank"> <i class="fa fa-info-circle fa-2x col-md-2">{{info}}</i></a>
                 </div>
                 <div data-ng-show="step.type.trim() === 'Approval'" class="form-group" ng-class="{ 'has-error' : stepFormSbmitted && epStepForm.stepValues.$invalid }">
                     <div class="row">

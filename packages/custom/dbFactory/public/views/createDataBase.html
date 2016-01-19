@@ -35,6 +35,8 @@
                             <th>Host</th>
                             <th>Port</th>
                             <th>Created On</th>
+                            <th>Created By</th>
+                            <th>Service Type</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -44,6 +46,8 @@
                             <td>{{db.host}}</td>
                             <td>{{db.port}}</td>
                             <td>{{db.created | date}}</td>
+                            <td>{{db.user}}</td>
+                            <td>{{db.serviceType}}</td>
                         </tr>
                         </tbody>
                     </table>

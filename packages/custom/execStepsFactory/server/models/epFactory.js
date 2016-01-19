@@ -24,6 +24,10 @@ var EPSchema = new Schema({
         type: String,
         trim: true
     },
+    user : {
+        type: String,
+        trim : true
+    },
     steps : [{
         name: {
             type: String,

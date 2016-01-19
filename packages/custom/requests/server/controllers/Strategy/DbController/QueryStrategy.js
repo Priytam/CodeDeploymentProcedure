@@ -3,11 +3,22 @@
  */
 module.exports =  function () {
 
+    var serviceList = {};
+    function registerService(serviceName , service){
+        serviceList[serviceName] = service;
+    }
+
     function processStep() {
         console.log('I am approval ');
     }
 
+    function query() {
+
+    }
+
     return {
-        processData :  processStep
+        registerService : registerService,
+        processData :  processStep,
+        query : query
     }
 };

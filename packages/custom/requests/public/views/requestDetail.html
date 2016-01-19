@@ -29,6 +29,7 @@
                                     <th>Progress</th>
                                     <th>Status</th>
                                     <th>State</th>
+                                    <th>Submitter</th>
                                 </tr>
                                 <tr data-ng-repeat="step in steps | orderBy:executionNumber" ui-sref="home.requestDetail.stepView({step : step, id : request._id, stepId : step._id, type : step.type})">
                                    <a href="">
@@ -43,6 +44,7 @@
                                     <td ng-if="step.status === 'INPROGRESS'"><span class="badge bg-green">{{step.status}}</span></td>
                                     <td ng-if="step.status === 'FINISHED'"><span class="badge bg-blue">{{step.status}}</span></td>
                                     <td ><span class="badge bg-info">{{step.state}}</span></td>
+                                    <td>{{step.user}}</td>
                                    </a>
                                 </tr>
                             </table>

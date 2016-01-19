@@ -42,6 +42,10 @@ var RequestSchema = new Schema({
         type : String,
         trim : true
     },
+    user : {
+        type: String,
+        trim : true
+    },
     reason : {
         type : String,
         trim : true

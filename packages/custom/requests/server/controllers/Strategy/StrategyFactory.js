@@ -2,7 +2,9 @@
  * Created by pjpandey on 12/30/2015.
  */
 var mongoose = require('mongoose'),
-    RequestDB = mongoose.model('Request');
+    RequestDB = mongoose.model('Request'),
+    queryStrategy = require('./DbController/QueryStrategy')(),
+    service = require('./QueryController/serviceRegistry')(queryStrategy).registerServices();
 
 module.exports = function () {
 
@@ -93,7 +95,7 @@ module.exports = function () {
         }
     }
 
-    function insertSteps(stepList, cb) {
+    function insertSteps(stepList, user, cb) {
         var typeDb = [];
         var body = stepList;
         var insertedPosition = 0;
@@ -107,7 +109,7 @@ module.exports = function () {
                 });
             }
             processor = strategy[type];
-            processor.insert(body[keys[i]], keys[i], function (err, data) {
+            processor.insert(body[keys[i]], keys[i], user, function (err, data) {
                 if (err) {
                     return cb({
                         error: 'Cannot process this request'

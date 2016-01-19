@@ -27,6 +27,10 @@ var UploadSchema = new Schema({
         type: String,
         trim : true
     },
+    user : {
+        type: String,
+        trim : true
+    },
     plan : {
         type: String,
         trim : true

@@ -101,19 +101,19 @@ module.exports =  function () {
         });
     }
 
-    function insert(reqData, name, done) {
+    function insert(step, name, user, done) {
         var values = [];
-        values[0] = reqData.value;
+        values[0] = step.value;
         var data = {
             values : values,
             name : name,
-            plan : reqData.name,
-            'executionNumber': reqData.executionNumber,
-            'isFirst': reqData.isFirst,
-            'isLast': reqData.isLast
+            plan : step.name,
+            'executionNumber': step.executionNumber,
+            'isFirst': step.isFirst,
+            'isLast': step.isLast
         };
         var upload = new UploadDb(data);
-        upload.user = '';
+        upload.user = user;
         upload.save(function (err) {
             if (err) {
                 done(err, null);

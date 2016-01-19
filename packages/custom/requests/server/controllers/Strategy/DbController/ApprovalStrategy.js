@@ -156,7 +156,7 @@ module.exports =  function () {
         });
     }
 
-    function insert(reqData, name, done) {
+    function insert(reqData, name, user, done) {
         var values = [];
         values[0] = reqData.value;
         var data = {
@@ -168,7 +168,7 @@ module.exports =  function () {
             'isLast': reqData.isLast
         };
         var approval = new ApprovalDB(data);
-        approval.user = '';
+        approval.user = user;
         approval.save(function (err) {
             if (err) {
                 done(err, null);

@@ -27,6 +27,10 @@ var ApprovalSchema = new Schema({
         type: String,
         trim : true
     },
+    user : {
+        type: String,
+        trim : true
+    },
     numberOfStates : {
         type: Number,
         default : 3

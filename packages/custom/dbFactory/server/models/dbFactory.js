@@ -39,8 +39,12 @@ var DBSchema = new Schema({
     trim: true
   },
   user: {
-    type: Schema.ObjectId,
-    ref: 'User'
+    type: String,
+    trim: true
+  },
+  serviceType: {
+      type: String,
+      trim: true
   },
   permissions: {
     type: Array

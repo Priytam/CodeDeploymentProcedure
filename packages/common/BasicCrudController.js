@@ -28,7 +28,9 @@ module.exports = function(modelName, sortBy) {
 
     function create (req, res) {
         var model = new Model(req.body);
-
+        console.log('##########################################');
+        console.log(req.user);
+        model.user = req.user;
         model.save(function(err) {
             if (err) {
                 return res.status(400).send({

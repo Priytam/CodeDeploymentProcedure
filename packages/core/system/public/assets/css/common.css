@@ -41,6 +41,12 @@
     margin-top: 70px;
     width: 100%
 }
+
+body {
+    font-family: Consolas,monaco,monospace;
+    font-size: 14px;
+    background-color: #eee;
+}
 footer {
 	position: fixed;
 	left: 0;

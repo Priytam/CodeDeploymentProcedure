@@ -11,11 +11,14 @@ angular.module('mean.dbFactory').controller('DbFactoryController',
       name: 'dbFactory'
     };
 
+    $scope.dbList = {}
+    $scope.serviceType = ['mysql','mssql'];
+
     $scope.isDbNotSelected = function() {
-        return angular.equals({},db);
+        return (angular.equals({},db) && $scope.operationType === 'update');
     };
 
-    if(operationType === 'update'){
+    if($scope.operationType === 'update'){
       $scope.dbList = db;
     }
 
@@ -26,6 +29,7 @@ angular.module('mean.dbFactory').controller('DbFactoryController',
     $scope.create = function(isValid) {
       if (isValid) {
         var db = new DbFactory($scope.dbList);
+          console.log(db);
         db.$save(function(response) {
             response.taskMessage = 'DB added successfully ...';
             $uibModalInstance.close(response);

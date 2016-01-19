@@ -24,4 +24,11 @@ module.exports = function(Requests, app) {
     app.route('/api/stepType/:stepId')
         .get(stepType.show)
         .put(stepType.update);
+
+    var query = require('../controllers/query')();
+
+    app.route('/api/query/')
+        .post(query.query);
+
+
 };

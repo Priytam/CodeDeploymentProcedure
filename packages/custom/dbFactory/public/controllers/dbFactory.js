@@ -29,7 +29,6 @@ angular.module('mean.dbFactory').controller('DbFactoryController',
     $scope.create = function(isValid) {
       if (isValid) {
         var db = new DbFactory($scope.dbList);
-          console.log(db);
         db.$save(function(response) {
             response.taskMessage = 'DB added successfully ...';
             $uibModalInstance.close(response);

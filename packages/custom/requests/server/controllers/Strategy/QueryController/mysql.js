@@ -4,24 +4,22 @@
 
 var mysql = require('mysql');
 
-module.export = function() {
+module.exports = function() {
 
-    function query(data , cb) {
+    function query(connectionString, queryString , cb) {
         var connection = mysql.createConnection({
-            host     : data.host,
-            port     : data.port,
-            user     : data.username,
-            password : data.password,
-            database : data.dbName
+            host     : connectionString.host,
+            port     : connectionString.port,
+            user     : connectionString.username,
+            password : connectionString.password,
+            database : connectionString.dbName
         });
-
         connection.connect();
-
-        connection.query(data.query,function(err, rows) {
+        connection.query(queryString, function(err, rows) {
            if(err){
                return cb(err)
            }
-            return cb(null, rows);
+           return cb(null, rows);
         });
     }
 

@@ -157,8 +157,7 @@ module.exports =  function () {
     }
 
     function insert(reqData, name, user, done) {
-        var values = [];
-        values[0] = reqData.value;
+        var values = reqData.values;
         var data = {
             values: values,
             name : name,

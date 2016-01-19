@@ -29,19 +29,19 @@ angular.module('mean.createRequest').controller('RequestFormController', ['$scop
         function createDefaultSteps(){
             $scope.request.name = $scope.plan.name;
             angular.forEach($scope.plan.steps, function(step) {
-                var data = {'value' : [], 'type' : step.type,  'executionNumber': step.stepNumber, 'isFirst' : step.isFirst , 'isLast' : step.isLast, 'name' : $scope.plan.name};
+                var data = {'values' : [], 'type' : step.type,  'executionNumber': step.stepNumber, 'isFirst' : step.isFirst , 'isLast' : step.isLast, 'name' : $scope.plan.name};
+                if(step.type === 'Query') {
+                    data.connectionString = step.values[0];
+                }
                 $scope.request.steps[step.name]= data;
             }, $scope.request.steps);
-            console.log($scope.request);
         }
 
-        $scope.pushRequired = function(step, index) {
-            var data = {'value' : $scope.requestData[step.name], 'type' : step.type, 'executionNumber': step.stepNumber, 'isFirst' : step.isFirst , 'isLast' : step.isLast , 'name' : $scope.plan.name};
-            $scope.request.steps[step.name] = data;
+        $scope.pushRequired = function(step) {
+            $scope.request.steps[step.name].values.push($scope.requestData[step.name]);
         };
 
         $scope.submit = function() {
-            console.log($scope.request);
             var newRequest = new Requests($scope.request);
             newRequest.$save(function(response) {
                 $state.go('home.requestDetail', {request : response, id : response._id});

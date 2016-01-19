@@ -2,9 +2,8 @@
  * Created by arkulkar on 12/21/2015.
  */
 angular.module('mean.execStepsFactory').controller('CreateStepModalController', ['$scope', '$uibModalInstance',
-    'AddStepFactory',
-
-    function($scope, $uibModalInstance, AddStepFactory) {
+    'AddStepFactory', 'DbFactory',
+    function($scope, $uibModalInstance, AddStepFactory, DbFactory) {
 
         $scope.types =  ['Query', 'Approval', 'Code', 'Upload', 'DateTime'];
         $scope.step = {};
@@ -21,11 +20,18 @@ angular.module('mean.execStepsFactory').controller('CreateStepModalController', 
                 $scope.stepFormSbmitted = true;
             }
         };
+        
         $scope.processOnChange = function() {
             $scope.step.values = $scope.unprocessed.values.split(',');
             for(var i = 0; i < $scope.step.values.length; i++ ){
                 $scope.step.values[i] = $scope.step.values[i].trim();
             }
+        };
+
+        $scope.getAvailableDataBase = function() {
+            DbFactory.query(function(dataBases){
+                $scope.dbs = dataBases;
+            });
         };
 
         $scope.dismiss = function(){

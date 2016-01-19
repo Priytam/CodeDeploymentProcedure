@@ -2,9 +2,8 @@
  * Created by pjpandey on 12/30/2015.
  */
 var mongoose = require('mongoose'),
-    RequestDB = mongoose.model('Request'),
-    queryStrategy = require('./DbController/QueryStrategy')(),
-    service = require('./QueryController/serviceRegistry')(queryStrategy).registerServices();
+    RequestDB = mongoose.model('Request');
+
 
 module.exports = function () {
 
@@ -167,6 +166,6 @@ module.exports = function () {
         getAllStepsOfARequest : getAllStepsOfARequest,
         getStep : getStep,
         update : update,
-        insertSteps :insertSteps
+        insertSteps : insertSteps
     }
 };

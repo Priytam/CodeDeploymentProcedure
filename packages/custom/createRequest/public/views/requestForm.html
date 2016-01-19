@@ -43,7 +43,7 @@
                                             <i title="This is a mandatory field!" class="fa fa-asterisk" ng-if="step.isMandatory === true" style="color:red"></i>
                                         </label>
                                         <div class="col-xs-9">
-                                            <textarea class="form-control" ng-required="step.isMandatory === true" ng-model-options='{ debounce: 750 }' ng-change="callOnChange(param)" ng-model="request.steps[param.name]" name="step.name" rows="4"></textarea>
+                                            <textarea class="form-control"  ng-model-options='{ debounce: 750 }' ng-change="pushRequired(step)" ng-model="request.steps[param.name]" name="step.name" rows="4"></textarea>
                                             <span class="help-block">
                                                     {{::step.description }}
                                                     <button class="btn btn-info"> Test </button>
@@ -90,7 +90,7 @@
                                             <i title="This is a mandatory field!" class="fa fa-asterisk" ng-if="step.isMandatory === true" style="color:red"></i>
                                         </label>
                                         <div class="col-xs-9">
-                                            <select ng-required="step.isMandatory === true" ng-change="pushRequired(step, $index)" ng-model="requestData[step.name]" name="step.name" class="form-control">
+                                            <select ng-required="step.isMandatory === true" ng-change="pushRequired(step)" ng-model="requestData[step.name]" name="step.name" class="form-control">
                                                 <option ng-repeat="value in step.values">{{::value}}</option>
                                             </select>
                                             <span class="help-block">{{::step.description }} <span ng-if="step.isMandatory === true">(since it is known who can approve this step, its mandatory to select this approver)</span></span>

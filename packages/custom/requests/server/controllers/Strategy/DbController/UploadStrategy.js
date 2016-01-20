@@ -101,7 +101,7 @@ module.exports =  function () {
         });
     }
 
-    function insert(step, name, user, done) {
+    function insert(step, name, user, email, done) {
         var values = [];
         values[0] = step.value;
         var data = {
@@ -114,6 +114,7 @@ module.exports =  function () {
         };
         var upload = new UploadDb(data);
         upload.user = user;
+        upload.email = email;
         upload.save(function (err) {
             if (err) {
                 done(err, null);

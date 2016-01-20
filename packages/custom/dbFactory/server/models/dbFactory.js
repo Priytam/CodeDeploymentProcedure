@@ -11,47 +11,52 @@ var mongoose = require('mongoose'),
  * Database Schema
  */
 var DBSchema = new Schema({
-  created: {
-    type: Date,
-    default: Date.now
-  },
-  dbName: {
-    type: String,
-    required: true,
-    trim: true
-  },
-  host: {
-    type: String,
-    required: true,
-    trim: true
-  },
-  port: {
-    type: String,
-    required: true,
-    trim: true
-  },
-  username: {
-    type: String,
-    trim: true
-  },
-  password: {
-    type: String,
-    trim: true
-  },
-  user: {
-    type: String,
-    trim: true
-  },
-  serviceType: {
-      type: String,
-      trim: true
-  },
-  permissions: {
-    type: Array
-  },
-  updated: {
-    type: Array
-  }
+    created: {
+        type: Date,
+        default: Date.now
+    },
+    dbName: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    host: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    port: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    username: {
+        type: String,
+        trim: true
+    },
+
+    password: {
+        type: String,
+        trim: true
+    },
+    user: {
+        type: String,
+        trim: true
+    },
+    email: {
+        type: String,
+        trim: true
+    },
+    serviceType: {
+        type: String,
+        trim: true
+    },
+    permissions: {
+        type: Array
+    },
+    updated: {
+        type: Array
+    }
 });
 
 /**

@@ -11,7 +11,7 @@ angular.module('mean.dbFactory').controller('DbFactoryController',
       name: 'dbFactory'
     };
 
-    $scope.dbList = {}
+    $scope.dbList = {};
     $scope.serviceType = ['mysql','mssql'];
 
     $scope.isDbNotSelected = function() {

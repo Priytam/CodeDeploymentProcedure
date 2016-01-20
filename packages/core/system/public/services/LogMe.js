@@ -10,7 +10,7 @@
         Authentication.user = $cookieStore.get('user');
 
         function checkIn() {
-            if(Authentication.user === undefined || Authentication.user === "") {
+            if(angular.equals({}, Authentication.user) || Authentication.user === undefined || Authentication.user === "") {
                 $uibModal.open({
                     templateUrl: 'system/views/logMe.html',
                     backdrop : 'static',

@@ -15,7 +15,7 @@ module.exports.create = create;
 module.exports.processData = processData;
 
 function create (req, res) {
-    factory.insertSteps(req.body.steps, req.user, function (err, steps) {
+    factory.insertSteps(req.body.steps, req.user.username, req.user.email, function (err, steps) {
         if (err || !steps) {
             return res.status(500).json({
                 error: 'Cannot save the request'
@@ -28,7 +28,8 @@ function create (req, res) {
             request.steps[i].name = steps[i].name;
             request.steps[i].category = steps[i];
         }
-        request.user = req.user;
+        request.user = req.user.username;
+        request.email = req.user.email;
         request.save(function (err) {
             if (err) {
                 return res.status(500).json({

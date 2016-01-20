@@ -92,7 +92,7 @@ module.exports =  function () {
         })
     }
 
-    function insert(reqData, name, user, done) {
+    function insert(reqData, name, user, email, done) {
         var data = {
             queryString : reqData.values[0],
             connectionString : reqData.connectionString,
@@ -104,6 +104,7 @@ module.exports =  function () {
         };
         var approval = new QueryDB(data);
         approval.user = user;
+        approval.email = email;
         approval.save(function (err) {
             if (err) {
                 done(err, null);

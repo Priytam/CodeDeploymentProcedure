@@ -60,11 +60,19 @@ module.exports =  function () {
                     return done(null);
                 },
                 function(done) {
+                    var to = approval.values.join();
+                    var gartitude = '';
+                    if(approval.values.length === 1){
+                        gartitude = approval.values[0].split('.')[0];
+                    }
+                    else {
+                        gartitude = 'All'
+                    }
                     var mailOptions = {
-                        to: approval.values[0],
+                        to: to,
                         from: 'CDP'
                     };
-                    mailOptions = templates.approval_email(approval.user, reqId, approval._id, approval.plan,  mailOptions);
+                    mailOptions = templates.approval_email(gartitude, reqId, approval._id, approval.plan,  mailOptions);
                     sendMail(mailOptions, function(err, result){
                         if(err)
                             return done(err)
@@ -127,10 +135,10 @@ module.exports =  function () {
                     response.status = 'danger';
                 }
                 var mailOptions = {
-                    to: 'priytam.j.pandey@intel.com',
+                    to: approval.email,
                     from: 'CDP'
                 };
-                mailOptions = templates.notification_email('pjpandey', reqId, approval._id, approval.plan,  mailOptions);
+                mailOptions = templates.notification_email(approval.user, reqId, approval._id, approval.plan,  mailOptions);
                 sendMail(mailOptions, function(err){
                     if (err) {
                         response.message = 'Approval step fail' + err;
@@ -157,7 +165,7 @@ module.exports =  function () {
         });
     }
 
-    function insert(reqData, name, user, done) {
+    function insert(reqData, name, user, email, done) {
         var values = reqData.values;
         var data = {
             values: values,
@@ -169,6 +177,7 @@ module.exports =  function () {
         };
         var approval = new ApprovalDB(data);
         approval.user = user;
+        approval.email = email;
         approval.save(function (err) {
             if (err) {
                 done(err, null);

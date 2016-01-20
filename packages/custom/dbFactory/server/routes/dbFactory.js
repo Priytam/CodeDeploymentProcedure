@@ -11,4 +11,4 @@ module.exports = function (DBs, app) {
 
     // Finish with setting up the dbId param
     app.param('dbId', dbs.getByID);
-  };
+};

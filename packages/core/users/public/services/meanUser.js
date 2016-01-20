@@ -6,8 +6,8 @@ angular.module('mean.users').factory('MeanUser', [ '$rootScope', '$http', '$loca
 
           logUser: function (user) {
               return $http.post('/api/login', {
-                  username : user,
-                  password:'^^^***^^^***'
+                  username : user.username,
+                  email    : user.email
               })
           }
       }

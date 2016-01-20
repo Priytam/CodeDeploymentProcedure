@@ -8,7 +8,7 @@
         /* jshint validthis: true */
         var vm = this;
         vm.close = $uibModalInstance.dismiss;
-        vm.user = '';
+        vm.user = {};
         vm.logMe = logMe;
 
         ////////////////

@@ -10,7 +10,11 @@
 
         <div class="form-group form-horizontal">
             <label for="user-text">IDSID :</label>
-            <input id="user-text" class="form-control" name="user-text" type="text" ng-model="vm.user" required focusme autofocus>
+            <input id="user-text" class="form-control" name="user-text" type="text" ng-model="vm.user.username" required focusme autofocus>
+        </div>
+        <div class="form-group form-horizontal">
+            <label for="user-email">EMAIL :</label>
+            <input id="user-email" class="form-control" name="user-email" type="text" ng-model="vm.user.email" required focusme autofocus>
         </div>
     </div>
     <div class="modal-footer">

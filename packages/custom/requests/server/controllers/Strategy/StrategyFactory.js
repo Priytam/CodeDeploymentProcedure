@@ -94,7 +94,7 @@ module.exports = function () {
         }
     }
 
-    function insertSteps(stepList, user, cb) {
+    function insertSteps(stepList, user, email, cb) {
         var typeDb = [];
         var body = stepList;
         var insertedPosition = 0;
@@ -108,7 +108,7 @@ module.exports = function () {
                 });
             }
             processor = strategy[type];
-            processor.insert(body[keys[i]], keys[i], user, function (err, data) {
+            processor.insert(body[keys[i]], keys[i], user, email,  function (err, data) {
                 if (err) {
                     return cb({
                         error: 'Cannot process this request'

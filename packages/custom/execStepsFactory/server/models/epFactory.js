@@ -28,6 +28,10 @@ var EPSchema = new Schema({
         type: String,
         trim : true
     },
+    email : {
+        type: String,
+        trim : true
+    },
     steps : [{
         name: {
             type: String,

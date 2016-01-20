@@ -9,7 +9,7 @@
         /* jshint validthis: true */
         var vm = this;
         vm.close = $uibModalInstance.dismiss;
-        vm.newUser = '';
+        vm.newUser = {};
         vm.loggedUser = Authentication.user;
         vm.switchUser = switchUser;
         vm.clearUser = clearUser;

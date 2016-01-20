@@ -7,13 +7,20 @@
     <div class="modal-body" >
         <div class="row">
             <div class="col-md-12">
-                Current effective username is: <b>{{::vm.loggedUser}}</b>
+                Current effective username is: <b>{{::vm.loggedUser.username}}</b>
+
             </div>
         </div>
         <br>
+        <b > Switch user to : </b> <br>
         <div class="form-group form-horizontal">
-            <label for="user-text">Switch user to:</label>
-            <input class="form-control" id="user-text" name="user-text" type="text" ng-model="vm.newUser" required focusme autofocus>
+            <label for="user-name">IDSID :</label>
+            <input class="form-control" id="user-name" name="user-name" type="text" ng-model="vm.newUser.username" required focusme autofocus>
+        </div>
+        <br>
+        <div class="form-group form-horizontal">
+            <label for="user-email">EMAIL :</label>
+            <input class="form-control" id="user-email" name="user-email" type="text" ng-model="vm.newUser.email" required focusme autofocus>
         </div>
     </div>
     <div class="modal-footer">

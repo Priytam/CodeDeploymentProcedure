@@ -2,8 +2,8 @@
 
 /* jshint -W098 */
 angular.module('mean.requests').controller('StepViewController', ['$scope', 'Global', 'Requests', '$state', '$stateParams',
-    'RequestsSpecific', '$window', 'QueryService',
-  function($scope, Global, Requests, $state, $stateParams, RequestsSpecific, $window, QueryService) {
+    'RequestsSpecific', '$window', 'QueryService', 'Authentication',
+  function($scope, Global, Requests, $state, $stateParams, RequestsSpecific, $window, QueryService, Authentication) {
       $scope.global = Global;
       $scope.package = {
           name: 'requests'
@@ -26,7 +26,7 @@ angular.module('mean.requests').controller('StepViewController', ['$scope', 'Glo
               $scope.queryData.queryString = $scope.step.queryString;
               var date = new Date();
               $scope.destination = '/docs_'+$scope.step.plan+'_'+date.getFullYear()+'_'+date.getMonth() + 1 +'_'+date.getDay()+'_'+date.getHours()+'_'+date.getMinutes()+'_'+date.getSeconds()+'/';
-
+              manageAccess();
           });
       } else {
           $scope.step = $stateParams.step;
@@ -36,6 +36,7 @@ angular.module('mean.requests').controller('StepViewController', ['$scope', 'Glo
           $scope.queryData.queryString = $scope.step.queryString;
           var date = new Date();
           $scope.destination = '/docs_'+$scope.step.plan+'_'+date.getFullYear()+'_'+date.getMonth() + 1 +'_'+date.getDay()+'_'+'_'+date.getHours()+'_'+date.getMinutes()+'_'+date.getSeconds()+'/';
+          manageAccess();
       }
 
       $scope.processStep = function(step) {
@@ -90,6 +91,29 @@ angular.module('mean.requests').controller('StepViewController', ['$scope', 'Glo
               $scope.queryData.refreshing = false;
               $scope.result = response;
           });
+      };
+
+
+
+
+
+
+
+
+      ////////////////////////////////
+      function manageAccess(){
+          $scope.isOwner = false;
+          $scope.isApproval = false;
+          if(Authentication.user.username === $scope.step.user && Authentication.user.email === $scope.step.email){
+              $scope.isOwner = true;
+          }
+          angular.forEach($scope.step.values,function(value){
+              if(Authentication.user.email === value){
+                  $scope.isApproval = true;
+              }
+          });
       }
+
+      ////////////////////////////////
   }
 ]);

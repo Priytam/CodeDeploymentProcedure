@@ -13,10 +13,6 @@ module.exports  = function() {
             database : connectionString.dbName
         };
 
-        //var string = 'mssql://'+connectionString.username+':' + connectionString.password + '@' + connectionString.host + ':'+ connectionString.port + '/' +connectionString.dbName;
-
-            console.log(config);
-
         mssql.connect(config).then(function() {
             var request = new mssql.Request();
             request.query(queryString).then(function(records) {
@@ -25,7 +21,6 @@ module.exports  = function() {
                 return cb(err);
             });
         }).catch(function(err) {
-            console.log('I am here ---------------------------');
             return cb(err);
         });
     }

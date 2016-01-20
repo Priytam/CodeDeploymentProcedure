@@ -25,8 +25,8 @@ var QuerySchema = new Schema({
     },
     state: {
         type: String,
-        enum : ['ApprovalAskMailSend','WaitingForApproval', 'ApprovedAndNotified'],
-        default : 'ApprovalAskMailSend'
+        enum : ['UploadQuery','QuerySaved', 'QuerySavedAndFinished'],
+        default : 'UploadQuery'
     },
     name : {
         type: String,

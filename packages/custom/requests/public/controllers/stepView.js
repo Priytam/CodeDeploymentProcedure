@@ -20,14 +20,20 @@ angular.module('mean.requests').controller('StepViewController', ['$scope', 'Glo
               type : $stateParams.type
           }, function(step) {
               $scope.step = step;
-              $scope.queryData.connectionString = JSON.parse($scope.step.connectionString);
+              if($scope.step.type === 'Query') {
+                  $scope.queryData.connectionString = JSON.parse($scope.step.connectionString);
+              }
+              $scope.queryData.queryString = $scope.step.queryString;
               var date = new Date();
               $scope.destination = '/docs_'+$scope.step.plan+'_'+date.getFullYear()+'_'+date.getMonth() + 1 +'_'+date.getDay()+'_'+date.getHours()+'_'+date.getMinutes()+'_'+date.getSeconds()+'/';
 
           });
       } else {
           $scope.step = $stateParams.step;
-          $scope.queryData.connectionString = JSON.parse($scope.step.connectionString);
+          if($scope.step.type === 'Query') {
+              $scope.queryData.connectionString = JSON.parse($scope.step.connectionString);
+          }
+          $scope.queryData.queryString = $scope.step.queryString;
           var date = new Date();
           $scope.destination = '/docs_'+$scope.step.plan+'_'+date.getFullYear()+'_'+date.getMonth() + 1 +'_'+date.getDay()+'_'+'_'+date.getHours()+'_'+date.getMinutes()+'_'+date.getSeconds()+'/';
       }
@@ -56,6 +62,17 @@ angular.module('mean.requests').controller('StepViewController', ['$scope', 'Glo
           },$scope.step.values);
           $scope.step.status = 'INPROGRESS';
           $scope.step.currentStateNumber =  1;
+          var  step = new RequestsSpecific($scope.step);
+          step.$update(function(res){
+              $window.location.reload();
+          });
+      };
+
+      $scope.updateQueryString = function() {
+          $scope.step.queryString = $scope.queryData.queryString;
+          $scope.step.status = 'INPROGRESS';
+          $scope.step.currentStateNumber = 2;
+          $scope.step.state = 'QuerySaved';
           var  step = new RequestsSpecific($scope.step);
           step.$update(function(res){
               $window.location.reload();

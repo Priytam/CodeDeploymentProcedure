@@ -105,16 +105,22 @@
                         </div>
                     </div>
                 </div>
-                <div class="box-footer clearfix" ng-if="step.status === 'DEFINED'">
+                <div class="box-footer clearfix">
                     <span class="text-danger pull-left" ng-if="result.error"> {{result.error}}</span>
                     <span class="text-success pull-left" ng-if="result.output"> Executed successfully ... <span class="text-muted">(check below for result)</span></span>
-                    <button style="margin-left: 2%" class="pull-right btn btn-default"  ng-if="step.status === 'DEFINED'" ng-click="query(step)">
-                        <i class="fa fa-play-circle"></i> Finish
+
+                    <button style="margin-left: 2%" class="pull-right btn btn-default"  ng-if="step.status === 'INPROGRESS'" ng-click="processStep(step)">
+                        Finish<i class="fa fa-arrow-circle-right"></i>
                     </button>
 
-                    <button class="pull-right btn btn-info" ng-click="query(step)">
+                    <button style="margin-left: 2%" class="pull-right btn btn-default"  ng-if="step.status !== 'FINISHED'" ng-click="updateQueryString()">
+                        Save   <i class="fa fa-save"></i>
+                    </button>
+
+                    <button class="pull-right btn btn-info" ng-click="query()">
                         <i class="fa fa-play-circle"></i> Execute
                     </button>
+
                     <span ng-show="queryData.refreshing" style="margin-right: 2%" class="pull-right">
                         <i class="fa fa-refresh fa-spin"></i>
                     </span>

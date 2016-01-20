@@ -16,7 +16,6 @@
             <uib-alert ng-show="requests.length===0" type="warning">NO requests available</uib-alert>
             <table ng-show="requests.length!==0" class="table table-bordered table-responsive">
                 <tr>
-                    <th>Request Id</th>
                     <th>Plan Name</th>
                     <th>Status</th>
                     <th>Progress</th>
@@ -26,21 +25,16 @@
                     <th>Reason</th>
                 </tr>
                 <tr data-ng-repeat="request in requests">
-                    <td>
-                        <a ng-click="openDetailView(request)">
-                            {{request._id}}
-                        </a>
-                    </td>
                     <td >
                         <a class="btn btn-app" ng-click="openDetailView(request)">
                             <span class="badge bg-yellow">{{request.steps.length}} steps</span>
                             {{request.name}}
                         </a>
                     </td>
-                    <td ng-if="request.status === 'DEFINED'"><span class="badge bg-orange">{{request.status}}</span></td>
-                    <td ng-if="request.status === 'INPROGRESS'"><span class="badge bg-green">{{request.status}}</span></td>
-                    <td ng-if="request.status === 'FINISHED'"><span class="badge bg-blue">{{request.status}}</span></td>
-                    <td >
+                    <td ng-click="openDetailView(request)" ng-if="request.status === 'DEFINED'"><span class="badge bg-orange">{{request.status}}</span></td>
+                    <td ng-click="openDetailView(request)" ng-if="request.status === 'INPROGRESS'"><span class="badge bg-green">{{request.status}}</span></td>
+                    <td ng-click="openDetailView(request)" ng-if="request.status === 'FINISHED'"><span class="badge bg-blue">{{request.status}}</span></td>
+                    <td ng-click="openDetailView(request)">
                         <div class="progress xs">
                             <div class="progress-bar progress-bar-success" style="width: {{(request.processedStep/request.steps.length)*100}}%"></div>
                         </div>
@@ -48,7 +42,7 @@
                     <td > {{request.created | date}}</td>
                     <td > {{request.user}}</td>
                     <td > {{request.issueNumber}}</td>
-                    <td > {{request.reason}}</td>
+                    <td> {{request.reason}} </td>
                 </tr>
             </table>
         </div>

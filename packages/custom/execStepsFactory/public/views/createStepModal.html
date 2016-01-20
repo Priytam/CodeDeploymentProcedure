@@ -11,7 +11,7 @@
                     <div class="form-group" ng-class="{ 'has-error' : stepFormSbmitted && epStepForm.stepName.$invalid }">
                         <label mean-token="'create-stepName'"  for="stepName" class="col-md-3 control-label">Step Name :</label>
                         <div class="col-md-9">
-                            <input name="stepName" type="text" class="form-control" data-ng-model="step.name" id="stepName" placeholder="Plan Name" required>
+                            <input name="stepName" type="text" class="form-control" data-ng-model="step.name" id="stepName" placeholder="Step Name" required>
                             <div ng-show="stepFormSbmitted && epStepForm.stepName.$invalid" class="help-block">
                                 <p ng-show="epStepForm.stepName.$error.required">Step Name is required</p>
                             </div>
@@ -44,18 +44,18 @@
                         </div>
                         <a href="/type/info" target="_blank" class="col-md-2"><i class="fa fa-info-circle fa-2x"></i> </a>
                     </div>
-                    <div data-ng-show="step.type.trim() === 'Approval'" class="form-group" ng-class="{ 'has-error' : stepFormSbmitted && epStepForm.stepValues.$invalid }">
+                    <div data-ng-if="step.type.trim() === 'Approval'" class="form-group" ng-class="{ 'has-error' : stepFormSbmitted && epStepForm.stepValues.$invalid }">
                         <div class="row">
                             <label mean-token="'create-stepValues'"  for="stepValues" class="col-md-3 control-label">Emails </label>
                             <div class="col-xs-9">
-                                <textarea name="stepValues" class="form-control" ng-model-options='{ debounce: 750 }' id="stepValues" ng-change="processOnChange()" ng-model="unprocessed.values" name="step.values" rows="4"></textarea>
+                                <textarea name="stepValues" class="form-control" ng-model-options='{ debounce: 750 }' id="stepValues" ng-change="processOnChange()" ng-model="unProcessed.values" name="stepValues" rows="4"></textarea>
                                 <div ng-show="stepFormSbmitted && epStepForm.stepValues.$invalid" class="help-block">
                                     <p ng-show="epStepForm.stepValues.$error.required">Step Type is required</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div data-ng-show="step.type.trim() === 'Query'" class="form-group" ng-class="{ 'has-error' : stepFormSbmitted && epStepForm.queryConnectionString.$invalid }">
+                    <div data-ng-if="step.type.trim() === 'Query'" class="form-group" ng-class="{ 'has-error' : stepFormSbmitted && epStepForm.queryConnectionString.$invalid }">
                         <div class="row">
                             <label mean-token="'create-queryConnectionString'"  for="queryConnectionString" class="col-md-3 control-label">DataBase :</label>
                             <div class="col-xs-9">

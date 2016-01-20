@@ -6,6 +6,7 @@ var config = require('meanio').loadConfig(),
     nodemailer = require('nodemailer'),
     async = require('async'),
     ApprovalDB = mongoose.model('Approval'),
+    _ = require('lodash'),
     templates = require('./../../template');
 
 
@@ -60,10 +61,10 @@ module.exports =  function () {
                 },
                 function(done) {
                     var mailOptions = {
-                        to: 'priytam.j.pandey@intel.com',
+                        to: approval.values[0],
                         from: 'CDP'
                     };
-                    mailOptions = templates.approval_email('pjpandey', reqId, approval._id, approval.plan,  mailOptions);
+                    mailOptions = templates.approval_email(approval.user, reqId, approval._id, approval.plan,  mailOptions);
                     sendMail(mailOptions, function(err, result){
                         if(err)
                             return done(err)

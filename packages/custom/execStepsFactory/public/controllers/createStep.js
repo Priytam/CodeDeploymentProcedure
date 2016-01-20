@@ -7,6 +7,7 @@ angular.module('mean.execStepsFactory').controller('CreateStepModalController', 
 
         $scope.types =  ['Query', 'Approval', 'Code', 'Upload', 'DateTime'];
         $scope.step = {};
+        $scope.unProcessed = {};
         $scope.step.stepNumber = AddStepFactory.getSteps().length + 1;
         if($scope.step.stepNumber === 1) {
             $scope.step.isFirst = true;
@@ -22,10 +23,13 @@ angular.module('mean.execStepsFactory').controller('CreateStepModalController', 
         };
         
         $scope.processOnChange = function() {
-            $scope.step.values = $scope.unprocessed.values.split(',');
-            for(var i = 0; i < $scope.step.values.length; i++ ){
-                $scope.step.values[i] = $scope.step.values[i].trim();
+            $scope.step.values = [];
+            var values = $scope.unProcessed.values.split(',');
+            for(var i = 0; i < values.length; i++ ){
+                $scope.step.values[i] = values[i].trim();
             }
+
+            console.log($scope.step.values)
         };
 
         $scope.getAvailableDataBase = function() {

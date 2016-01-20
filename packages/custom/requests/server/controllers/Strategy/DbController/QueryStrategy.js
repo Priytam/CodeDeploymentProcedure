@@ -92,6 +92,15 @@ module.exports =  function () {
         })
     }
 
+    function testConnection(req, cb) {
+        var service = serviceList[req.serviceType];
+        service.testConnection(req, function(err, response){
+            if(err)
+                return cb(err);
+            return cb(null, response);
+        })
+    }
+
     function insert(reqData, name, user, email, done) {
         var data = {
             queryString : reqData.values[0],
@@ -135,6 +144,7 @@ module.exports =  function () {
         query : query,
         update : update,
         insert : insert,
-        getData : getData
+        getData : getData,
+        testConnection : testConnection
     }
 };

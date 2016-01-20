@@ -17,7 +17,19 @@ module.exports = function() {
         });
     }
 
+    function testConnection(req, res) {
+        queryStrategy.testConnection(req.body, function (err, response) {
+            if (err) {
+                res.status(500).json({
+                    error: 'some internal issue ' + err
+                });
+            }
+            return res.json(response)
+        });
+    }
+
     return {
-        query : query
+        query : query,
+        testConnection : testConnection
     };
 };

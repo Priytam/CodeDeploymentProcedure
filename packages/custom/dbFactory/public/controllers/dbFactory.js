@@ -2,8 +2,8 @@
 
 /* jshint -W098 */
 angular.module('mean.dbFactory').controller('DbFactoryController',
-    ['$scope', 'Global', 'DbFactory', '$uibModalInstance', 'db', 'operationType',
-  function($scope, Global, DbFactory, $uibModalInstance, db, operationType) {
+    ['$scope', 'Global', 'DbFactory', '$uibModalInstance', 'db', 'operationType', 'QueryConnection', 'QueryService',
+  function($scope, Global, DbFactory, $uibModalInstance, db, operationType, QueryConnection, QueryService) {
 
     $scope.global = Global;
     $scope.operationType = operationType;
@@ -12,7 +12,7 @@ angular.module('mean.dbFactory').controller('DbFactoryController',
     };
 
     $scope.dbList = {};
-    $scope.serviceType = ['mysql','mssql'];
+    $scope.serviceTypes = ['mysql','mssql'];
 
     $scope.isDbNotSelected = function() {
         return (angular.equals({},db) && $scope.operationType === 'update');
@@ -49,5 +49,27 @@ angular.module('mean.dbFactory').controller('DbFactoryController',
         $scope.submitted = true;
       }
     };
+
+      $scope.closeConnectionAlert = function() {
+          $scope.connection = undefined;
+      };
+
+      $scope.testConnection = function() {
+          $scope.connection = {};
+          $scope.connection.successMessage = 'dataBase is Connected';
+          var qString =  new QueryConnection($scope.dbList);
+          qString.$testConnection(function(response){
+              $scope.connection.response = response;
+          });
+      };
+
+      $scope.testConnectionCreated = function() {
+          $scope.connection = {};
+          $scope.connection.successMessage = 'dataBase is Connected';
+          var qString =  new QueryService($scope.dbList);
+          qString.$testConnection(function(response){
+              $scope.connection.response = response;
+          });
+      }
   }
 ]);

@@ -29,6 +29,10 @@ module.exports = function(Requests, app) {
 
     app.route('/api/query/')
         .post(query.query);
+    app.route('/api/connection/')
+        .post(query.testConnection);
+    app.route('/api/query/:queryId')
+        .post(query.testConnection);
 
 
 };

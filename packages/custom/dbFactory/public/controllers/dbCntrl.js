@@ -4,8 +4,8 @@
  * Created by pjpandey on 1/5/2016.
  */
 angular.module('mean.dbFactory').controller('dbController', ['$scope', 'Global', 'ExecStepsFactory',
-    '$uibModal', 'AddStepFactory', 'DbFactory',
-    function($scope, Global, EPDB, $uibModal, AddStepFactory, DbFactory) {
+    '$uibModal', 'AddStepFactory', 'DbFactory', 'QueryService',
+    function($scope, Global, EPDB, $uibModal, AddStepFactory, DbFactory, QueryService) {
         $scope.global = Global;
         var selectedBD = {};
         $scope.package = {
@@ -37,7 +37,6 @@ angular.module('mean.dbFactory').controller('dbController', ['$scope', 'Global',
 
         $scope.selectBD = function(db){
             selectedBD = db;
-            console.log(selectedBD);
         };
 
         $scope.openConfirmDialog = function(){
@@ -45,6 +44,7 @@ angular.module('mean.dbFactory').controller('dbController', ['$scope', 'Global',
                 templateUrl : 'dbFactory/views/confirmDeleteDBModal.html',
                 controller : 'confirmDeleteDBController',
                 windowClass : 'medium-Modal',
+                backdrop : 'static',
                 resolve: {
                     db : function() {
                         return selectedBD;
@@ -67,5 +67,24 @@ angular.module('mean.dbFactory').controller('dbController', ['$scope', 'Global',
                 $scope.dbs = dataBases;
             });
         };
+
+        $scope.closeConnectionAlert = function() {
+            $scope.connection = undefined;
+        };
+
+        $scope.testConnection = function() {
+            $scope.connection = {};
+            $scope.connection.successMessage = 'dataBase is Connected';
+            if(!angular.equals({}, selectedBD)){
+                var qString =  new QueryService(selectedBD);
+                qString.$testConnection(function(response){
+                    $scope.connection.response = response;
+                });
+            } else {
+                $scope.connection.selectionError = 'No db selected , select a db from table and try again';
+            }
+        };
     }
 ]);
+
+

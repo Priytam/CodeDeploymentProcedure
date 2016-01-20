@@ -423,7 +423,7 @@
     position: relative;
     border-top: 1px solid #337ab7;
     border-bottom: 1px solid #337ab7;
-    width: 32%;
+    width: auto;
     margin: 0 1px;
 }
 
@@ -449,11 +449,23 @@
 }
 
 #progress li.active {
-    background: deepskyblue;
+    background: #5cb85c;
+    border-top: 1px solid #5cb85c;
+    border-bottom: 1px solid #5cb85c;
 }
 
 #progress li.active:after {
-    border-left-color: deepskyblue;
+    border-left-color: #5cb85c;
+}
+
+#progress li.defined {
+    background: #ff851b !important;
+    border-top: 1px solid #ff851b !important;
+    border-bottom: 1px solid #ff851b !important;
+}
+
+#progress li.defined:after {
+    border-left-color: #ff851b !important;
 }
 
 
@@ -502,4 +514,16 @@
 
 .progress.xs {
     height: 7px;
+}
+
+.progress-bar-success    {
+    .progress-bar-styles(@progress-bar-success-bg);
+}
+
+.btn.btn-app > .badge {
+    position: absolute;
+    top: -3px;
+    right: -10px;
+    font-size: 10px;
+    font-weight: 400;
 }

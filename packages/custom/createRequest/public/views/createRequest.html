@@ -1,4 +1,4 @@
-<section data-ng-controller="CreateRequestController" data-ng-init="findPlans()">
+<section data-ng-controller="CreateRequestController" data-ng-init="findInitialData()">
   <div class="row" ng-if="plans.length!==0">
     <div class="col-md-8">
         <div class="box box-primary">
@@ -6,7 +6,7 @@
                 <i class="fa fa-chain"></i> <h3 class="box-title">Plans</h3>
                 <div class="box-tools">
                     <div class="input-group">
-                        <input type="text" name="search" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search plan by name"/>
+                        <input type="text" name="search" class="form-control input-sm pull-right" style="width: 150px;" ng-model="searchInput" placeholder="text free search"/>
                         <div class="input-group-btn">
                             <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
                         </div>
@@ -15,11 +15,10 @@
             </div>
             <div class="box-body">
                 <div class="list-group">
-                    <button class="list-group-item" type="button" data-ng-repeat="plan in plans" data-ng-click="changeSelectedPlan(plan)">
+                    <button class="list-group-item" type="button" data-ng-repeat="plan in plans | filter:searchInput" data-ng-click="changeSelectedPlan(plan)">
                         <b> {{plan.name}}  </b>({{plan.description}})  <br>
                         <small class="text-muted">
                             <i class="glyphicon glyphicon-time"></i>
-
                             created on {{plan.created | date}} by {{plan.user || 'anonumous'}}
                         </small>
                     </button>
@@ -48,7 +47,7 @@
                             <div class="icon">
                                 <i class="fa fa-archive"></i>
                             </div>
-                            <a href="#" class="small-box-footer">
+                            <a ui-sref="home.execStepsFactory" ui-sref-active="active" class="small-box-footer">
                                 More info <i class="fa fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -77,7 +76,7 @@
                         <div class="small-box bg-yellow">
                             <div class="inner">
                                 <h3>
-                                    44
+                                    {{notCompleted || 0}}
                                 </h3>
                                 <p>
                                     Active request
@@ -90,13 +89,12 @@
                                 More info <i class="fa fa-arrow-circle-right"></i>
                             </a>
                         </div>
-                    </div><!-- ./col -->
+                    </div>
                     <div class="col-md-12">
-                        <!-- small box -->
                         <div class="small-box bg-red">
                             <div class="inner">
                                 <h3>
-                                    65
+                                    {{completed || 0}}
                                 </h3>
                                 <p>
                                     Completed Requests
@@ -109,7 +107,7 @@
                                 More info <i class="fa fa-arrow-circle-right"></i>
                             </a>
                         </div>
-                    </div><!-- ./col -->
+                    </div>
                 </div>
             </div>
         </div>

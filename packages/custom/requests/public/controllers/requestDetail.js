@@ -4,6 +4,8 @@
 angular.module('mean.createRequest').controller('RequestsDetailController', ['$scope', '$stateParams', 'Requests', 'RequestsSpecific', '$state',
     function($scope, $stateParams, Requests, RequestsSpecific, $state){
         $scope.showFinished = false;
+        $scope.searchInput = '';
+
         if( $stateParams.request === null) {
             Requests.get({
                 reqID : $stateParams.id
@@ -15,6 +17,8 @@ angular.module('mean.createRequest').controller('RequestsDetailController', ['$s
             $scope.request = $stateParams.request;
             findSpecific()
         }
+
+
 
         function findSpecific() {
             var specific =  new RequestsSpecific({steps : $scope.request.steps});

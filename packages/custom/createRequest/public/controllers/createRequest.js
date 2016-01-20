@@ -2,22 +2,35 @@
 
 /* jshint -W098 */
 angular.module('mean.createRequest').controller('CreateRequestController', ['$scope', 'Global', 'CreateRequest',
-  'ExecStepsFactory', '$state',
-  function($scope, Global, CreateRequest, ExecStepsFactory, $state) {
-    $scope.global = Global;
-    $scope.package = {
-      name: 'createRequest'
-    };
+  'ExecStepsFactory', '$state', 'Requests',
+  function($scope, Global, CreateRequest, ExecStepsFactory, $state, Requests) {
+      $scope.global = Global;
+      $scope.package = {
+          name: 'createRequest'
+      };
 
-    $scope.changeSelectedPlan = function(plan){
-      //$scope.plan = plan;
-      $state.go('home.requestForm', {myPlan : plan, id : plan._id});
-    };
+      $scope.searchInput = '';
 
-    $scope.findPlans = function() {
-      ExecStepsFactory.query(function(plans) {
-        $scope.plans = plans;
-      });
-    };
+      $scope.changeSelectedPlan = function (plan) {
+          //$scope.plan = plan;
+          $state.go('home.requestForm', {myPlan: plan, id: plan._id});
+      };
+
+      $scope.findInitialData = function () {
+
+          ExecStepsFactory.query(function (plans) {
+              $scope.plans = plans;
+          });
+
+          Requests.query(function (requests) {
+              $scope.notCompleted = 0;
+              angular.forEach(requests, function(value, key){
+                  if(value.status !== "FINISHED") {
+                      $scope.notCompleted = $scope.notCompleted + 1;
+                  }
+              }, $scope.notCompleted);
+              $scope.completed = requests.length - $scope.notCompleted;
+          });
+      };
   }
 ]);

@@ -12,6 +12,8 @@ angular.module('mean.requests').controller('RequestsController', ['$scope', 'Glo
           $state.go('home.requestDetail', {request : request, id : request._id});
       };
 
+      $scope.searchInput = '';
+
       $scope.findRequests = function() {
           Requests.query(function(requests) {
               $scope.requests = requests;

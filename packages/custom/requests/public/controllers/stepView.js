@@ -90,6 +90,12 @@ angular.module('mean.requests').controller('StepViewController', ['$scope', 'Glo
           service.$query(function (response) {
               $scope.queryData.refreshing = false;
               $scope.result = response;
+              if(response.output){
+                  $scope.step.queryString = $scope.queryData.queryString;
+                  $scope.step.isSuccess = true;
+                  var  step = new RequestsSpecific($scope.step);
+                  step.$update();
+              }
           });
       };
 

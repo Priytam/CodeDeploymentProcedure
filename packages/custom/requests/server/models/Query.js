@@ -23,6 +23,10 @@ var QuerySchema = new Schema({
         type : String,
         trim : true
     },
+    isSuccess: {
+        type: Boolean,
+        default : false
+    },
     state: {
         type: String,
         enum : ['UploadQuery','QuerySaved', 'QuerySavedAndFinished'],

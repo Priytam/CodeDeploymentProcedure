@@ -1,14 +1,14 @@
 'use strict';
 
 module.exports = {
-    approval_email : function(user, reqId, id, plan, mailOptions) {
+    approval_email : function(user, reqId, id, plan, type, mailOptions) {
       mailOptions.html = [
           '<img src="/system/assets/img/loaders/gear.gif" class="ajax-loader"/></br></br>',
 
           '<b> Hi ' + user + '</b></br><</br>',
           'CDP team  have received a request which requires your approval.',
           'Please click on the link below or paste this into your browser to complete the process:',
-          'http://' + 'localhost:3000' + '/requests/' + reqId + '/step/' + id,
+          'http://' + 'localhost:3000' + '/requests/' + reqId + '/step/' + id + '/type/' + type ,
           ''
       ].join('\n\n');
       mailOptions.subject = 'Approval require for plan ' + plan;

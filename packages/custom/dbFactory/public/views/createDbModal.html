@@ -7,9 +7,6 @@
         <div class="col-xs-12">
             <div ng-if="isDbNotSelected()">
                 <span class="text-warning">No DB is selected, please select a DB and try again</span>
-                <button class="btn btn-warning pull-right" ng-click="dismiss()">
-                    <i class="fa fa-times-circle"></i>&nbsp;Cancel
-                </button>
             </div>
             <div  ng-if="operationType ==='create'" class="col-md-offset-7 col-md-5" style="text-align:center">
                 <button ng-click="testConnection()" class="btn btn-success pull-right">
@@ -90,18 +87,22 @@
                 <!-- submit -->
                 <div class="form-group">
                     <div class="col-md-offset-7 col-md-5" style="text-align:center">
-                        <button  ng-click="" ng-if="operationType==='create'" type="submit" class="btn btn-info">
+                        <button  ng-click="" ng-if="operationType==='create'" type="submit" class="btn btn-info pull-right  ">
                             <i class="fa fa-check-square-o"></i>Create
-                        </button>
-                        <button  ng-click="update(epForm.$valid)" ng-if="operationType==='update'" class="btn btn-info">
-                            <i class="fa fa-check-square-o"></i>Update
-                        </button>
-                        <button class="btn btn-warning pull-right" ng-click="dismiss()">
-                            <i class="fa fa-times-circle"></i>&nbsp;Cancel
                         </button>
                     </div>
                 </div>
             </form>
         </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <div class="col-md-offset-7 col-md-5" style="text-align:center">
+        <button  ng-disabled="epForm.$invalid" ng-click="update()" ng-if="operationType==='update' && !isDbNotSelected() " class="btn btn-info">
+            <i class="fa fa-check-square-o"></i> Update
+        </button>
+        <button class="btn btn-warning pull-right" ng-click="dismiss()">
+            <i class="fa fa-times-circle"></i> Cancel
+        </button>
     </div>
 </div>

@@ -72,7 +72,7 @@ module.exports =  function () {
                         to: to,
                         from: 'CDP'
                     };
-                    mailOptions = templates.approval_email(gartitude, reqId, approval._id, approval.plan,  mailOptions);
+                    mailOptions = templates.approval_email(gartitude, reqId, approval._id, approval.plan, approval.type, mailOptions);
                     sendMail(mailOptions, function(err, result){
                         if(err)
                             return done(err)

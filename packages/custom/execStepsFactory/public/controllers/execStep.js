@@ -83,7 +83,8 @@ angular.module('mean.execStepsFactory')
     };
 
     function updateTaskMessage(msg){
-        $scope.taskMessage = msg;
+      selectedPlan = {};
+      $scope.taskMessage = msg;
     }
 
     $scope.openConfirmDialog = function(){
@@ -100,6 +101,7 @@ angular.module('mean.execStepsFactory')
     };
 
     function removePlan(){
+      selectedPlan = {};
       $scope.eps.splice($scope.eps.indexOf(selectedPlan), 1);
       $scope.taskMessage = "Plan removed successfully ...";
     }

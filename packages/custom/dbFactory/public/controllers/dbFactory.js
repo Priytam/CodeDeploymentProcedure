@@ -39,15 +39,11 @@ angular.module('mean.dbFactory').controller('DbFactoryController',
       }
     };
 
-    $scope.update = function(isValid){
-      if(isValid) {
+    $scope.update = function(){
         $scope.dbList.$update(function(response){
           response.taskMessage = 'DB updated successfully';
           $uibModalInstance.close(response);
         })
-      } else {
-        $scope.submitted = true;
-      }
     };
 
       $scope.closeConnectionAlert = function() {

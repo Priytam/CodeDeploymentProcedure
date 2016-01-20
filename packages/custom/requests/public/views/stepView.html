@@ -27,7 +27,6 @@
                         <button ng-if="step.status === 'DEFINED'" ng-disabled="!isOwner" class="pull-right btn btn-default" id="askApproval" ng-click="processStep(step)">Ask for Approval <i class="fa fa-arrow-circle-right"></i></button>
                         <button ng-if="step.status === 'INPROGRESS'" ng-disabled="!isApproval" class="pull-right btn btn-default" id="giveApproval" ng-click="processStep(step)">Approve <i class="fa fa-arrow-circle-right"></i></button>
                 </div>
-                {{isApproval}}
             </div>
             <div ng-switch-when="Upload">
                 <div class="box-header">
@@ -52,8 +51,8 @@
                         <h3>
                             <span class="text-info">List of files (click to download)</span>
                         </h3>
-                        <div data-ng-repeat="file in step.values" class="text-center">
-                            <a  target="_blank" data-ng-href="{{file.src}}">{{file.name}} is {{file.size}} bytes </a>
+                        <div data-ng-repeat="file in step.values" ng-if="step.values.length > 0" class="text-center">
+                            <a  target="_blank" data-ng-href="{{file.src}}">{{file.name}} </a>
                         </div>
                     </div>
                 </div>
@@ -116,8 +115,8 @@
                 <div class="box-footer clearfix">
                     <span class="text-danger pull-left" ng-if="result.error"> {{result.error}}</span>
                     <span class="text-success pull-left" ng-if="result.output"> Executed successfully ... <span class="text-muted">(check below for result)</span></span>
-
-                    <button ng-disabled="!isOwner" style="margin-left: 2%" class="pull-right btn btn-default"  ng-if="step.status === 'INPROGRESS'" ng-click="processStep(step)">
+                    {{step.isSuccess}}
+                    <button ng-disabled="!isOwner || step.isSuccess===false" style="margin-left: 2%" class="pull-right btn btn-default"  ng-if="step.status === 'INPROGRESS'" ng-click="processStep(step)">
                         Finish<i class="fa fa-arrow-circle-right"></i>
                     </button>
 

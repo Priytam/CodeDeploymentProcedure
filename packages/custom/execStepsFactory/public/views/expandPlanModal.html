@@ -39,7 +39,6 @@
                                             </button>
                                         </div>
                                         <br>
-                                        <form  name="flowInputForm" novalidate>
                                             <div class="form-group form-horizontal">
                                                 <div class="row">
                                                     <label class="col-xs-3"> stepNumber</label>
@@ -98,14 +97,18 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-offset-7 col-md-5" style="text-align:center">
-                <button ng-show="!isEmpty" ng-click="save()" class="btn btn-info">
+            <div ng-if="!isEmpty && operationType === 'update'" class="col-md-offset-7 col-md-5" style="text-align:center">
+                <button  ng-click="save()" class="btn btn-info">
                     <i class="fa fa-check-square-o"></i>Confirm
                 </button>
-                &nbsp;&nbsp;
-                <a class="btn btn-warning pull-right" ng-click="dismiss()">
+                <button class="btn btn-warning pull-right" ng-click="dismiss()">
                     <i class="fa fa-times-circle"></i> Cancel
-                </a>
+                </button>
+            </div>
+            <div ng-if="isEmpty || operationType === 'detail'" class="col-md-offset-7 col-md-5" style="text-align:center">
+                <button class="btn btn-warning pull-right" ng-click="dismiss()">
+                    <i class="fa fa-times-circle"></i> Close
+                </button>
             </div>
         </div>
     </div>

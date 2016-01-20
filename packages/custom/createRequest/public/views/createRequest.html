@@ -1,5 +1,5 @@
 <section data-ng-controller="CreateRequestController" data-ng-init="findInitialData()">
-  <div class="row" ng-if="plans.length!==0">
+  <div class="row">
     <div class="col-md-8">
         <div class="box box-primary">
             <div class="box-header">
@@ -14,7 +14,8 @@
                 </div>
             </div>
             <div class="box-body">
-                <div class="list-group">
+                <uib-alert ng-show="plans.length===0" type="warning">NO plans available to create request</uib-alert>
+                <div class="list-group" ng-if="plans.length!==0">
                     <button class="list-group-item" type="button" data-ng-repeat="plan in plans | filter:searchInput" data-ng-click="changeSelectedPlan(plan)">
                         <b> {{plan.name}}  </b>({{plan.description}})  <br>
                         <small class="text-muted">

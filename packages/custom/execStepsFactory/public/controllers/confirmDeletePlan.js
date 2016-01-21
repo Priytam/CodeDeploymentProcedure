@@ -17,8 +17,15 @@ angular.module('mean.execStepsFactory').controller('confirmDeletePlanController'
         $scope.ok = function(){
             $scope.plan.$remove(function(response) {
                 $uibModalInstance.close();
+            }, function(err) {
+                $scope.statusText =  err.statusText;
+                $scope.errorMessage = err.data.message;
             });
 
         };
+
+        $scope.closeAlert = function() {
+            $scope.errorMessage = undefined;
+        }
     }
 ]);

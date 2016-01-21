@@ -18,8 +18,13 @@
                     <i class="fa fa-check-square-o">Test Connection</i>
                 </button>
             </div>
+
             <br>
             <br>
+            <div data-ng-if="errorMessage">
+                <uib-alert type="danger" close="closeAlert()" dismiss-on-timeout="4000"> <b>{{statusText }} : </b> {{errorMessage}}</uib-alert>
+            </div>
+
             <div data-ng-if="connection.response.isConnected">
                 <uib-alert type="success" close="closeConnectionAlert()" dismiss-on-timeout="4000">{{connection.successMessage}}</uib-alert>
             </div>

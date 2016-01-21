@@ -13,6 +13,9 @@
                     </button>
                 </div>
             </div>
+            <div data-ng-if="errorMessage">
+                <uib-alert type="danger" close="closeAlert()" dismiss-on-timeout="4000"> <b>{{statusText }} : </b> {{errorMessage}}</uib-alert>
+            </div>
             <div ng-if="!isEmpty">
                 <label class="info_description">Are you sure you want to delete this DB?</label>
                 <div class="col-md-offset-7 col-md-5" style="text-align:center">

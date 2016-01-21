@@ -38,6 +38,10 @@ SystemPackage.register(function(app, auth, database, circles) {
   // Adding robots and humans txt
   app.useStatic(__dirname + '/public/assets/static');
 
-  return SystemPackage;
+  require('../../custom/dbFactory/server/policies/dbPolicy').invokeRolesPolicies();
+  require('../../custom/execStepsFactory/server/policies/epPolicy').invokeRolesPolicies();
+
+
+    return SystemPackage;
 
 });

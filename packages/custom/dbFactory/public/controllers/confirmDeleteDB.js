@@ -8,7 +8,6 @@ angular.module('mean.dbFactory').controller('confirmDeleteDBController',['$scope
         $scope.isEmpty = false;
 
         $scope.db = db;
-        console.log(db);
         if(angular.equals({},db)){
             $scope.isEmpty = true;
         }
@@ -19,8 +18,15 @@ angular.module('mean.dbFactory').controller('confirmDeleteDBController',['$scope
         $scope.ok = function(){
             $scope.db.$remove(function(response) {
                 $uibModalInstance.close();
+            }, function(err) {
+                $scope.statusText =  err.statusText;
+                $scope.errorMessage = err.data.message;
             });
 
         };
+
+        $scope.closeAlert = function() {
+            $scope.errorMessage = undefined;
+        }
     }
 ]);

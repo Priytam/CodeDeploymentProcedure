@@ -9,12 +9,16 @@
                 <div ng-show="isEmpty">
                     <label class="info_description">NO Plan selected, please select a plan and try agaian</label>
                 </div>
+                <div data-ng-if="errorMessage">
+                    <uib-alert type="danger" close="closeAlert()" dismiss-on-timeout="4000"> <b>{{statusText }} : </b> {{errorMessage}}</uib-alert>
+                </div>
                 <div ng-show="!isEmpty">
                     <div class="panel panel-default">
                         <div class="panel-heading">{{plan.name}}
                         <span class="text-muted">({{plan.description}})</span>
                         </div>
                         <div class="panel-body">
+
                             <uib-accordion close-others="true">
                                 <uib-accordion-group data-ng-repeat="step in plan.steps" is-open="statusOpen[$index].open">
                                     <uib-accordion-heading>

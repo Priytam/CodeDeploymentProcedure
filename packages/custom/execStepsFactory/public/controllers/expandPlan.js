@@ -28,7 +28,15 @@ angular.module('mean.execStepsFactory').controller('expandPlanController',['$sco
             $scope.plan.$update(function(response) {
                 $scope.plan = response;
                 $uibModalInstance.close('Plan update successfully');
+            }, function(err) {
+                $scope.statusText =  err.statusText;
+                $scope.errorMessage = err.data.message;
             });
+
+        };
+
+        $scope.closeAlert = function() {
+            $scope.errorMessage = undefined;
         };
 
         $scope.removeStep = function(index){

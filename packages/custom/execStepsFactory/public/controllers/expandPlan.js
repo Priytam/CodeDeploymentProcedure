@@ -35,7 +35,7 @@ angular.module('mean.execStepsFactory').controller('expandPlanController',['$sco
 
         };
 
-        $scope.closeAlert = function() {
+        $scope.closeErrorAlert = function() {
             $scope.errorMessage = undefined;
         };
 

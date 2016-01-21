@@ -1,8 +1,9 @@
 'use strict';
 
 /* jshint -W098 */
-angular.module('mean.requests').controller('RequestsController', ['$scope', 'Global', 'Requests', '$state',
-  function($scope, Global, Requests, $state) {
+angular.module('mean.requests').controller('RequestsController', ['$scope', 'Global',
+    'Requests', '$state', '$stateParams',
+  function($scope, Global, Requests, $state, $stateParams) {
       $scope.global = Global;
       $scope.package = {
           name: 'requests'
@@ -15,7 +16,9 @@ angular.module('mean.requests').controller('RequestsController', ['$scope', 'Glo
       $scope.searchInput = '';
 
       $scope.findRequests = function() {
-          Requests.query(function(requests) {
+          Requests.query({
+              status : $stateParams.status
+          }, function(requests) {
               $scope.requests = requests;
           });
       };

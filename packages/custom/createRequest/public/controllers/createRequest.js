@@ -2,8 +2,8 @@
 
 /* jshint -W098 */
 angular.module('mean.createRequest').controller('CreateRequestController', ['$scope', 'Global', 'CreateRequest',
-  'ExecStepsFactory', '$state', 'Requests',
-  function($scope, Global, CreateRequest, ExecStepsFactory, $state, Requests) {
+  'ExecStepsFactory', '$state', 'Requests', 'Features',
+  function($scope, Global, CreateRequest, ExecStepsFactory, $state, Requests, Features) {
       $scope.global = Global;
       $scope.package = {
           name: 'createRequest'
@@ -15,6 +15,10 @@ angular.module('mean.createRequest').controller('CreateRequestController', ['$sc
           //$scope.plan = plan;
           $state.go('home.requestForm', {myPlan: plan, id: plan._id});
       };
+
+      Features.query(function(response){
+          $scope.features = response.length;
+      });
 
       $scope.findInitialData = function () {
 

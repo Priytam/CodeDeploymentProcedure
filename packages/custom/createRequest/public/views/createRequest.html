@@ -58,16 +58,16 @@
                         <div class="small-box bg-green">
                             <div class="inner">
                                 <h3>
-                                    53
+                                    {{features}}
                                 </h3>
                                 <p>
-                                    Discussion
+                                    Requested Features
                                 </p>
                             </div>
                             <div class="icon">
                                 <i class="fa fa-tv"></i>
                             </div>
-                            <a href="#" class="small-box-footer">
+                            <a ui-sref="home.features" ui-sref-active="active" class="small-box-footer">
                                 More info <i class="fa fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -86,7 +86,7 @@
                             <div class="icon">
                                 <i class="fa fa-battery-half"></i>
                             </div>
-                            <a href="#" class="small-box-footer">
+                            <a ui-sref="home.requests({status : 'INPROGRESS' })" ui-sref-active="active" class="small-box-footer">
                                 More info <i class="fa fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -104,7 +104,7 @@
                             <div class="icon">
                                 <i class="fa fa-battery-full"></i>
                             </div>
-                            <a href="#" class="small-box-footer">
+                            <a ui-sref="home.requests({status : 'FINISHED'})" ui-sref-active="active" class="small-box-footer">
                                 More info <i class="fa fa-arrow-circle-right"></i>
                             </a>
                         </div>

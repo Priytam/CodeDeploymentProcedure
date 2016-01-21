@@ -77,10 +77,9 @@ module.exports = function(modelName, sortBy) {
 
     function all(req, res) {
         var query = {};
-        if (req.query.filter) {
-            query = req.query.filter;
+        if (req.query) {
+            query = req.query;
         }
-
         Model.find(query).sort(sortBy).exec(function(err, models) {
             if (err) {
                 return res.status(400).send({

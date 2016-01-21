@@ -10,7 +10,7 @@
                     <label class="info_description">NO Plan selected, please select a plan and try agaian</label>
                 </div>
                 <div data-ng-if="errorMessage">
-                    <uib-alert type="danger" close="closeAlert()" dismiss-on-timeout="4000"> <b>{{statusText }} : </b> {{errorMessage}}</uib-alert>
+                    <uib-alert type="danger" close="closeErrorAlert()" dismiss-on-timeout="4000"> <b>{{statusText }} : </b> {{errorMessage}}</uib-alert>
                 </div>
                 <div ng-show="!isEmpty">
                     <div class="panel panel-default">

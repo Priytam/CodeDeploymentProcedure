@@ -5,19 +5,30 @@
         <li class="list-group-item text-muted"><b>Requests</b> <i class="fa fa-dashboard"></i></li>
         <a ui-sref="home.createRequest" ui-sref-active="active" class="list-group-item"><i class="glyphicon glyphicon-menu-hamburger" style="color: #003399"></i>&nbsp;Create Request  <span class="badge">{{plans}}</span></a>
         <a ui-sref="home.requests" ui-sref-active="active" class="list-group-item"><i class="fa fa-stack-overflow" style="color: #003399"></i>&nbsp;Request Overview <span class="badge">{{requests}}</span></a>
-        <a ui-sref="pendingTasks" ui-sref-active="active" class="list-group-item"><i class="glyphicon glyphicon-tasks" style="color: darkorange"></i>&nbsp;All pending approval</a>
-        <a ui-sref="pendingMyTasks" ui-sref-active="active" class="list-group-item"><i class="glyphicon glyphicon-user" style="color:darkorange"></i>&nbsp;My pending approval</a>
+        <!--<a ui-sref="pendingTasks" ui-sref-active="active" class="list-group-item"><i class="glyphicon glyphicon-tasks" style="color: darkorange"></i>&nbsp;All pending approval</a>
+        <a ui-sref="pendingMyTasks" ui-sref-active="active" class="list-group-item"><i class="glyphicon glyphicon-user" style="color:darkorange"></i>&nbsp;My pending approval</a>-->
       </div>
-
+    </div>
+    <div class="panel panel-default">
+      <div class="list-group">
+          <li class="list-group-item text-muted"><b>Setting</b> <i class="fa fa-gear fa-1x"></i></li>
+          <a ui-sref="home.execStepsFactory" ui-sref-active="active" class="list-group-item"><i class="fa fa-pencil-square-o" style="color: green  "></i>&nbsp;Configure a plan <span class="badge">{{plans}}</span></a>
+          <a ui-sref="home.dbFactory" ui-sref-active="active" class="list-group-item"><i class="fa fa-database" style="color: green  "></i>&nbsp;Configure a data base <span class="badge">{{dbs}}</span></a>
+      </div>
     </div>
     <div class="panel panel-default">
           <div class="list-group">
-              <li class="list-group-item text-muted"><b>Setting</b> <i class="fa fa-gear fa-1x"></i></li>
-              <a ui-sref="home.execStepsFactory" ui-sref-active="active" class="list-group-item"><i class="fa fa-pencil-square-o" style="color: green  "></i>&nbsp;Configure a plan</a>
-              <a ui-sref="home.dbFactory" ui-sref-active="active" class="list-group-item"><i class="fa fa-database" style="color: green  "></i>&nbsp;Configure a data base</a>
+              <li class="list-group-item text-muted"><b>CDP</b> <i class="fa fa-eye fa-1x"></i></li>
+              <a ui-sref="home.bugs" ui-sref-active="active" class="list-group-item">
+                  <i class="fa fa-bug " style="color: darkred  "></i>
+                  &nbsp; Bugs <span class="badge">{{bugs}}</span>
+              </a>
+              <a ui-sref="home.features" ui-sref-active="active" class="list-group-item">
+                  <i class="fa fa-comment-o" style="color: darkorange  "></i>
+                  &nbsp; Features Requested <span class="badge">{{features}}</span>
+              </a>
           </div>
-
-      </div>
+    </div>
   </div>
   <div class="col-md-9">
     <div class="row">

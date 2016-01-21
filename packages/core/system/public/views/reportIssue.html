@@ -4,6 +4,9 @@
 </div>
 <form novalidate name="feedbackForm">
     <div class="modal-body">
+        <div data-ng-if="vm.errorMessage">
+            <uib-alert type="danger" close="vm.closeErrorAlert()" dismiss-on-timeout="4000"> <b>{{vm.statusText }} : </b> {{vm.errorMessage}}</uib-alert>
+        </div>
         <div class="form-group form-horizontal">
             <label for="subject">Subject</label>
             <input type="text" class="form-control" ng-model="vm.feedback.subject" name="subject" id="subject" placeholder="Subject" required>

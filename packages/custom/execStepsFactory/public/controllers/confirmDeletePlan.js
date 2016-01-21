@@ -24,7 +24,7 @@ angular.module('mean.execStepsFactory').controller('confirmDeletePlanController'
 
         };
 
-        $scope.closeAlert = function() {
+        $scope.closeErrorAlert = function() {
             $scope.errorMessage = undefined;
         }
     }

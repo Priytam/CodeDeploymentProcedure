@@ -70,7 +70,7 @@ module.exports =  function () {
                     }
                     var mailOptions = {
                         to: to,
-                        from: 'CDP'
+                        from: 'akshata.r.kulkarni@intel.com'
                     };
                     mailOptions = templates.approval_email(gartitude, reqId, approval._id, approval.plan, approval.type, mailOptions);
                     sendMail(mailOptions, function(err, result){
@@ -136,7 +136,7 @@ module.exports =  function () {
                 }
                 var mailOptions = {
                     to: approval.email,
-                    from: 'CDP'
+                    from: 'akshata.r.kulkarni@intel.com'
                 };
                 mailOptions = templates.notification_email(approval.user, reqId, approval._id, approval.plan,  mailOptions);
                 sendMail(mailOptions, function(err){

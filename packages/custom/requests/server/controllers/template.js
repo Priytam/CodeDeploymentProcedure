@@ -34,5 +34,17 @@ module.exports = {
         ].join('\n\n');
         mailOptions.subject = 'Doc Upload request for plan '+ plan+ ' has been finished';
         return mailOptions;
+    },
+    query_email : function(user, reqId, id, plan, query, mailOptions) {
+        mailOptions.html = [
+            '<img src="/system/assets/img/loaders/gear.gif" class="ajax-loader"/></br></br>',
+
+            '<b> Hi ' + user + '</b></br><</br>',
+            'Your query has been uploaded',
+            'Uploaded query : <br>'
+             + query
+        ].join('\n\n');
+        mailOptions.subject = 'Query upload request for plan '+ plan+ ' has been finished';
+        return mailOptions;
     }
 };

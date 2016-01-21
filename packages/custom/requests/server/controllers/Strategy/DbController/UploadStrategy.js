@@ -43,10 +43,10 @@ module.exports =  function () {
                 },
                 function(done) {
                     var mailOptions = {
-                        to: 'priytam.j.pandey@intel.com',
-                        from: 'CDP'
+                        to: upload.email,
+                        from: 'akshata.r.kulkarni@intel.com'
                     };
-                    mailOptions = templates.upload_email('pjpandey', reqId, upload._id, upload.plan,  mailOptions);
+                    mailOptions = templates.upload_email(upload.user, reqId, upload._id, upload.plan,  mailOptions);
                     sendMail(mailOptions, function(err){
                         if(err)
                             return done(err)

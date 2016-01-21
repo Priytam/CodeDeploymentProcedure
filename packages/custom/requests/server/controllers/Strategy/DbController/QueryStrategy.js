@@ -48,10 +48,10 @@ module.exports =  function () {
                     },
                     function (done) {
                         var mailOptions = {
-                            to: query.user,
-                            from: 'CDP'
+                            to: query.email,
+                            from: 'akshata.r.kulkarni@intel.com'
                         };
-                        mailOptions = templates.approval_email(query.user, reqId, query._id, query.plan, mailOptions);
+                        mailOptions = templates.query_email(query.user, reqId, query._id, query.plan, query.queryString, mailOptions);
                         sendMail(mailOptions, function (err, result) {
                             if (err) {
                                 return done(err);

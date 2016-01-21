@@ -36,7 +36,7 @@ module.exports =  function () {
                     if (!upload) {
                         return done(true);
                     }
-                    else if (upload.status !== 'DEFINED') {
+                    else if (upload.status !== 'INPROGRESS') {
                         return done(true);
                     }
                     return done(null);

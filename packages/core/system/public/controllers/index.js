@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('mean.system').controller('IndexController', ['$scope', 'Global', 'ExecStepsFactory',
-    'Requests', 'Bugs', 'Features', 'DbFactory',
-  function($scope, Global, ExecStepsFactory, Requests, Bugs, Features, DbFactory) {
+    'Requests', 'Bugs', 'Features', 'DbFactory', 'Authentication',
+  function($scope, Global, ExecStepsFactory, Requests, Bugs, Features, DbFactory, Authentication) {
       $scope.global = Global;
 
       ExecStepsFactory.query(function(plans) {
@@ -25,5 +25,11 @@ angular.module('mean.system').controller('IndexController', ['$scope', 'Global',
           $scope.features = response.length;
       });
 
+      $scope.currentUser = Authentication.user.username;
+      console.log($scope.currentUser);
+
+      Requests.query({user : $scope.currentUser},function(requests) {
+          $scope.myRequests = requests.length;
+      });
   }
 ]);

@@ -8,7 +8,7 @@ angular.module('mean.requests').controller('RequestsController', ['$scope', 'Glo
       $scope.package = {
           name: 'requests'
       };
-
+      $scope.requests = [];
       $scope.openDetailView = function(request){
           $state.go('home.requestDetail', {request : request, id : request._id});
       };
@@ -17,7 +17,8 @@ angular.module('mean.requests').controller('RequestsController', ['$scope', 'Glo
 
       $scope.findRequests = function() {
           Requests.query({
-              status : $stateParams.status
+              status : $stateParams.status,
+              user : $stateParams.user
           }, function(requests) {
               $scope.requests = requests;
           });

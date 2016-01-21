@@ -8,6 +8,13 @@ angular.module('mean.requests').config(['$stateProvider',
           params : {status : null},
           templateUrl: 'requests/views/requests.html'
       })
+          .state('home.myRequests', {
+              url: '/myRequests/:user',
+              parent: 'home',
+              params : {user : null},
+              templateUrl: 'requests/views/requests.html'
+          })
+
           .state('home.requestDetail', {
               url: '/requests/:id',
               parent: 'home',

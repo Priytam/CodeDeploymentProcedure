@@ -10,7 +10,7 @@ angular.module('mean.createRequest').controller('CreateRequestController', ['$sc
       };
 
       $scope.searchInput = '';
-
+      $scope.plans = [];
       $scope.changeSelectedPlan = function (plan) {
           //$scope.plan = plan;
           $state.go('home.requestForm', {myPlan: plan, id: plan._id});

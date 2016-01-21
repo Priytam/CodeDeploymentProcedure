@@ -79,7 +79,7 @@ var header = '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "ht
 '<!-- 600px container (white background) -->'+
 '<table border="0" width="600" cellpadding="0" cellspacing="0" class="container" style="width:600px;max-width:600px">'+
 '<tr>'+
-'<td class="container-padding header" align="left" style="font-family:Helvetica, Arial, sans-serif;font-size:24px;font-weight:bold;padding-bottom:12px;color:#DF4726;padding-left:24px;padding-right:24px">'+
+'<td class="container-padding header" align="left" style="font-family:Helvetica, Arial, sans-serif;font-size:24px;font-weight:bold;padding-bottom:12px;color:#337ab7;padding-left:24px;padding-right:24px">'+
 'Code Deployment Procedure'+
 '</td>'+
 '</tr>'+
@@ -98,18 +98,14 @@ var footer ='<br><br>'+
 '<tr>'+
 '<td class="container-padding footer-text" align="left" style="font-family:Helvetica, Arial, sans-serif;font-size:12px;line-height:16px;color:#aaaaaa;padding-left:24px;padding-right:24px">'+
 '<br><br>'+
-'Sample Footer text: © 2015 Acme, Inc.'+
+'You are receiving this email because you opted in on CDP tool '+
 '<br><br>'+
 ''+
-'You are receiving this email because you opted in on our website. Update your <a href="#" style="color:#aaaaaa">email preferences</a> or <a href="#" style="color:#aaaaaa">unsubscribe</a>.'+
-'<br><br>'+
-''+
-'<strong>Acme, Inc.</strong><br>'+
+'<strong>CDP</strong><br>'+
 '<span class="ios-footer">'+
-'123 Main St.<br>'+
-'Springfield, MA 12345<br>'+
+'SMIT GPS<br>'+
 '</span>'+
-'<a href="http://www.acme-inc.com" style="color:#aaaaaa">www.acme-inc.com</a><br>'+
+'<a href="http://www.cdp.intel.com" style="color:#aaaaaa">www.cdp.intel.com</a><br>'+
 ''+
 '<br><br>'+
 ''+
@@ -159,7 +155,7 @@ module.exports = {
             header
             +
             '<b> Hi ' + user + '</b></br></br>',
-            'Your document has been approved'
+            'Your document has been uploaded successfully, please proceed with next steps'
             +
             footer
         ].join('\n\n');
@@ -171,7 +167,7 @@ module.exports = {
             header
             +
             '<b> Hi ' + user + '</b></br></br>',
-            'Your query has been uploaded',
+            'Your query has been uploaded for plan: '+plan+'</br>',
             'Uploaded query : <br>'
              + query
              +

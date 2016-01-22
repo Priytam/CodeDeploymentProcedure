@@ -33,6 +33,7 @@ angular.module('mean.execStepsFactory')
 
       function updatePlan() {
           $scope.executionPlan = AddStepFactory.getPlan();
+          console.log($scope.executionPlan);
       }
 
       $scope.addAStep = function () {

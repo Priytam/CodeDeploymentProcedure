@@ -27,7 +27,14 @@
                 </div>
                 <div data-ng-if="isVisible">
                     <div data-ng-show="executionPlan.name !== undefined">
-                        <div class="panel panel-heading">{{::executionPlan.name}} : {{::executionPlan.description}} </div>
+                        <div class="panel panel-heading">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <b> Name : </b>{{::executionPlan.name}},<br>
+                                    <b> Descrption : </b>{{::executionPlan.description}}
+                                </li>
+                            </ul>
+                        </div>
                         <div class=" panel panel-body">
                             <ul class="list-group " data-ng-repeat="step in executionPlan.steps">
                                 <li class="list-group-item"><span class="badge">{{step.isMandatory}}</span>

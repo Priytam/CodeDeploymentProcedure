@@ -1,5 +1,5 @@
 {
-  "name": "users",
+  "name": "system",
   "version": "0.0.0",
   "dependencies": {
     "angular-jwt" : "latest",

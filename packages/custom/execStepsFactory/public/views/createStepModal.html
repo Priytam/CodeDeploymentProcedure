@@ -59,11 +59,20 @@
                         <div class="row">
                             <label mean-token="'create-queryConnectionString'"  for="queryConnectionString" class="col-md-3 control-label">DataBase :</label>
                             <div class="col-xs-9">
-                                <select name="queryConnectionString" class="form-control" data-ng-model="step.values" id="queryConnectionString" placeholder="data base" required>
-                                    <option data-ng-repeat="db in dbs">
-                                        {{::db}}
-                                    </option>
-                                </select>
+                                <div class="input-group form-control">
+                                    <ui-select name="queryConnectionString"  id="queryConnectionString" ng-model="unProcessed.values" on-select="onSelected($item)" theme="bootstrap" ng-disabled="disabled" required>
+                                        <ui-select-match placeholder="Select a data base or search with dbName/host/port/username/createdby/">{{$select.selected.dbName}}</ui-select-match>
+                                        <ui-select-choices repeat="db in dbs | propsFilter: {dbName : $select.search, host : $select.search, port : $select.search, username : $select.search, user : $select.search}">
+                                            <div ng-bind-html="db.dbName | highlight: $select.search"></div>
+                                            <small>
+                                                host : <span ng-bind-html="''+db.host | highlight: $select.search"></span>
+                                                port : <span ng-bind-html="''+db.port | highlight: $select.search"></span>
+                                                username : <span ng-bind-html="''+db.username | highlight: $select.search"></span>
+                                                created by : <span ng-bind-html="''+db.user | highlight: $select.search"></span>
+                                            </small>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </div>
                                 <div ng-show="stepFormSbmitted && epStepForm.queryConnectionString.$invalid" class="help-block">
                                     <p ng-show="epStepForm.queryConnectionString.$error.required">Connection String is required</p>
                                 </div>

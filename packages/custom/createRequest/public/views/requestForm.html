@@ -39,15 +39,12 @@
 
                                 <div ng-switch-when="Query">
                                     <div class="row">
-                                        <label class="col-xs-3">{{::step.name}}
-                                            <i title="This is a mandatory field!" class="fa fa-asterisk" ng-if="step.isMandatory === true" style="color:red"></i>
+                                        <label class="col-xs-3">{{::step.name}} :
                                         </label>
                                         <div class="col-xs-9">
-                                            <textarea class="form-control"  ng-model-options='{ debounce: 750 }' ng-change="pushRequired(step)" ng-model="request.steps[param.name]" name="step.name" rows="4"></textarea>
+                                            <textarea class="form-control"  ng-disabled="true"  ng-model-options='{ debounce: 750 }' ng-change="pushRequired(step)" ng-model="request.steps[param.name]" name="step.name" rows="4"></textarea>
                                             <span class="help-block">
-                                                    {{::step.description }}
-                                                    <button class="btn btn-info"> Test </button>
-                                                    <span ng-show="step.refreshing"><i class="fa fa-refresh fa-spin"></i></span>
+                                                    {{::step.description }} (Query is allowed to upload and run at time of prcessing this step)
                                             </span>
                                         </div>
                                     </div>
@@ -55,11 +52,10 @@
 
                                 <div ng-switch-when="Code">
                                     <div class="row">
-                                        <label class="col-xs-3">{{::step.name}}
-                                            <i title="This is a mandatory field!" class="fa fa-asterisk" ng-if="step.isMandatory === true" style="color:red"></i>
+                                        <label class="col-xs-3">{{::step.name}} :
                                         </label>
                                         <div class="col-xs-9">
-                                            <textarea class="form-control" ng-required="step.isMandatory === true" ng-model-options='{ debounce: 750 }' ng-change="vm.callOnChange(param)" ng-model="request.steps[param.name]" name="step.name" rows="4"></textarea>
+                                            <textarea class="form-control"  ng-disabled="true" ng-model-options='{ debounce: 750 }' ng-change="vm.callOnChange(param)" ng-model="request.steps[param.name]" name="step.name" rows="4"></textarea>
                                             <span class="help-block">
                                                 {{::step.description }}
                                             </span>
@@ -69,12 +65,11 @@
 
                                 <div ng-switch-when="DateTime">
                                     <div class="row">
-                                        <label class="col-xs-3">{{::step.name}}
-                                            <i title="This is a mandatory field!" class="fa fa-asterisk" ng-if="step.isMandatory === true" style="color:red"></i>
+                                        <label class="col-xs-3">{{::step.name}} :
                                         </label>
                                         <div class="col-xs-9">
                                             <p class="input-group">
-                                                <input type="text" name="step.name" ng-required="step.isMandatory === true" class="form-control" datetime-picker="dd MMM yyyy HH:mm" ng-model="request.steps[param.name]" is-open="vm.isOpen"  />
+                                                <input type="text" name="step.name" ng-disabled="true" class="form-control" datetime-picker="dd MMM yyyy HH:mm" ng-model="request.steps[param.name]" is-open="vm.isOpen"  />
                                                 <span class="input-group-btn">
                                                   <button type="button" class="btn btn-default" ng-click="vm.openCalendar($event, prop)"><i class="glyphicon glyphicon-calendar"></i></button>
                                                 </span>
@@ -86,14 +81,17 @@
 
                                 <div ng-switch-when="Approval">
                                     <div class="row">
-                                        <label class="col-xs-3">{{::step.name}}
-                                            <i title="This is a mandatory field!" class="fa fa-asterisk" ng-if="step.isMandatory === true" style="color:red"></i>
+                                        <label class="col-xs-3">{{::step.name}} :
+                                            <i title="This is a mandatory field!" class="fa fa-asterisk" ng-if="true" style="color:red"></i>
                                         </label>
                                         <div class="col-xs-9">
-                                            <select ng-required="step.isMandatory === true" ng-change="pushRequired(step)" ng-model="requestData[step.name]" name="step.name" class="form-control">
-                                                <option ng-repeat="value in step.values">{{::value}}</option>
-                                            </select>
-                                            <span class="help-block">{{::step.description }} <span ng-if="step.isMandatory === true">(since it is known who can approve this step, its mandatory to select this approver)</span></span>
+                                            <ui-select multiple ng-model="request.steps[step.name].values" theme="bootstrap" name="step.name" class="form-control" required="true">
+                                                <ui-select-match placeholder="Select emails...">{{$item}}</ui-select-match>
+                                                <ui-select-choices repeat="value in step.values | filter:$select.search">
+                                                    {{value}}
+                                                </ui-select-choices>
+                                            </ui-select>
+                                            <span class="help-block">{{::step.description }} (Approver(s) can be removed if required , zero approvers will not allow to submit request)</span>
                                         </div>
                                     </div>
                                 </div>
@@ -101,13 +99,18 @@
                                 <div ng-switch-when="Upload">
                                     <div class="row">
                                         <label class="col-xs-3">{{::step.name}}
-                                            <i title="This is a mandatory field!" class="fa fa-asterisk" ng-if="step.isMandatory === true" style="color:red"></i>
                                         </label>
                                         <div class="col-xs-9" >
-                                            <mean-upload file-dest="destination" upload-callback="uploadFinished(files, step, $index)" upload-file-callback="uploadFileCallback(file)">
-                                            </mean-upload>
+                                            <div class="input-group" ng-disabled="true">
+                                                <span class="input-group-btn" ng-disabled="true">
+                                                    <span class="btn btn-primary btn-file" ng-disabled="true">
+                                                        Browse &hellip; <input type="file" class="form-control" ng-disabled="true"   multiple>
+                                                    </span>
+                                                </span>
+                                                <input  ng-disabled="true" type="text" class="form-control" readonly>
+                                            </div>
                                             <span class="help-block">
-                                                {{::step.description }}( If document is not ready yet , you can upload it at time proceesing this step
+                                                {{::step.description }} (Documents upload is allowed at time of prcessing this step)
                                             </span>
                                         </div>
                                     </div>

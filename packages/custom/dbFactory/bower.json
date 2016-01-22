@@ -1,5 +1,7 @@
 {
   "name": "dbFactory",
   "version": "0.0.1",
-  "dependencies": {}
+  "dependencies": {
+    "font-awesome": "fontawesome#~4.5.0"
+  }
 }

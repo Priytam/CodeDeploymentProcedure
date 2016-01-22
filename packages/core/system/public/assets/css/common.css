@@ -91,3 +91,8 @@ footer p {
     margin-top: -32px; /* -1 * image height / 2 */
     display: block;
 }
+
+
+.select2 > .select2-choice.ui-select-match {
+    height: 29px;
+}

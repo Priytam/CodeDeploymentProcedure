@@ -28,8 +28,25 @@ angular.module('mean.execStepsFactory').controller('CreateStepModalController', 
             for(var i = 0; i < values.length; i++ ){
                 $scope.step.values[i] = values[i].trim();
             }
+        };
 
-            console.log($scope.step.values)
+        $scope.disabled = false;
+
+        $scope.enable = function() {
+            $scope.disabled = false;
+        };
+
+        $scope.disable = function() {
+            $scope.disabled = true;
+        };
+
+        $scope.clear = function() {
+            $scope.step.values = undefined;
+        };
+
+        $scope.onSelected = function(selectedItem){
+
+            $scope.step.values =  JSON.stringify(selectedItem);
         };
 
         $scope.getAvailableDataBase = function() {

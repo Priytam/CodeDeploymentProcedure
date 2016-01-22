@@ -1,0 +1,49 @@
+<section data-ng-controller="FeaturesController" data-ng-init="find()">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="box box-primary">
+        <div class="box-header">
+          <i class="fa fa-comment-o fa-2x"></i> <h3 class="box-title">Features List</h3>
+        </div>
+        <div class="box-body">
+          <div data-ng-if="errorMessage">
+            <uib-alert type="danger" close="closeErrorAlert()" dismiss-on-timeout="4000"> <b>{{statusText }} : </b> {{errorMessage}}</uib-alert>
+          </div>
+          <div data-ng-show="features.length !==0">
+            <table class="table table-bordered table-responsive">
+              <thead>
+              <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Justification</th>
+                <th>Status</th>
+                <th>Raised by </th>
+                <th>Raised On</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr data-ng-repeat="feature in features">
+                <td>{{feature.title}}</td>
+                <td style="max-width: 150px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap">
+                    <span uib-popover="{{feature.description}}" popover-title="Description" type="button" popover-trigger="mouseenter" popover-placement="left">
+                      {{feature.description}}
+                    </span>
+                </td>
+                <td style="max-width: 150px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap">
+                    <span uib-popover="{{feature.justification}}" popover-title="Justification" type="button" popover-trigger="mouseenter" popover-placement="left">
+                      {{feature.justification}}
+                    </span>
+                </td>
+                <td>{{feature.status}}</td>
+                <td>{{feature.user}}</td>
+                <td>{{feature.created | date}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

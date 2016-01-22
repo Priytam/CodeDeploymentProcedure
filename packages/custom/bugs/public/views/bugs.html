@@ -1,0 +1,43 @@
+<section data-ng-controller="BugsController" data-ng-init="find()">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <i class="fa fa-bug fa-2x"></i> <h3 class="box-title">Bugs List</h3>
+                </div>
+                <div class="box-body">
+                    <div data-ng-if="errorMessage">
+                        <uib-alert type="danger" close="closeErrorAlert()" dismiss-on-timeout="4000"> <b>{{statusText }} : </b> {{errorMessage}}</uib-alert>
+                    </div>
+                    <div data-ng-show="bugs.length !==0">
+                        <table class="table table-bordered table-responsive">
+                            <thead>
+                            <tr>
+                                <th>Subject</th>
+                                <th>Message</th>
+                                <th>Status</th>
+                                <th>Raised by </th>
+                                <th>Raised On</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr data-ng-repeat="bug in bugs">
+                                <td>{{bug.subject}}</td>
+                                <td style="max-width: 150px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap">
+                                    <span uib-popover="{{bug.message}}" popover-title="Message" type="button" popover-trigger="mouseenter" popover-placement="left">
+                                        {{bug.message}}
+                                    </span>
+                                </td>
+                                <td>{{bug.status}}</td>
+                                <td>{{bug.user}}</td>
+                                <td>{{bug.created | date}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

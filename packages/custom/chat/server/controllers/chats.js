@@ -11,7 +11,9 @@ exports.createFromSocket = function(data, cb) {
   var message = new Message(data);
   message.time = new Date();
   message.save(function(err) {
-    if (err)
+    if (err){
+
+    }
     Message.findOne({
       _id: message._id
     }).exec(function(err, message) {

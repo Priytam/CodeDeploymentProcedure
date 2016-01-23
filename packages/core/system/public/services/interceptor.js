@@ -23,7 +23,6 @@ angular.module('mean-factory-interceptor', [])
       };
     }
   ])
-//Http Interceptor to check auth failures for XHR requests
 .config(['$httpProvider',
   function($httpProvider) {
     $httpProvider.interceptors.push('httpInterceptor');

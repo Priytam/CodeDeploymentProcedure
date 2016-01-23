@@ -19,6 +19,7 @@ angular.module('mean-factory-interceptor', [])
                 if (!(--numLoadings)) {
                     $rootScope.$broadcast("loader_hide");
                 }
+                $rootScope.$broadcast('toast_error',response);
                 return $q.reject(response);
             }
         };

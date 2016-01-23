@@ -14,6 +14,18 @@
     "angular-ui-select": "latest",
     "angular-sanitize": "latest",
     "font-awesome": "fontawesome#~4.5.0",
-    "select2": "~4.0.1"
+    "select2": "~4.0.1",
+    "AngularJS-Toaster": "angularjs-toaster#~1.0.0"
+  },
+  "overrides": {
+    "fontawesome": {
+      "main": [
+        "css/font-awesome.css",
+        "fonts/fontawesome-webfont.eot",
+        "fonts/fontawesome-webfont.woff",
+        "fonts/fontawesome-webfont.ttf",
+        "fonts/fontawesome-webfont.svg"
+      ]
+    }
   }
 }

@@ -1,17 +1,17 @@
 'use strict';
 
 angular.module('mean.system').controller('HeaderController', ['$scope', '$rootScope', 'Menus', 'MeanUser', '$state', '$uibModal',
-    'Authentication',
-  function($scope, $rootScope, Menus, MeanUser, $state, $uibModal, Authentication) {
+    'Authentication', 'toaster', 'Socket',
+  function($scope, $rootScope, Menus, MeanUser, $state, $uibModal, Authentication, toaster, Socket) {
     
     var vm = this;
 
     vm.menus = {};
     vm.hdrvars = {
-        authenticated: MeanUser.loggedin,
+        authenticated: MeanUser,
         user: MeanUser.user,
         isAdmin: MeanUser.isAdmin
-    }
+    };
       $scope.user = Authentication.user;
 
     // Default hard coded menu items for main menu
@@ -27,6 +27,14 @@ angular.module('mean.system').controller('HeaderController', ['$scope', '$rootSc
             vm.menus[name] = menu;
         });
     }
+
+      $scope.$on('toast_error',function(event, response) {
+          toaster.pop(
+              'error',
+              response.statusText,
+              response.data.message
+          );
+      });
 
     // Query server for menus and check permissions
     queryMenu('main', defaultMainMenu);

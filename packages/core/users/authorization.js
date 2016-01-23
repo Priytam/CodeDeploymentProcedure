@@ -32,16 +32,7 @@ exports.requiresLogin = function(req, res, next) {
  * Basic Role checking - future release with full permission system
  */
 exports.requiresAdmin = function(req, res, next) {
-  if (!req.isAuthenticated()) {
-    return res.status(401).send('User is not authorized');
-  }
-  findUser(req.user._id, function(user) {
-      if (!user) return res.status(401).send('User is not authorized');
 
-      if (req.user.roles.indexOf('admin') === -1) return res.status(401).send('User is not authorized');
-      req.user = user;
-      next();
-  });
 };
 
 /**

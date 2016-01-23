@@ -4,7 +4,9 @@
       "bower_components/build/css/dist.min.css": [
         "bower_components/angular/angular-csp.css",
         "bower_components/angular-ui-select/dist/select.min.css",
-        "bower_components/font-awesome/css/font-awesome.css"
+        "bower_components/font-awesome/css/font-awesome.css",
+        "bower_components/select2/dist/css/select2.min.css",
+        "bower_components/AngularJS-Toaster/toaster.min.css"
       ]
     },
     "js": {
@@ -21,7 +23,9 @@
         "bower_components/angular-ui-select/dist/select.min.js",
         "bower_components/web-bootstrap/index.js",
         "bower_components/angular-http-loader.min.js",
-        "bower_components/angular-cookies/angular-cookies.js"
+        "bower_components/angular-cookies/angular-cookies.js",
+        "bower_components/select2/dist/js/select2.full.min.js",
+        "bower_components/AngularJS-Toaster/toaster.min.js"
       ]
     }
   }

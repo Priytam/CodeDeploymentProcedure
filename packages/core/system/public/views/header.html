@@ -30,6 +30,11 @@
                 </div>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
+                        <a ui-sref="home.chats"  ui-sref-active="active">
+                            <i class="fa fa-comments-o fa-lg"></i>
+                        </a>
+                    </li>
+                    <li>
                         <p class="navbar-text"><i class="fa fa-user fa-lg"></i> {{::user.username}}</p>
                     </li>
                     <li class="dropdown" uib-dropdown on-toggle="toggled(open)">
@@ -72,3 +77,4 @@
         </div>
     </div>
 </nav>
+<toaster-container></toaster-container>

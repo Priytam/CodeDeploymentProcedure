@@ -13,6 +13,8 @@ angular.module('mean.requests').controller('StepViewController', ['$scope', 'Glo
       $scope.files = [];
       $scope.queryData = {};
       $scope.queryData.refreshing = false;
+      $scope.isApproval = false;
+      $scope.isOwner = false;
 
       if( $stateParams.step === null) {
           RequestsSpecific.get({
@@ -52,6 +54,9 @@ angular.module('mean.requests').controller('StepViewController', ['$scope', 'Glo
         return angular.equals([], $scope.step.values[0]);
       };
 
+
+      //////////////////////upload////////////////////////////////
+
       $scope.uploadFileCallback = function(file) {
           $scope.files.push(file);
       };
@@ -69,6 +74,8 @@ angular.module('mean.requests').controller('StepViewController', ['$scope', 'Glo
           });
       };
 
+
+////////////////////////////Query//////////////////////////////////////////
       $scope.updateQueryString = function() {
           $scope.step.queryString = $scope.queryData.queryString;
           $scope.step.status = 'INPROGRESS';
@@ -100,24 +107,20 @@ angular.module('mean.requests').controller('StepViewController', ['$scope', 'Glo
       };
 
 
-
-
-
-
-
-
-      ////////////////////////////////
+      ///////////////////Access///////////////////////////////////////////////
       function manageAccess(){
-          $scope.isOwner = false;
-          $scope.isApproval = false;
+
           if(Authentication.user.username === $scope.step.user && Authentication.user.email === $scope.step.email){
               $scope.isOwner = true;
           }
-          angular.forEach($scope.step.values,function(value){
-              if(Authentication.user.email === value){
-                  $scope.isApproval = true;
-              }
-          });
+          if($scope.step.type=='Approval'){
+              angular.forEach($scope.step.values,function(value){
+                  if(Authentication.user.email === value){
+                      $scope.isApproval = true;
+                  }
+              }, $scope.isApproval);
+          }
+
       }
 
       ////////////////////////////////

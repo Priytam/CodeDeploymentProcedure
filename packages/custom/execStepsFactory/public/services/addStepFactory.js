@@ -25,6 +25,10 @@ function AddStepFactory() {
         steps  = [];
     }
 
+    function clearPlans(){
+        _plan  = {};
+    }
+
     function setStep(step) {
         steps.push(step);
     }
@@ -32,6 +36,7 @@ function AddStepFactory() {
         getSteps : getSteps,
         setStep : setStep,
         clearSteps : clearSteps,
+        clearPlans : clearPlans,
         setPlan : setPlan,
         getPlan : getPlan
     };

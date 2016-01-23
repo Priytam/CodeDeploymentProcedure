@@ -20,20 +20,17 @@ angular.module('mean.execStepsFactory')
       $scope.executionPlan.steps = AddStepFactory.getSteps();
       var selectedPlan = {};
       $scope.eps = [];
-      $scope.isVisible = true;
-      $scope.isEmpty = true;
+
       $scope.addAPlan = function () {
           $uibModal.open({
               templateUrl: 'execStepsFactory/views/createPlanModal.html',
               controller: 'CreatePlanModalController',
               windowClass: 'medium-Modal'
-          })
-              .result.then(updatePlan);
+          }).result.then(updatePlan);
       };
 
       function updatePlan() {
           $scope.executionPlan = AddStepFactory.getPlan();
-          console.log($scope.executionPlan);
       }
 
       $scope.addAStep = function () {
@@ -41,8 +38,7 @@ angular.module('mean.execStepsFactory')
               templateUrl: 'execStepsFactory/views/createStepModal.html',
               controller: 'CreateStepModalController',
               windowClass: 'medium-Modal'
-          })
-              .result.then(updateStep);
+          }).result.then(updateStep);
       };
 
       function updateStep() {
@@ -56,9 +52,9 @@ angular.module('mean.execStepsFactory')
               $scope.eps.unshift(response);
               $scope.taskMessage = "Plan added successfully ...";
           });
-          $scope.isVisible = false;
           $scope.isEmpty = false;
           AddStepFactory.clearSteps();
+          AddStepFactory.clearPlans();
           $scope.executionPlan.steps = [];
           $scope.executionPlan = {};
       };
@@ -84,7 +80,6 @@ angular.module('mean.execStepsFactory')
       };
 
       function updateTaskMessage(msg) {
-          selectedPlan = {};
           $scope.taskMessage = msg;
       }
 
@@ -102,8 +97,8 @@ angular.module('mean.execStepsFactory')
       };
 
       function removePlan() {
-          selectedPlan = {};
           $scope.eps.splice($scope.eps.indexOf(selectedPlan), 1);
+          selectedPlan = {};
           $scope.taskMessage = "Plan removed successfully ...";
       }
 
@@ -114,18 +109,6 @@ angular.module('mean.execStepsFactory')
       $scope.find = function () {
           EPDB.query(function (plans) {
               $scope.eps = plans;
-          }, function (err) {
-              $scope.statusText = err.statusText;
-              $scope.errorMessage = err.data.message;
-          });
-
-      };
-
-      $scope.findOne = function () {
-          EPDB.get({
-              // articleId: $scope.db_id
-          }, function (ep) {
-              $scope.ep = ep;
           }, function (err) {
               $scope.statusText = err.statusText;
               $scope.errorMessage = err.data.message;

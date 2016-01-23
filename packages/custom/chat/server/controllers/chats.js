@@ -8,19 +8,13 @@ var mongoose = require('mongoose'),
   _ = require('lodash');
 
 exports.createFromSocket = function(data, cb) {
-  console.log(data);
   var message = new Message(data);
-  console.log('##################################');
-  console.log(data);
   message.time = new Date();
   message.save(function(err) {
     if (err)
-        console.log(err);
     Message.findOne({
       _id: message._id
     }).exec(function(err, message) {
-        console.log('##################################');
-        console.log(err);
       return cb(message);
     });
   });

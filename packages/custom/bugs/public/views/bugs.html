@@ -22,7 +22,11 @@
                             </thead>
                             <tbody>
                             <tr data-ng-repeat="bug in bugs">
-                                <td>{{bug.subject}}</td>
+                                <td style="max-width: 150px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap">
+                                    <span uib-popover="{{bug.subject}}" popover-title="Description" type="button" popover-trigger="mouseenter" popover-placement="left">
+                                        {{bug.subject}}
+                                    </span>
+                                </td>
                                 <td style="max-width: 150px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap">
                                     <span uib-popover="{{bug.message}}" popover-title="Message" type="button" popover-trigger="mouseenter" popover-placement="left">
                                         {{bug.message}}

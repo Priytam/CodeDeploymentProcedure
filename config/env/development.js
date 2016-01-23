@@ -13,43 +13,13 @@ module.exports = {
   },
   hostname: 'http://localhost:3000',
   app: {
-    name: 'MEAN - A Modern Stack - Development'
+    name: 'CDP - Next Gen Code Deployment Procedure'
   },
   strategies: {
     local: {
       enabled: true
     },
-    landingPage: '/',
-    facebook: {
-      clientID: 'DEFAULT_APP_ID',
-      clientSecret: 'APP_SECRET',
-      callbackURL: 'http://localhost:3000/api/auth/facebook/callback',
-      enabled: false
-    },
-    twitter: {
-      clientID: 'DEFAULT_CONSUMER_KEY',
-      clientSecret: 'CONSUMER_SECRET',
-      callbackURL: 'http://localhost:3000/api/auth/twitter/callback',
-      enabled: false
-    },
-    github: {
-      clientID: 'DEFAULT_APP_ID',
-      clientSecret: 'APP_SECRET',
-      callbackURL: 'http://localhost:3000/api/auth/github/callback',
-      enabled: false
-    },
-    google: {
-      clientID: 'DEFAULT_APP_ID',
-      clientSecret: 'APP_SECRET',
-      callbackURL: 'http://localhost:3000/api/auth/google/callback',
-      enabled: false
-    },
-    linkedin: {
-      clientID: 'DEFAULT_API_KEY',
-      clientSecret: 'SECRET_KEY',
-      callbackURL: 'http://localhost:3000/api/auth/linkedin/callback',
-      enabled: false
-    }
+    landingPage: '/'
   },
   emailFrom: 'SENDER EMAIL ADDRESS', // sender address like ABC <abc@example.com>
   mailer: {

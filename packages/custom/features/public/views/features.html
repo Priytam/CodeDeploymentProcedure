@@ -23,7 +23,11 @@
               </thead>
               <tbody>
               <tr data-ng-repeat="feature in features">
-                <td>{{feature.title}}</td>
+                  <td style="max-width: 150px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap">
+                    <span uib-popover="{{feature.title}}" popover-title="Description" type="button" popover-trigger="mouseenter" popover-placement="left">
+                     {{feature.title}}
+                    </span>
+                  </td>
                 <td style="max-width: 150px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap">
                     <span uib-popover="{{feature.description}}" popover-title="Description" type="button" popover-trigger="mouseenter" popover-placement="left">
                       {{feature.description}}

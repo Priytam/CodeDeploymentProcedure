@@ -5,7 +5,7 @@ module.exports = function(Chat, io) {
 
     var _ = require('lodash');
     var moment = require('moment');
-    var mycontroller = require('../controllers/sockets');
+    var mycontroller = require('../controllers/chats');
 
     io.on('connection', function(socket) {
 

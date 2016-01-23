@@ -1,0 +1,31 @@
+
+<div class="row" data-ng-controller="ChatController" >
+    <div class="box box-primary" >
+        <div class="box-header">
+            <i class="fa fa-comments-o"></i>
+            <h3 class="box-title">Chat</h3>
+        </div>
+        <div class="box-body chat" id="chat-box" schroll-bottom="messages" style="height: 400px;overflow: auto;overflow-x: hidden;">
+            <div class="item" data-ng-repeat="message in messages">
+               <img src="/chat/assets/img//blankUser.png" alt="user image" class="offline"/>
+                <p class="message">
+                    <a href class="name">
+                        <small class="text-muted pull-right"><i class="fa fa-clock-o"></i>{{message.time | date:'medium'}}</small>
+                        {{message.user}}
+                    </a>
+                   {{message.message}}
+                </p>
+            </div>
+        </div>
+        <div class="box-footer">
+            <div class="input-group">
+                <input class="form-control" type="text" data-ng-model="message.title" placeholder="type message here"/>
+                <div class="input-group-btn">
+                    <button class="btn btn-success" data-ng-click="sendMessage(message.title)">send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

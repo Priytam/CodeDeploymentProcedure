@@ -1,34 +1,38 @@
 'use strict';
 
 angular.module('mean.system').controller('HeaderController', ['$scope', '$rootScope', 'Menus', 'MeanUser', '$state', '$uibModal',
-    'Authentication', 'toaster', 'Socket',
-  function($scope, $rootScope, Menus, MeanUser, $state, $uibModal, Authentication, toaster, Socket) {
-    
-    var vm = this;
+    'Authentication', 'toaster', 'Socket', 'UserRequests',
+  function($scope, $rootScope, Menus, MeanUser, $state, $uibModal, Authentication, toaster, Socket, UserRequests) {
 
-    vm.menus = {};
-    vm.hdrvars = {
-        authenticated: MeanUser,
-        user: MeanUser.user,
-        isAdmin: MeanUser.isAdmin
-    };
+      var vm = this;
+
+      vm.menus = {};
+      vm.hdrvars = {
+          authenticated: MeanUser,
+          user: MeanUser.user,
+          isAdmin: MeanUser.isAdmin
+      };
       $scope.user = Authentication.user;
 
-    // Default hard coded menu items for main menu
-    var defaultMainMenu = [];
+      // Default hard coded menu items for main menu
+      var defaultMainMenu = [];
 
-    // Query menus added by modules. Only returns menus that user is allowed to see.
-    function queryMenu(name, defaultMenu) {
+      // Query menus added by modules. Only returns menus that user is allowed to see.
+      function queryMenu(name, defaultMenu) {
+          Menus.query({
+              name: name,
+              defaultMenu: defaultMenu
+          }, function (menu) {
+              vm.menus[name] = menu;
+          });
+      }
 
-        Menus.query({
-            name: name,
-            defaultMenu: defaultMenu
-        }, function (menu) {
-            vm.menus[name] = menu;
-        });
-    }
+      // Query server for menus and check permissions
+      queryMenu('main', defaultMainMenu);
+      queryMenu('account', []);
 
-      $scope.$on('toast_error',function(event, response) {
+
+      $scope.$on('toast_error', function (event, response) {
           toaster.pop(
               'error',
               response.statusText,
@@ -36,48 +40,25 @@ angular.module('mean.system').controller('HeaderController', ['$scope', '$rootSc
           );
       });
 
-    // Query server for menus and check permissions
-    queryMenu('main', defaultMainMenu);
-    queryMenu('account', []);
+      $scope.isCollapsed = false;
 
-
-    $scope.isCollapsed = false;
-
-    $rootScope.$on('loggedin', function() {
-      queryMenu('main', defaultMainMenu);
-
-      vm.hdrvars = {
-        authenticated: MeanUser.loggedin,
-        user: MeanUser.user,
-        isAdmin: MeanUser.isAdmin
-      };
-    });
-
-    vm.logout = function(){
-      MeanUser.logout();
-    };
-
-    $rootScope.$on('logout', function() {
-      vm.hdrvars = {
-        authenticated: false,
-        user: {},
-        isAdmin: false
-      };
-      queryMenu('main', defaultMainMenu);
-      $state.go('home');
-    });
+      UserRequests.query({
+          user: $scope.user.username
+      }, function (requests) {
+          $scope.inProgressRequests = requests;
+      });
 
       $scope.switchUser = function () {
           $uibModal.open({
               templateUrl: 'system/views/switchUser.html',
-              backdrop : 'static',
+              backdrop: 'static',
               controller: 'SwitchUser as vm'
           }).result.then(loginNow);
       };
 
-      function loginNow(){
+      function loginNow() {
           MeanUser.logUser(Authentication.user)
-              .success( function(err , user){
+              .success(function (err, user) {
 
               });
       }
@@ -85,7 +66,7 @@ angular.module('mean.system').controller('HeaderController', ['$scope', '$rootSc
       $scope.reportAnIssue = function () {
           $uibModal.open({
               templateUrl: 'system/views/reportIssue.html',
-              backdrop : 'static',
+              backdrop: 'static',
               controller: 'ReportIssue as vm'
           });
       };
@@ -93,7 +74,7 @@ angular.module('mean.system').controller('HeaderController', ['$scope', '$rootSc
       $scope.submitRequest = function () {
           $uibModal.open({
               templateUrl: 'system/views/openRequest.html',
-              backdrop : 'static',
+              backdrop: 'static',
               controller: 'OpenRequest as vm',
               draggable: true
           });

@@ -117,3 +117,22 @@ footer p {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
 }
+
+.badge-notify{
+    background:red;
+    position:relative;
+    top: -10px;
+    left: -5px;
+}
+
+.badge-notify > a:hover {
+    top : -5px;
+}
+
+.progress.xs {
+    height: 7px;
+}
+
+.progress-bar-success    {
+.progress-bar-styles(@progress-bar-success-bg);
+}

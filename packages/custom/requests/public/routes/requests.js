@@ -9,9 +9,9 @@ angular.module('mean.requests').config(['$stateProvider',
           templateUrl: 'requests/views/requests.html'
       })
           .state('home.myRequests', {
-              url: '/myRequests/:user',
+              url: '/myRequests/:user/:isUserPending',
               parent: 'home',
-              params : {user : null},
+              params : {user : null, isUserPending : 'false'},
               templateUrl: 'requests/views/requests.html'
           })
 

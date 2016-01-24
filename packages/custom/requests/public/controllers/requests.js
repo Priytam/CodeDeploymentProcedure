@@ -2,8 +2,8 @@
 
 /* jshint -W098 */
 angular.module('mean.requests').controller('RequestsController', ['$scope', 'Global',
-    'Requests', '$state', '$stateParams',
-  function($scope, Global, Requests, $state, $stateParams) {
+    'Requests', '$state', '$stateParams', 'UserRequests',
+  function($scope, Global, Requests, $state, $stateParams, UserRequests) {
       $scope.global = Global;
       $scope.package = {
           name: 'requests'
@@ -16,12 +16,21 @@ angular.module('mean.requests').controller('RequestsController', ['$scope', 'Glo
       $scope.searchInput = '';
 
       $scope.findRequests = function() {
-          Requests.query({
-              status : $stateParams.status,
-              user : $stateParams.user
-          }, function(requests) {
-              $scope.requests = requests;
-          });
+          if(!$stateParams.isUserPending || $stateParams.isUserPending === null || typeof $stateParams.isUserPending === 'undefined' || $stateParams.isUserPending === 'false' ) {
+              Requests.query({
+                  status: $stateParams.status,
+                  user: $stateParams.user
+              }, function (requests) {
+                  $scope.requests = requests;
+              });
+          } else {
+              UserRequests.query({
+                  user: $stateParams.user
+              }, function (requests) {
+                  $scope.requests = requests;
+              });
+          }
+
       };
   }
 ]);

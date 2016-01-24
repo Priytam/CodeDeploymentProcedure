@@ -13,6 +13,7 @@ var mongoose = require('mongoose'),
 module.exports = crud;
 module.exports.create = create;
 module.exports.processData = processData;
+module.exports.userProgressRequest = userProgressRequest;
 
 function create (req, res) {
     factory.insertSteps(req.body.steps, req.user.username, req.user.email, function (err, steps) {
@@ -52,5 +53,22 @@ function processData(req, res) {
             return res.status(500).json(response);
         }
         return res.json(response)
+    });
+}
+
+function userProgressRequest(req, res) {
+    var query = {};
+    if (req.query) {
+        query.user = req.query.user;
+    }
+    query.status = 'INPROGRESS';
+    RequestDB.find(query).sort('-created').exec(function(err, requests) {
+        if (err) {
+            return res.status(500).send({
+                message: err
+            });
+        } else {
+            res.json(requests);
+        }
     });
 }

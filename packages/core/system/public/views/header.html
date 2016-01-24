@@ -29,6 +29,35 @@
                     <div class="pull-right" mean-translate></div>
                 </div>
                 <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown" uib-dropdown on-toggle="toggled(open)">
+                        <a href uib-dropdown-toggle>
+                            <i class="fa fa-tasks fa-lg"></i><span class="badge badge-notify">{{inProgressRequests.length}}</span>
+                        </a>
+                        <ul uib-dropdown-menu aria-labelledby="simple-dropdown">
+                            <li role="menuitem">
+                              <a>
+                                  You have {{inProgressRequests.length}} pending requests
+                              </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li role="menuitem" ng-repeat="req in inProgressRequests">
+                                    <a href>
+                                        <span>
+                                            {{req.issueNumber}}
+                                            <small class="pull-right">{{(req.processedStep/req.steps.length)*100}}%</small>
+                                        </span>
+                                        <div class="progress xs">
+                                            <div class="progress-bar progress-bar-success" style="width: {{(req.processedStep/req.steps.length)*100}}%">
+                                            </div>
+                                        </div>
+                                    </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li role="menuitem">
+                                <a ui-sref="home.myRequests({user : user.username, isUserPending : true})" ui-sref-active="active" class="text-center">View all</a>
+                            </li>
+                        </ul>
+                    </li>
                     <li>
                         <a ui-sref="home.chats"  ui-sref-active="active">
                             <i class="fa fa-comments-o fa-lg"></i>

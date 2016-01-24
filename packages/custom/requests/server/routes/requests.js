@@ -16,6 +16,8 @@ module.exports = function(Requests, app) {
         .post(requests.processData);
     app.param('reqID', requests.getByID);
 
+    app.route('/api/user/request/')
+        .get(requests.userProgressRequest);
 
     var stepType = require('../controllers/types')();
 

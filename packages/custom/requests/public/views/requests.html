@@ -42,7 +42,7 @@
                             {{(request.processedStep/request.steps.length)*100 || 0}}%
                         </sup>
                     </td>
-                    <td > {{request.created | date}}</td>
+                    <td > {{request.created | date:'medium'}}</td>
                     <td > {{request.user}}</td>
                     <td > {{request.issueNumber}}</td>
                     <td style="max-width: 150px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap">

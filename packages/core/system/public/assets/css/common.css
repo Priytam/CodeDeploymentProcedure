@@ -136,3 +136,9 @@ footer p {
 .progress-bar-success    {
 .progress-bar-styles(@progress-bar-success-bg);
 }
+
+
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+    color: #fff;
+    background-color: #337ab7;
+}

@@ -33,7 +33,7 @@
                         <a href uib-dropdown-toggle>
                             <i class="fa fa-tasks fa-lg"></i><span class="badge badge-notify">{{inProgressRequests.length}}</span>
                         </a>
-                        <ul uib-dropdown-menu aria-labelledby="simple-dropdown">
+                        <ul ng-if="inProgressRequests.length > 0" uib-dropdown-menu aria-labelledby="simple-dropdown">
                             <li role="menuitem">
                               <a>
                                   You have {{inProgressRequests.length}} pending requests

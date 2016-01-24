@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('mean.system').controller('IndexController', ['$scope', 'Global', 'ExecStepsFactory',
-    'Requests', 'Bugs', 'Features', 'DbFactory', 'Authentication',
-  function($scope, Global, ExecStepsFactory, Requests, Bugs, Features, DbFactory, Authentication) {
+    'Requests', 'Bugs', 'Features', 'DbFactory', 'Authentication', 'PageValues',
+  function($scope, Global, ExecStepsFactory, Requests, Bugs, Features, DbFactory, Authentication, PageValues) {
       $scope.global = Global;
+      $scope.LoadingData = PageValues;
 
       ExecStepsFactory.query(function(plans) {
           $scope.plans = plans.length;

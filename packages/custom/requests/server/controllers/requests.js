@@ -59,9 +59,15 @@ function processData(req, res) {
 function userProgressRequest(req, res) {
     var query = {};
     if (req.query) {
-        query.user = req.query.user;
+        query = {
+            user : req.query.user,
+            $or:[
+                {status:"INPROGRESS"},
+                {status:"DEFINED"}
+            ]
+        }
     }
-    query.status = 'INPROGRESS';
+
     RequestDB.find(query).sort('-created').exec(function(err, requests) {
         if (err) {
             return res.status(500).send({

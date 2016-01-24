@@ -44,10 +44,10 @@
                                     <a href>
                                         <span>
                                             {{req.issueNumber}}
-                                            <small class="pull-right">{{(req.processedStep/req.steps.length)*100}}%</small>
+                                            <small class="pull-right">{{(req.processedStep/req.steps.length)*100 || 0}}%</small>
                                         </span>
                                         <div class="progress xs">
-                                            <div class="progress-bar progress-bar-success" style="width: {{(req.processedStep/req.steps.length)*100}}%">
+                                            <div class="progress-bar progress-bar-success" style="width: {{(req.processedStep/req.steps.length)*100 || 0}}%">
                                             </div>
                                         </div>
                                     </a>

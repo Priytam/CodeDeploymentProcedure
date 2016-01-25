@@ -29,7 +29,9 @@
         "bower_components/AngularJS-Toaster/toaster.min.js",
         "bower_components/perfect-scrollbar/min/perfect-scrollbar.min.js",
         "bower_components/perfect-scrollbar/min/perfect-scrollbar.with-mousewheel.min.js",
-        "bower_components/angular-perfect-scrollbar/src/angular-perfect-scrollbar.js"
+        "bower_components/angular-perfect-scrollbar/src/angular-perfect-scrollbar.js",
+        "bower_components/ace-builds/src-min-noconflict/ace.js",
+        "bower_components/angular-ui-ace/ui-ace.js"
       ]
     }
   }

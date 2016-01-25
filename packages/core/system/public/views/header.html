@@ -40,18 +40,20 @@
                               </a>
                             </li>
                             <li class="divider"></li>
-                            <li role="menuitem" ng-repeat="req in inProgressRequests">
-                                    <a href>
-                                        <span>
-                                            {{req.issueNumber}}
-                                            <small class="pull-right">{{(req.processedStep/req.steps.length)*100 || 0}}%</small>
-                                        </span>
-                                        <div class="progress xs">
-                                            <div class="progress-bar progress-bar-success" style="width: {{(req.processedStep/req.steps.length)*100 || 0}}%">
-                                            </div>
+                            <perfect-scrollbar class="scroller" wheel-propagation="true" wheel-speed="10" min-scrollbar-length="20">
+                                <li ng-repeat="req in inProgressRequests" style="margin-left: 5%; margin-right: 5%">
+                                    <span>
+                                        {{req.issueNumber}}
+                                        <small class="pull-right">{{(req.processedStep/req.steps.length)*100 || 0}}%</small>
+                                    </span>
+                                    <div class="progress xs">
+                                        <div class="progress-bar progress-bar-success" style="width: {{(req.processedStep/req.steps.length)*100 || 0}}%">
                                         </div>
-                                    </a>
-                            </li>
+                                    </div>
+                                    <hr ng-show="!$last">
+                                </li>
+
+                            </perfect-scrollbar>
                             <li class="divider"></li>
                             <li role="menuitem">
                                 <a ui-sref="home.myRequests({user : user.username, isUserPending : true})" ui-sref-active="active" class="text-center">View all</a>

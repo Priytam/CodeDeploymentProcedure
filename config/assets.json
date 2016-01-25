@@ -6,7 +6,8 @@
         "bower_components/angular-ui-select/dist/select.min.css",
         "bower_components/font-awesome/css/font-awesome.css",
         "bower_components/select2/dist/css/select2.min.css",
-        "bower_components/AngularJS-Toaster/toaster.min.css"
+        "bower_components/AngularJS-Toaster/toaster.min.css",
+        "bower_components/perfect-scrollbar/min/perfect-scrollbar.min.css"
       ]
     },
     "js": {
@@ -25,7 +26,10 @@
         "bower_components/angular-http-loader.min.js",
         "bower_components/angular-cookies/angular-cookies.js",
         "bower_components/select2/dist/js/select2.full.min.js",
-        "bower_components/AngularJS-Toaster/toaster.min.js"
+        "bower_components/AngularJS-Toaster/toaster.min.js",
+        "bower_components/perfect-scrollbar/min/perfect-scrollbar.min.js",
+        "bower_components/perfect-scrollbar/min/perfect-scrollbar.with-mousewheel.min.js",
+        "bower_components/angular-perfect-scrollbar/src/angular-perfect-scrollbar.js"
       ]
     }
   }

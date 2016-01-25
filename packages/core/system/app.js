@@ -11,7 +11,7 @@ SystemPackage.register(function(app, auth, database, circles) {
 
     SystemPackage.routes(app, auth, database);
     SystemPackage.aggregateAsset('css', 'common.css');
-    SystemPackage.angularDependencies(['ui.router', 'mean-factory-interceptor', 'ngCookies', 'toaster']);
+    SystemPackage.angularDependencies(['ui.router', 'mean-factory-interceptor', 'ngCookies', 'toaster', 'perfect_scrollbar']);
 
     app.set('views', __dirname + '/server/views');
 

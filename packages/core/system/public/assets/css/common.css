@@ -142,3 +142,9 @@ footer p {
     color: #fff;
     background-color: #337ab7;
 }
+
+.scroller {
+    height: 200px;
+    overflow-y: hidden;
+    position: relative;
+}

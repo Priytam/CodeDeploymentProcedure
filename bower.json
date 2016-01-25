@@ -15,7 +15,8 @@
     "angular-sanitize": "latest",
     "font-awesome": "fontawesome#~4.5.0",
     "select2": "~4.0.1",
-    "AngularJS-Toaster": "angularjs-toaster#~1.0.0"
+    "AngularJS-Toaster": "angularjs-toaster#~1.0.0",
+    "angular-perfect-scrollbar": "~0.0.4"
   },
   "overrides": {
     "fontawesome": {

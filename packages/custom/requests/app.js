@@ -13,6 +13,5 @@ Requests.register(function(app, auth, database) {
 
   Requests.aggregateAsset('css', 'requests.css');
 
-
   return Requests;
 });

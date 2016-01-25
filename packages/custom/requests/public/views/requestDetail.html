@@ -16,7 +16,7 @@
                             </div>
                         </div>
                         <div class="box-body">
-                                <ul id="progress" class="col-md-12" style="align-content: center">
+                                <ul class="col-md-12 progress-arrow">
                                     <div data-ng-repeat="step in steps | orderBy:'executionNumber'">
                                         <li ui-sref="home.requestDetail.stepView({step : step, id : request._id, stepId : step._id, type : step.type})" ng-if="step.status === 'FINISHED'" >{{step.name}}
                                         <li ui-sref="home.requestDetail.stepView({step : step, id : request._id, stepId : step._id, type : step.type})" ng-if="step.status === 'INPROGRESS'" class="active">{{step.name}}</li>

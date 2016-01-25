@@ -106,7 +106,21 @@ angular.module('mean.requests').controller('StepViewController', ['$scope', 'Glo
           });
       };
 
-
+      $scope.aceLoaded = function(_editor){
+          var _session = _editor.getSession();
+          var _renderer = _editor.renderer;
+          _editor.setReadOnly(false);
+          _session.setUndoManager(new ace.UndoManager());
+          _renderer.setShowGutter(true);
+          _session.setMode("ace/mode/mysql");
+          // Events
+          _editor.on("changeSession", function(){
+              //console.log('changeSession');
+          });
+          _session.on("change", function() {
+             // console.log('change');
+          });
+      };
       ///////////////////Access///////////////////////////////////////////////
       function manageAccess(){
 

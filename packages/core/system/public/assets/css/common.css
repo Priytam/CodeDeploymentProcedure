@@ -148,3 +148,6 @@ footer p {
     overflow-y: hidden;
     position: relative;
 }
+.scroller.ps-container>.ps-scrollbar-y-rail {
+    opacity: 0.6;
+}

@@ -1,5 +1,4 @@
 <div class="row" data-ng-controller="StepViewController">
-    {{step.type}}
     <div class="box box-info">
         <div ng-switch on="step.type">
             <div ng-switch-when="Approval">
@@ -105,8 +104,9 @@
                             </label>
                         </div>
                         <div class="col-xs-10">
-                            <textarea class="form-control" ng-model="queryData.queryString" name="step.name" rows="4">
-                            </textarea>
+                           <!-- <textarea class="form-control" ng-model="queryData.queryString" name="step.name" rows="4">
+                            </textarea>-->
+                           <div ui-ace="{ onLoad : aceLoaded }" ng-model="queryData.queryString" name="step.name"></div>
                             <span class="help-block">
                                 write query to fix the issue and  finish this step
                             </span>
@@ -116,7 +116,6 @@
                 <div class="box-footer clearfix">
                     <span class="text-danger pull-left" ng-if="result.error"> {{result.error}}</span>
                     <span class="text-success pull-left" ng-if="result.output"> Executed successfully ... <span class="text-muted">(check below for result)</span></span>
-                    {{step.isSuccess}}
                     <button ng-disabled="!isOwner || step.isSuccess===false" style="margin-left: 2%" class="pull-right btn btn-default"  ng-if="step.status === 'INPROGRESS'" ng-click="processStep(step)">
                         Finish<i class="fa fa-arrow-circle-right"></i>
                     </button>

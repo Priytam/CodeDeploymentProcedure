@@ -17,7 +17,8 @@
     "select2": "~4.0.1",
     "AngularJS-Toaster": "angularjs-toaster#~1.0.0",
     "angular-perfect-scrollbar": "~0.0.4",
-    "angular-ui-ace": "bower"
+    "angular-ui-ace": "bower",
+    "angular-ui-grid": "~3.1.0"
   },
   "overrides": {
     "fontawesome": {

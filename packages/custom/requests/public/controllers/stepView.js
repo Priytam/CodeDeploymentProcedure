@@ -2,8 +2,8 @@
 
 /* jshint -W098 */
 angular.module('mean.requests').controller('StepViewController', ['$scope', 'Global', 'Requests', '$state', '$stateParams',
-    'RequestsSpecific', '$window', 'QueryService', 'Authentication',
-  function($scope, Global, Requests, $state, $stateParams, RequestsSpecific, $window, QueryService, Authentication) {
+    'RequestsSpecific', '$window', 'QueryService', 'Authentication', '$interval',
+  function($scope, Global, Requests, $state, $stateParams, RequestsSpecific, $window, QueryService, Authentication, $interval) {
       $scope.global = Global;
       $scope.package = {
           name: 'requests'
@@ -15,6 +15,7 @@ angular.module('mean.requests').controller('StepViewController', ['$scope', 'Glo
       $scope.queryData.refreshing = false;
       $scope.isApproval = false;
       $scope.isOwner = false;
+      $scope.isGridTrue = false;
 
       if( $stateParams.step === null) {
           RequestsSpecific.get({
@@ -99,13 +100,14 @@ angular.module('mean.requests').controller('StepViewController', ['$scope', 'Glo
               $scope.result = response;
               if(response.output){
                   $scope.step.queryString = $scope.queryData.queryString;
+                  configGridOption(response.output);
                   $scope.step.isSuccess = true;
                   var  step = new RequestsSpecific($scope.step);
                   step.$update();
               }
           });
       };
-
+        //editor
       $scope.aceLoaded = function(_editor){
           var _session = _editor.getSession();
           var _renderer = _editor.renderer;
@@ -121,9 +123,38 @@ angular.module('mean.requests').controller('StepViewController', ['$scope', 'Glo
              // console.log('change');
           });
       };
+      //grid view
+      function configGridOption(output) {
+          var columnDefs = [];
+          angular.forEach(output[0], function(value, key) {
+              if(this.length < 5) {
+                  this.push({field : key, visible : true});
+              } else {
+                  this.push({field : key, visible: false});
+              }
+          }, columnDefs);
+          console.log(columnDefs);
+          $scope.gridOptions = {
+              enableSorting: true,
+              columnDefs: columnDefs,
+              data : output,
+              //showGroupPanel: true,
+              showColumnMenu: true,
+              enableGridMenu: true,
+              exporterMenuPdf: false,
+              paginationPageSize: 25,
+              exporterCsvFilename: 'cdp_db_download.csv',
+              exporterCsvLinkElement: angular.element(document.querySelectorAll(".custom-csv-link-location")),
+              onRegisterApi: function( gridApi ){
+                  $scope.gridApi = gridApi;
+                  $scope.gridApi.core.refresh();
+              }
+          };
+          $scope.isGridTrue = true;
+      }
+
       ///////////////////Access///////////////////////////////////////////////
       function manageAccess(){
-
           if(Authentication.user.username === $scope.step.user && Authentication.user.email === $scope.step.email){
               $scope.isOwner = true;
           }

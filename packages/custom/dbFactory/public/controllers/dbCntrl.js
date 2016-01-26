@@ -13,6 +13,7 @@ angular.module('mean.dbFactory').controller('dbController', ['$scope', 'Global',
         };
 
         $scope.dbs = [];
+        $scope.isGridTrue = false;
 
         $scope.addADB = function (type) {
             $uibModal.open({
@@ -84,6 +85,68 @@ angular.module('mean.dbFactory').controller('dbController', ['$scope', 'Global',
                 $scope.connection.selectionError = 'No db selected , select a db from table and try again';
             }
         };
+
+        ///////////////////////query a data ////////////////
+        $scope.queryData = {};
+        $scope.query = function() {
+            $scope.queryData.refreshing = true;
+            var service = new QueryService({
+                connectionString: JSON.stringify($scope.queryData.connectionString),
+                queryString: $scope.queryData.queryString,
+                type: 'Query'
+            });
+            service.$query(function (response) {
+                $scope.queryData.refreshing = false;
+                $scope.result = response;
+                configGridOption(response.output);
+            });
+        };
+        //editor
+        $scope.aceLoaded = function(_editor){
+            var _session = _editor.getSession();
+            var _renderer = _editor.renderer;
+            _editor.setReadOnly(false);
+            _session.setUndoManager(new ace.UndoManager());
+            _renderer.setShowGutter(true);
+            _session.setMode("ace/mode/mysql");
+            // Events
+            _editor.on("changeSession", function(){
+                //console.log('changeSession');
+            });
+            _session.on("change", function() {
+                // console.log('change');
+            });
+        };
+        //grid view
+        function configGridOption(output) {
+            var columnDefs = [];
+            angular.forEach(output[0], function(value, key) {
+                if(this.length < 5) {
+                    this.push({field : key, visible : true});
+                } else {
+                    this.push({field : key, visible: false});
+                }
+            }, columnDefs);
+            console.log(columnDefs);
+            $scope.gridOptions1 = {
+                enableSorting: true,
+                columnDefs: columnDefs,
+                data : output,
+                //showGroupPanel: true,
+                showColumnMenu: true,
+                enableGridMenu: true,
+                exporterMenuPdf: false,
+                paginationPageSize: 25,
+                exporterCsvFilename: 'cdp_db_download.csv',
+                exporterCsvLinkElement: angular.element(document.querySelectorAll(".custom-csv-link-location")),
+                onRegisterApi: function( gridApi ){
+                    $scope.gridApi = gridApi;
+                    $scope.gridApi.core.refresh();
+                }
+            };
+            $scope.isGridTrue = true;
+        }
+
     }
 ]);
 

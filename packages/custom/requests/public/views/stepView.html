@@ -132,18 +132,7 @@
                         <i class="fa fa-refresh fa-spin"></i>
                     </span>
                 </div>
-                <div>
-                    <uib-accordion close-others="false" ng-if="result.output" class="col-xs-12">
-                        <uib-accordion-group  panel-class="panel-info" is-open="false">
-                            <uib-accordion-heading>
-                                Query output <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
-                            </uib-accordion-heading>
-                            <pre data-ng-repeat="res in result.output">
-                                {{res | json}}
-                            </pre>
-                        </uib-accordion-group>
-                    </uib-accordion>
-                </div>
+                <div ng-if="isGridTrue" id="grid" ui-grid-move-columns ui-grid-pagination ui-grid-selection ui-grid-exporter  ui-grid="gridOptions" class="grid"></div>
             </div>
         </div>
     </div>

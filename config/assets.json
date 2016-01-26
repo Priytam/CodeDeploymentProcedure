@@ -7,7 +7,8 @@
         "bower_components/font-awesome/css/font-awesome.css",
         "bower_components/select2/dist/css/select2.min.css",
         "bower_components/AngularJS-Toaster/toaster.min.css",
-        "bower_components/perfect-scrollbar/min/perfect-scrollbar.min.css"
+        "bower_components/perfect-scrollbar/min/perfect-scrollbar.min.css",
+        "bower_components/angular-ui-grid/ui-grid.min.css"
       ]
     },
     "js": {
@@ -31,7 +32,8 @@
         "bower_components/perfect-scrollbar/min/perfect-scrollbar.with-mousewheel.min.js",
         "bower_components/angular-perfect-scrollbar/src/angular-perfect-scrollbar.js",
         "bower_components/ace-builds/src-min-noconflict/ace.js",
-        "bower_components/angular-ui-ace/ui-ace.js"
+        "bower_components/angular-ui-ace/ui-ace.js",
+        "bower_components/angular-ui-grid/ui-grid.min.js"
       ]
     }
   }

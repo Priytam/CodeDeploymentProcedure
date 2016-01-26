@@ -3,7 +3,7 @@
     <div class="col-md-12">
         <div class="box box-primary">
             <div class="box-header">
-                <i class="fa fa-database"></i> <h3 class="box-title">DataBase List</h3>
+                <i class="fa fa-database"></i> <h3 class="box-title">DataBase related tasks</h3>
                 <div class="box-tools pull-right">
                     <div class="list-group list-group-horizontal text-center">
                         <a  href="" ng-click="addADB('create')" class="list-group-item">
@@ -35,35 +35,106 @@
                 <div data-ng-if="connection.response && !connection.response.isConnected">
                     <uib-alert type="danger" close="closeConnectionAlert()" dismiss-on-timeout="4000">{{connection.response.error}}</uib-alert>
                 </div>
-
-                <div data-ng-show="dbs.length !==0">
-                    <table class="table table-bordered table-responsive">
-                        <thead>
-                        <tr>
-                            <th></th>
-                            <th>Host</th>
-                            <th>Port</th>
-                            <th>DBName</th>
-                            <th>Username </th>
-                            <th>Created On</th>
-                            <th>Created By</th>
-                            <th>Service Type</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr data-ng-repeat="db in dbs">
-                            <td><input type="radio" ng-click="selectBD(db)" name="select"></td>
-                            <td>{{db.host}}</td>
-                            <td>{{db.port}}</td>
-                            <td>{{db.dbName}}</td>
-                            <td>{{db.username}}</td>
-                            <td>{{db.created | date:'medium'}}</td>
-                            <td>{{db.user}}</td>
-                            <td>{{db.serviceType}}</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <uib-tabset>
+                    <uib-tab heading="DB List">
+                        <br>
+                        <br>
+                        <div data-ng-show="dbs.length !==0">
+                            <table class="table table-bordered table-responsive">
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Host</th>
+                                    <th>Port</th>
+                                    <th>DBName</th>
+                                    <th>Username </th>
+                                    <th>Created On</th>
+                                    <th>Created By</th>
+                                    <th>Service Type</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr data-ng-repeat="db in dbs">
+                                    <td><input type="radio" ng-click="selectBD(db)" name="select"></td>
+                                    <td>{{db.host}}</td>
+                                    <td>{{db.port}}</td>
+                                    <td>{{db.dbName}}</td>
+                                    <td>{{db.username}}</td>
+                                    <td>{{db.created | date:'medium'}}</td>
+                                    <td>{{db.user}}</td>
+                                    <td>{{db.serviceType}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </uib-tab>
+                    <uib-tab heading="Query a Db">
+                        <br>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="input-group form-control">
+                                    <ui-select name="queryConnectionString"  id="queryConnectionString" ng-model="queryData.connectionString" on-select="onSelected($item)" theme="bootstrap" ng-disabled="disabled" required>
+                                        <ui-select-match placeholder="Select a data base or search with dbName/host/port/username/createdby/">{{$select.selected.dbName}}</ui-select-match>
+                                        <ui-select-choices repeat="db in dbs | propsFilter: {dbName : $select.search, host : $select.search, port : $select.search, username : $select.search, user : $select.search}">
+                                            <div ng-bind-html="db.dbName | highlight: $select.search"></div>
+                                            <small>
+                                                host : <span ng-bind-html="''+db.host | highlight: $select.search"></span>
+                                                port : <span ng-bind-html="''+db.port | highlight: $select.search"></span>
+                                                username : <span ng-bind-html="''+db.username | highlight: $select.search"></span>
+                                                created by : <span ng-bind-html="''+db.user | highlight: $select.search"></span>
+                                            </small>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </div>
+                            </div>
+                            <div class="col-xs-12" style="margin-top: 4%" ng-if="queryData.connectionString">
+                                <table  class="table table-bordered table-responsive table-hover">
+                                    <tr >
+                                        <th>Service</th>
+                                        <th>Host</th>
+                                        <th>Port</th>
+                                        <th>Username</th>
+                                        <th>Password</th>
+                                        <th>DataBase Name</th>
+                                    </tr>
+                                    <tr>
+                                        <td>{{queryData.connectionString.serviceType}}</td>
+                                        <td>{{queryData.connectionString.host}}</td>
+                                        <td>{{queryData.connectionString.port}}</td>
+                                        <td>{{queryData.connectionString.username}} </td>
+                                        <td >********</span></td>
+                                        <td>{{queryData.connectionString.dbName}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-xs-12" style="margin-top: 4%">
+                                <div ui-ace="{ onLoad : aceLoaded }" ng-model="queryData.queryString" name="query"></div>
+                                    <span class="help-block">
+                                        write query for selected data base
+                                    </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <span class="text-danger pull-left" ng-if="result.error"> {{result.error}}</span>
+                                <span class="text-success pull-left" ng-if="result.output"> Executed successfully ...</span>
+                                <button style="margin-left: 2%" class="pull-right btn btn-default" ng-click="updateQueryString()">
+                                    Save   <i class="fa fa-save"></i>
+                                </button>
+                                <button class="pull-right btn btn-info" ng-click="query()">
+                                    <i class="fa fa-play-circle"></i> Execute
+                                </button>
+                                 <span ng-show="queryData.refreshing" style="margin-right: 2%" class="pull-right">
+                                <i class="fa fa-refresh fa-spin"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <br>
+                        <hr>
+                        <div ng-if="isGridTrue" id="grid" ui-grid-move-columns ui-grid-pagination ui-grid-selection ui-grid-exporter  ui-grid="gridOptions1" class="grid1"></div>
+                    </uib-tab>
+                </uib-tabset>
             </div>
         </div>
     </div>

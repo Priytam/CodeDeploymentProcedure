@@ -1,5 +1,7 @@
 'use strict';
 
+var config = require('meanio').loadConfig();
+
 var header = '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">'+
 '<html lang="en">'+
 '<head>'+
@@ -131,7 +133,7 @@ module.exports = {
           '<b> Hi ' + user + '</b></br></br>',
           'CDP team  have received a request which requires your approval.',
           'Please click on the link below or paste this into your browser to complete the process:',
-          'http://' + 'localhost:3000' + '/requests/' + reqId + '/step/' + id + '/type/' + type +
+          config.hostname + '/requests/' + reqId + '/step/' + id + '/type/' + type +
           footer
       ].join('\n\n');
       mailOptions.subject = 'Approval require for plan ' + plan;

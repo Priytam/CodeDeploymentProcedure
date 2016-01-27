@@ -63,6 +63,10 @@ var EPSchema = new Schema({
         isLast : {
             type: Boolean,
             default : false
+        },
+        isNext : {
+            type: Boolean,
+            default : false
         }
     }]
 

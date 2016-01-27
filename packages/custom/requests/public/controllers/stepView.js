@@ -112,6 +112,7 @@ angular.module('mean.requests').controller('StepViewController', ['$scope', 'Glo
           var _session = _editor.getSession();
           var _renderer = _editor.renderer;
           _editor.setReadOnly(false);
+          _editor.setFontSize(16);
           _session.setUndoManager(new ace.UndoManager());
           _renderer.setShowGutter(true);
           _session.setMode("ace/mode/mysql");

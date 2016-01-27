@@ -108,13 +108,17 @@ module.exports =  function () {
             values : values,
             name : name,
             plan : step.name,
-            'executionNumber': step.executionNumber,
-            'isFirst': step.isFirst,
-            'isLast': step.isLast
+            executionNumber : step.executionNumber,
+            isFirst : step.isFirst,
+            isLast : step.isLast,
+            isNext : step.isNext
         };
         var upload = new UploadDb(data);
         upload.user = user;
         upload.email = email;
+        if(upload.isNext) {
+            upload.status  = 'WAITING';
+        }
         upload.save(function (err) {
             if (err) {
                 done(err, null);

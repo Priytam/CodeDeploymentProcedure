@@ -87,6 +87,8 @@ angular.module('mean.dbFactory').controller('dbController', ['$scope', 'Global',
         };
 
         ///////////////////////query a data ////////////////
+        $scope.themes = ['Cobalt', 'SqlServer', 'Dawn', 'TextMate', 'IPlastic', 'MonoKai'];
+        $scope.theme = $scope.themes[1];
         $scope.queryData = {};
         $scope.query = function() {
             $scope.queryData.refreshing = true;
@@ -106,6 +108,8 @@ angular.module('mean.dbFactory').controller('dbController', ['$scope', 'Global',
             var _session = _editor.getSession();
             var _renderer = _editor.renderer;
             _editor.setReadOnly(false);
+            _editor.setFontSize(16);
+            _editor.setTheme("ace/theme/"+ $scope.theme.toLowerCase());
             _session.setUndoManager(new ace.UndoManager());
             _renderer.setShowGutter(true);
             _session.setMode("ace/mode/mysql");
@@ -116,7 +120,13 @@ angular.module('mean.dbFactory').controller('dbController', ['$scope', 'Global',
             _session.on("change", function() {
                 // console.log('change');
             });
+
+            $scope.modeChanged = function (theme) {
+                console.log(theme);
+                _editor.setTheme("ace/theme/" + theme.toLowerCase());
+            };
         };
+
         //grid view
         function configGridOption(output) {
             var columnDefs = [];
@@ -149,5 +159,3 @@ angular.module('mean.dbFactory').controller('dbController', ['$scope', 'Global',
 
     }
 ]);
-
-

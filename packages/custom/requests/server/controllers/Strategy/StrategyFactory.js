@@ -3,9 +3,10 @@
  */
 var mongoose = require('mongoose'),
     RequestDB = mongoose.model('Request');
+    async = require('async');
 
 
-module.exports = function () {
+    module.exports = function () {
 
     var strategy = {};
     function registerStrategy(strategyName , strategyLogic){
@@ -31,29 +32,99 @@ module.exports = function () {
             });
         }
         processor.processData(id, reqId,  function(msg){
-            getStep(id, type, function(err, data){
-               var processedStep = data.executionNumber;
-               getRequest(reqId, function(err, result){
-                   if(err){
-                       return cb(err);
-                   }
-                   var request = result;
-                   request.processedStep = processedStep;
-                   if(data.isFirst){
-                       request.status = 'INPROGRESS';
-                   }
-                   if(data.isLast){
-                       request.status = 'FINISHED';
-                   }
-                   request.save(function(err) {
-                       if (err) {
-                           return cb(err);
-                       }
-                       return cb(null, msg);
-                   });
-               })
-            });
+            afterProcess(id ,reqId, type, function(err) {
+                if (err) {
+                    return cb(err);
+                }
+                return cb(null, msg);
+            })
         });
+    }
+
+    function afterProcess(stepId, reqId, type, cb) {
+        async.waterfall([
+                function(done) {
+                    getStep(stepId, type, function(err, step){
+                        var processedStep = step.executionNumber;
+                        getRequest(reqId, function(err, result){
+                            if(err){
+                                done(err);
+                            }
+                            var request = result;
+                            request.processedStep = processedStep;
+                            if(step.isFirst){
+                                request.status = 'INPROGRESS';
+                            }
+                            if(step.isLast && step.status === 'FINISHED'){
+                                request.status = 'FINISHED';
+                            }
+                            if(step.status === 'FINISHED'){
+                                step.isNext = false;
+                            }
+                            step.save(function(err) {
+                                if(err) {
+                                    done(err);
+                                }
+                                request.save(function(err) {
+                                    done(err, step, request);
+                                });
+                            })
+                        })
+                    });
+                },
+                function(previousStep, request, done) {
+                    if(!previousStep.isLast && previousStep.status === 'FINISHED') {
+                        getNextStep(previousStep, request, function(err , nextStep){
+                            if(err) {
+                                done(err);
+                            }
+                            nextStep.isNext = true;
+                            nextStep.status = 'WAITING';
+                            nextStep.save(function(err, processedStep ){
+                                if(err) {
+                                    done(err);
+                                }
+                                done(null, processedStep);
+                            })
+                        });
+                    } else {
+                        done(null, 'done');
+                    }
+                }
+            ],
+            function(err, msg) {
+                if(err){
+                    return cb(err);
+                }
+                return cb(null, msg);
+            });
+    }
+
+
+    function getNextStep(previousStep, request, cb) {
+        var body = request.steps;
+        var keys = Object.keys(body);
+        for( var i = 0; i < body.length; i++) {
+            var processor, id, type;
+            id  = body[i].category;
+            type = body[keys[i]].type;
+            if (!type) {
+                return cb({
+                    error :"NonMentionedHandlerTypeError",
+                    message:"Handler type is not mentioned in request"
+                });
+            }
+            processor = strategy[type];
+            processor.getData(id, function(err, result){
+                if (err) {
+                    return cb(err);
+                }
+                if(previousStep.executionNumber + 1 === result.executionNumber){
+                    return cb(null, result);
+                }
+            });
+        }
+        return cb(null);
     }
 
     function getRequest(id , cb){

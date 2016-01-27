@@ -40,6 +40,10 @@ var QuerySchema = new Schema({
         type: String,
         trim : true
     },
+    isNext : {
+        type: Boolean,
+        default : false
+    },
     email : {
         type: String,
         trim : true

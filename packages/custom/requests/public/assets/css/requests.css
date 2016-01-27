@@ -468,6 +468,15 @@
 .progress-arrow li.defined:after {
     border-left-color: #ff851b !important;
 }
+.progress-arrow li.waiting {
+    background: #f39c12 !important;
+    border-top: 1px solid #f39c12 !important;
+    border-bottom: 1px solid #f39c12 !important;
+}
+
+.progress-arrow li.waiting:after {
+    border-left-color: #f39c12 !important;
+}
 
 
 .btn.btn-app {

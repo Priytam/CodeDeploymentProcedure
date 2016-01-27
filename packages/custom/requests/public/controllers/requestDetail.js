@@ -29,16 +29,11 @@ angular.module('mean.createRequest').controller('RequestsDetailController', ['$s
         }
 
         function selectActiveStep(){
-            var isFinished = true;
             angular.forEach($scope.steps, function(value, key){
-                if(value.status === 'INPROGRESS'){
-                    isFinished = false;
+                if(value.isNext){
                     $state.go('home.requestDetail.stepView', {step : value, id : $scope.request._id, stepId : value._id, type : value.type});
                 }
             });
-            if(isFinished){
-                $scope.showFinished = true;
-            }
         }
     }
 ]);

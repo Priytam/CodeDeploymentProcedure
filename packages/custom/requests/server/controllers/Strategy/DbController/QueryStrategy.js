@@ -109,11 +109,15 @@ module.exports =  function () {
             plan : reqData.name,
             executionNumber : reqData.executionNumber,
             isFirst : reqData.isFirst,
-            isLast : reqData.isLast
+            isLast : reqData.isLast,
+            isNext : reqData.isNext
         };
         var approval = new QueryDB(data);
         approval.user = user;
         approval.email = email;
+        if(approval.isNext) {
+            approval.status  = 'WAITING';
+        }
         approval.save(function (err) {
             if (err) {
                 done(err, null);

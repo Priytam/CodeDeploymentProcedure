@@ -26,7 +26,7 @@ angular.module('mean.createRequest')
         function createDefaultSteps(){
             $scope.request.name = $scope.plan.name;
             angular.forEach($scope.plan.steps, function(step) {
-                var data = {'values' : [], 'type' : step.type,  'executionNumber': step.stepNumber, 'isFirst' : step.isFirst , 'isLast' : step.isLast, 'name' : $scope.plan.name};
+                var data = {'values' : [], 'type' : step.type,  'executionNumber': step.stepNumber, 'isFirst' : step.isFirst , 'isLast' : step.isLast, isNext : step.isNext, 'name' : $scope.plan.name};
                 if(step.type === 'Query') {
                     data.connectionString = step.values[0];
                 }

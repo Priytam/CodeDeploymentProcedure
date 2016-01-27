@@ -24,8 +24,8 @@
                     </div>
                 </div>
                 <div class="box-footer clearfix">
-                        <button ng-if="step.status === 'DEFINED'" ng-disabled="!isOwner" class="pull-right btn btn-default" id="askApproval" ng-click="processStep(step)">Ask for Approval <i class="fa fa-arrow-circle-right"></i></button>
-                        <button ng-if="step.status === 'INPROGRESS'" ng-disabled="!isApproval" class="pull-right btn btn-default" id="giveApproval" ng-click="processStep(step)">Approve <i class="fa fa-arrow-circle-right"></i></button>
+                        <button ng-if="step.status === 'WAITING'" ng-disabled="!isOwner  && !step.isNext" class="pull-right btn btn-default" id="askApproval" ng-click="processStep(step)">Ask for Approval <i class="fa fa-arrow-circle-right"></i></button>
+                        <button ng-if="step.status === 'INPROGRESS'" ng-disabled="!isApproval  && step.isNext" class="pull-right btn btn-default" id="giveApproval" ng-click="processStep(step)">Approve <i class="fa fa-arrow-circle-right"></i></button>
                 </div>
             </div>
             <div ng-switch-when="Upload">
@@ -34,20 +34,20 @@
                     <h3 class="box-title"> {{step.name}} </h3>
                 </div>
                 <div class="box-body">
-                    <div class="row" ng-if="step.status === 'DEFINED'">
+                    <div class="row" ng-if="step.status === 'WAITING'">
                         <label class="col-md-3 text-right">
                             {{::step.name}} :
                             <i title="This is a mandatory field!" class="fa fa-asterisk" ng-if="step.isMandatory === true" style="color:red"></i>
                         </label>
-                        <div  ng-if="isOwner" class="col-md-9 text-left">
+                        <div  ng-if="isOwner && step.isNext" class="col-md-9 text-left">
                             <mean-upload file-dest="destination" upload-callback="uploadFinished(files)" upload-file-callback="uploadFileCallback(file)">
                             </mean-upload>
                         </div>
-                        <div  ng-if="!isOwner" class="col-md-9 text-left">
+                        <div  ng-if="!isOwner " class="col-md-9 text-left">
                             <span class="text-warning"> You are not allowed to upload Docs</span>
                         </div>
                     </div>
-                    <div data-ng-show="! isEmpty()" class="text-center">
+                    <div data-ng-show="!isEmpty()" class="text-center">
                         <h3>
                             <span class="text-info">List of files (click to download)</span>
                         </h3>
@@ -57,7 +57,7 @@
                     </div>
                 </div>
                 <div class="box-footer clearfix" ng-if="step.status === 'INPROGRESS'">
-                    <button  ng-disabled="!isOwner" class="pull-right btn btn-default" id="sendEmail" ng-click="processStep(step)">
+                    <button  ng-disabled="!isOwner &&  step.isNext" class="pull-right btn btn-default" id="sendEmail" ng-click="processStep(step)">
                         FinishUpload <i class="fa fa-arrow-circle-right"></i>
                     </button>
                 </div>
@@ -116,11 +116,11 @@
                 <div class="box-footer clearfix">
                     <span class="text-danger pull-left" ng-if="result.error"> {{result.error}}</span>
                     <span class="text-success pull-left" ng-if="result.output"> Executed successfully ... <span class="text-muted">(check below for result)</span></span>
-                    <button ng-disabled="!isOwner || step.isSuccess===false" style="margin-left: 2%" class="pull-right btn btn-default"  ng-if="step.status === 'INPROGRESS'" ng-click="processStep(step)">
+                    <button ng-if="step.isNext" ng-disabled="!isOwner || step.isSuccess===false" style="margin-left: 2%" class="pull-right btn btn-default"  ng-if="step.status === 'INPROGRESS'" ng-click="processStep(step)">
                         Finish<i class="fa fa-arrow-circle-right"></i>
                     </button>
 
-                    <button ng-disabled="!isOwner" style="margin-left: 2%" class="pull-right btn btn-default"  ng-if="step.status !== 'FINISHED'" ng-click="updateQueryString()">
+                    <button ng-if="step.isNext" ng-disabled="!isOwner" style="margin-left: 2%" class="pull-right btn btn-default"  ng-if="step.status !== 'FINISHED'" ng-click="updateQueryString()">
                         Save   <i class="fa fa-save"></i>
                     </button>
 

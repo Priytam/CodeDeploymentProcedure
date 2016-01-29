@@ -22,11 +22,19 @@
             }
         }
 
-        function loginNow(){
-            MeanUser.logUser(Authentication.user)
-                .success( function(err , user){
-
-                });
+        function loginNow() {
+            var user = Authentication.user;
+            MeanUser.logUser(user).then(function successCallback(response) {
+                Authentication.user = response.data.user;
+                if(Authentication.user.roles.indexOf('admin') !== -1){
+                    Authentication.user.isAdmin = true;
+                } else {
+                    Authentication.user.isAdmin = false;
+                }
+                $cookieStore.put('user', response.data.user);
+            }, function errorCallback(err) {
+                checkIn();
+            });
         }
 
         function askAgainToOpen(){
@@ -34,7 +42,8 @@
         }
 
         var service = {
-            checkIn: checkIn
+            checkIn: checkIn,
+            loginNow : loginNow
         };
 
         return service;

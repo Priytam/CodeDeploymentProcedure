@@ -26,8 +26,7 @@ angular.module('mean.system').controller('IndexController', ['$scope', 'Global',
           $scope.features = response.length;
       });
 
-      $scope.currentUser = Authentication.user.username;
-      console.log($scope.currentUser);
+      $scope.currentUser = Authentication.user ?  Authentication.user.username : '';
 
       Requests.query({user : $scope.currentUser},function(requests) {
           $scope.myRequests = requests.length;

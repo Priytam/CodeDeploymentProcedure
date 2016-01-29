@@ -4,7 +4,7 @@
         .module('mean.system')
         .controller('LogMe', LogMe);
 
-    function LogMe($uibModalInstance, $cookieStore, Authentication, $location, $window) {
+    function LogMe($uibModalInstance, Authentication, $location, $window) {
         /* jshint validthis: true */
         var vm = this;
         vm.close = $uibModalInstance.dismiss;
@@ -14,16 +14,14 @@
         ////////////////
 
         function logMe() {
-            Authentication.user = vm.user;
-            $cookieStore.put('user',  vm.user);
+            $location.path('/');
+            $window.location.reload();
             return iAmLoggedIn();
         }
 
         function iAmLoggedIn() {
-            $location.path('/');
-            $window.location.reload();
-            $uibModalInstance.close(true);
-            $uibModalInstance.close(true);
+            Authentication.user = vm.user;
+            $uibModalInstance.close();
         }
     }
 })();

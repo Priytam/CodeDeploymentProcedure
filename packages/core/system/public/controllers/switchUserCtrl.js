@@ -5,7 +5,7 @@
         .module('mean.system')
         .controller('SwitchUser', SwitchUser);
 
-    function SwitchUser($uibModalInstance, $location, $window, Authentication, $cookieStore) {
+    function SwitchUser($uibModalInstance, $location, $window, Authentication) {
         /* jshint validthis: true */
         var vm = this;
         vm.close = $uibModalInstance.dismiss;
@@ -19,7 +19,6 @@
 
         function switchUser() {
             Authentication.user = vm.newUser;
-            $cookieStore.put('user',  vm.newUser);
             return userSwitched();
         }
 

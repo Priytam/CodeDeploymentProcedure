@@ -73,7 +73,7 @@
                             <i class="fa fa-cog fa-lg"></i><b class="caret"></b>
                         </a>
                         <ul uib-dropdown-menu aria-labelledby="simple-dropdown">
-                            <li>
+                            <li ng-if="user.isAdmin">
                                 <a href=""  ng-click="switchUser()">
                                     <i class="fa fa-fw fa-user"></i>
                                     Switch User

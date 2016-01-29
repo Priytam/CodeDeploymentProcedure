@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('mean.system').controller('HeaderController', ['$scope', '$rootScope', 'Menus', 'MeanUser', '$state', '$uibModal',
-    'Authentication', 'toaster', 'Socket', 'UserRequests',
-  function($scope, $rootScope, Menus, MeanUser, $state, $uibModal, Authentication, toaster, Socket, UserRequests) {
+    'Authentication', 'toaster', 'Socket', 'UserRequests', 'LogMe',
+  function($scope, $rootScope, Menus, MeanUser, $state, $uibModal, Authentication, toaster, Socket, UserRequests, LogMe) {
 
       var vm = this;
 
@@ -43,7 +43,7 @@ angular.module('mean.system').controller('HeaderController', ['$scope', '$rootSc
       $scope.isCollapsed = false;
 
       UserRequests.query({
-          user: $scope.user.username
+          user: $scope.user ? $scope.user.username : ''
       }, function (requests) {
           $scope.inProgressRequests = requests;
       });
@@ -53,15 +53,15 @@ angular.module('mean.system').controller('HeaderController', ['$scope', '$rootSc
               templateUrl: 'system/views/switchUser.html',
               backdrop: 'static',
               controller: 'SwitchUser as vm'
-          }).result.then(loginNow);
+          }).result.then(LogMe.loginNow);
       };
-
+/*
       function loginNow() {
-          MeanUser.logUser(Authentication.user)
-              .success(function (err, user) {
-
+          MeanUser.logUser(Authentication.user).then(function (response) {
+                  Authentication.user = response.data.user;
+                  $cookieStore.put('user',  response.data.user);
               });
-      }
+      }*/
 
       $scope.reportAnIssue = function () {
           $uibModal.open({

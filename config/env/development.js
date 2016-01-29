@@ -31,5 +31,12 @@ module.exports = {
           "rejectUnauthorized": false
       }
   },
-  secret: 'SOME_TOKEN_SECRET'
+  secret: 'SOME_TOKEN_SECRET',
+  admins : [{
+          username : 'pjpandey',
+          email : 'priytam.j.pandey@intel.com'
+      }, {
+      username: 'arkulkar',
+      email: 'akshata.r.kulkarni@intel.com'
+  }]
 };

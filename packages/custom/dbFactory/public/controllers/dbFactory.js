@@ -39,6 +39,10 @@ angular.module('mean.dbFactory').controller('DbFactoryController',
           }
       };
 
+      $scope.makeArrayOfSO = function () {
+          $scope.dbList.secondaryOwner = $scope.dbList.secondaryOwner.split(',');
+      };
+
       $scope.update = function () {
           $scope.dbList.$update(function (response) {
               response.taskMessage = 'DB updated successfully';

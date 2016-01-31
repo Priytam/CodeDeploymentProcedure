@@ -89,6 +89,16 @@
                         </div>
                     </div>
                 </div>
+                <div class="form-group" ng-class="{ 'has-error' : submitted && epForm.secondaryOwner.$invalid }">
+                    <label for="secondaryOwner" class="col-md-3 control-label">secondaryOwner :</label>
+                    <div class="col-md-9">
+                        <input name="secondaryOwner" type="text" class="form-control" ng-model-options='{ debounce: 550 }' ng-change="makeArrayOfSO()" data-ng-model="dbList.secondaryOwner" id="secondaryOwner" placeholder="comma seperated IDSID">
+                        <div ng-show="submitted && epForm.secondaryOwner.$invalid" class="help-block">
+                            <p ng-show="epForm.secondaryOwner.$error.required">secondaryOwner is required</p>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- submit -->
                 <div class="form-group">
                     <div class="col-md-offset-7 col-md-5" style="text-align:center">

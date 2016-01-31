@@ -39,6 +39,8 @@ SystemPackage.register(function(app, auth, database, circles) {
     require('../../custom/execStepsFactory/server/policies/epPolicy').invokeRolesPolicies();
     require('../../custom/bugs/server/policies/bugPolicy').invokeRolesPolicies();
     require('../../custom/features/server/policies/featuresPolicy').invokeRolesPolicies();
+    require('../../custom/requests/server/policies/queryPolicy').invokeRolesPolicies();
+
 
 
     return SystemPackage;

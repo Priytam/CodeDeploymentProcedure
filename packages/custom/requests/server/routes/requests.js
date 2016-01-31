@@ -2,6 +2,8 @@
 
 /* jshint -W098 */
 // The Package is past automatically as first parameter
+var queryPolicy = require('../policies/queryPolicy');
+
 module.exports = function(Requests, app) {
 
     var requests = require('../controllers/requests');
@@ -30,10 +32,12 @@ module.exports = function(Requests, app) {
     var query = require('../controllers/query')();
 
     app.route('/api/query/')
+        .all(queryPolicy.isQueryAllowed)
         .post(query.query);
     app.route('/api/connection/')
         .post(query.testConnection);
     app.route('/api/query/:queryId')
+        .all(queryPolicy.isConnectionAllowed)
         .post(query.testConnection);
 
 

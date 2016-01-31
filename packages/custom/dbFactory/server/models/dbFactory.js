@@ -51,7 +51,7 @@ var DBSchema = new Schema({
         type: String,
         trim: true
     },
-    permissions: {
+    secondaryOwner: {
         type: Array
     },
     updated: {

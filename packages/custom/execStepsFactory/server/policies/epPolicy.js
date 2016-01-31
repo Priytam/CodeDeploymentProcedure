@@ -44,10 +44,6 @@ exports.isAllowed = function (req, res, next) {
     if (req.modelName && req.user) {
         if (req.modelName.user === req.user.username) {
             return next();
-        } else {
-            return res.status(403).json({
-                message: 'User is not authorized'
-            })
         }
     }
 

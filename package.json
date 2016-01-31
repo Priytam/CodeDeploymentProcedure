@@ -38,6 +38,7 @@
     "mysql": "^2.10.2",
     "nodemailer": "latest",
     "npm": "^2.1.0",
+    "oracledb": "^1.6.0",
     "passport": "^0.3.2",
     "passport-facebook": "latest",
     "passport-github": "latest",

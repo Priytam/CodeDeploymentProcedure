@@ -12,7 +12,8 @@
   },
   "dependencies": {
     "mssql": "latest",
-    "mysql": "^2.10.2"
+    "mysql": "^2.10.2",
+    "oracledb": "^1.6.0"
   },
   "license": "MIT"
 }

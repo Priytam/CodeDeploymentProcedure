@@ -12,7 +12,7 @@ angular.module('mean.dbFactory').controller('DbFactoryController',
       };
 
       $scope.dbList = {};
-      $scope.serviceTypes = ['mysql', 'mssql'];
+      $scope.serviceTypes = ['mysql', 'mssql', 'oracle'];
 
       $scope.isDbNotSelected = function () {
           return (angular.equals({}, db) && $scope.operationType === 'update');

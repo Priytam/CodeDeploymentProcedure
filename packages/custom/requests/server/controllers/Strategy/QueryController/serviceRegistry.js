@@ -3,15 +3,15 @@
  */
 
 var mysql = require('./mysql')(),
-    mssql = require('./mssql')();
+    mssql = require('./mssql')(),
+    oracle = require('./oracle')();
 
 module.exports = function(queryStrategy){
 
     function registerServices() {
-        console.log(queryStrategy);
         queryStrategy.registerService('mysql', mysql);
         queryStrategy.registerService('mssql', mssql);
-        console.log(queryStrategy);
+        queryStrategy.registerService('oracle', oracle);
     }
     return {
         registerServices : registerServices

@@ -131,13 +131,12 @@ angular.module('mean.dbFactory').controller('dbController', ['$scope', 'Global',
         function configGridOption(output) {
             var columnDefs = [];
             angular.forEach(output[0], function(value, key) {
-                if(this.length < 5) {
-                    this.push({field : key, visible : true});
+            if(this.length < 5) {
+                    this.push({displayName: key, field : key, visible : true});
                 } else {
-                    this.push({field : key, visible: false});
+                    this.push({displayName: key, field : key, visible: false});
                 }
             }, columnDefs);
-            console.log(columnDefs);
             $scope.gridOptions1 = {
                 enableSorting: true,
                 columnDefs: columnDefs,

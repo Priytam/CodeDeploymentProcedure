@@ -56,7 +56,7 @@ admins : [ {
 5. admin can also switch as another user
 6. not logged in person will have role as guest and can view only things.
 
-supported steps :
+supported steps
 1. approval (send mails with link to request's aprroval steps and approver can either reject/aprrove previous steps ).
 2. query (able to run any query and view result and finish to move to next step of compltete request).
 3. upload (upload documnets and visible to only potnetial user of that request).

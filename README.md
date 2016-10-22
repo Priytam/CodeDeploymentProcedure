@@ -71,3 +71,10 @@ http://localhost:3000
 #//TODO:
 1. provide configuration readme.
 3. add ldap authentication.
+
+
+## License
+
+[![CC0](https://licensebuttons.net/p/zero/1.0/88x31.png)](http://creativecommons.org/publicdomain/zero/1.0/)
+
+To the extent possible under law, [Priytam Jee Pandey](https://www.linkedin.com/in/priytam-jee-pandey-80482675?trk=hp-identity-photo) has waived all copyright and related rights to this repo.

@@ -1,3 +1,5 @@
+<img src="https://lh3.googleusercontent.com/-lTK0EFd5OVo/AAAAAAAAAAI/AAAAAAAAABY/_SsW6-AREEw/s60-p-rw-no/photo.jpg"  align="right" />
+
 # CodeDeploymentProcedure
 
 #####Easy configurable procedure containing combinations of mail send( approval) , connect to mysqldb (query), upload (doc, pdf, jpeg, png). Configure Once and excute it forever. Automating day to day office depolyment issues 
